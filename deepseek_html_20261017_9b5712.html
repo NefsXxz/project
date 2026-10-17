@@ -1,0 +1,3549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HEROES ARCHIVE — Satria Heroes &amp; BIMA-X Fan Projects</title>
+  <meta name="description" content="Follow ZenovX's independent Satria Heroes and BIMA-X fan projects, original game credits, restoration research, development progress, and community updates.">
+  <meta name="author" content="ZenovX">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0B0D12">
+  <meta name="color-scheme" content="dark">
+
+  <!-- Open Graph / social preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="HEROES ARCHIVE">
+  <meta property="og:title" content="HEROES ARCHIVE — Satria Heroes &amp; BIMA-X Fan Projects">
+  <meta property="og:description" content="Two tokusatsu experiences. One independent journey to preserve their legacy. Follow ZenovX's fan restoration research and community archive.">
+  <meta property="og:image" content="https://static.filmvandaag.nl/covers/128000/128914.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="HEROES ARCHIVE — Satria Heroes &amp; BIMA-X Fan Projects">
+  <meta name="twitter:description" content="Two tokusatsu experiences. One independent journey to preserve their legacy.">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230B0D12'/%3E%3Cpath d='M14 14h8v14h20V14h8v36h-8V36H22v14h-8z' fill='%23E4B85C'/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://static.filmvandaag.nl">
+  <link rel="preconnect" href="https://storage.moegirl.org.cn">
+  <link rel="preconnect" href="https://img.youtube.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Required CDN technology -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: '#0B0D12',
+            crimson: '#8E1727',
+            gold: '#E4B85C'
+          }
+        }
+      }
+    };
+  </script>
+
+  <script>
+    document.documentElement.classList.add('js');
+
+    /* Graceful fallback for all external imagery. */
+    window.imgFallback = function (img) {
+      if (img.dataset.fallback && img.src !== img.dataset.fallback) {
+        img.src = img.dataset.fallback;
+        return;
+      }
+      img.style.display = 'none';
+      var frame = img.closest('.media-frame');
+      if (frame) {
+        frame.classList.add('img-failed');
+      }
+    };
+  </script>
+
+  <style>
+    /* ============================================================
+       HEROES ARCHIVE — Design tokens & global styles
+       ============================================================ */
+    :root {
+      --ink: #0B0D12;
+      --ink-2: #0F1219;
+      --ink-3: #141821;
+      --crimson: #8E1727;
+      --crimson-bright: #B3253A;
+      --crimson-deep: #4A0C14;
+      --gold: #E4B85C;
+      --gold-soft: #F0D49A;
+      --bone: #F4F4F5;
+      --muted: #A1A1AA;
+      --line: rgba(228, 184, 92, 0.16);
+      --line-strong: rgba(228, 184, 92, 0.34);
+      --white-line: rgba(255, 255, 255, 0.07);
+      --green: #6BBF8A;
+      --amber: #E0A84A;
+      --red: #D05C5C;
+      --purple: #A78BFA;
+      --font-display: 'Bebas Neue', Impact, sans-serif;
+      --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+      --max: 1280px;
+      --gutter: clamp(1.25rem, 4vw, 2.5rem);
+      --header-h: 76px;
+      --section-pad: clamp(5rem, 11vw, 10rem);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: calc(var(--header-h) + 16px);
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      margin: 0;
+      background: var(--ink);
+      color: var(--bone);
+      font-family: var(--font-body);
+      font-weight: 400;
+      line-height: 1.65;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+    }
+
+    h1, h2, h3, h4 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-weight: 400;
+      line-height: 0.92;
+      letter-spacing: 0.015em;
+      text-transform: uppercase;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    ::selection {
+      background: var(--gold);
+      color: var(--ink);
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 4px;
+    }
+
+    .sr-only {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 3000;
+      padding: 0.8rem 1.1rem;
+      background: var(--gold);
+      color: var(--ink);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transform: translateY(-160%);
+      transition: transform 0.2s ease;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .container {
+      width: min(100% - (var(--gutter) * 2), var(--max));
+      margin-inline: auto;
+    }
+
+    .section {
+      position: relative;
+      padding-block: var(--section-pad);
+    }
+
+    .section--tight {
+      padding-block: clamp(4rem, 8vw, 7rem);
+    }
+
+    .section--alt {
+      background: var(--ink-2);
+    }
+
+    .section--crimson {
+      background:
+        radial-gradient(950px 520px at 86% 8%, rgba(142, 23, 39, 0.38), transparent 64%),
+        linear-gradient(180deg, #0B0D12 0%, #16070B 20%, #260A10 100%);
+    }
+
+    .section--border-top {
+      border-top: 1px solid var(--line);
+    }
+
+    .gold-line {
+      width: 64px;
+      height: 1px;
+      background: var(--gold);
+      flex: none;
+    }
+
+    .crimson-line {
+      width: 72px;
+      height: 2px;
+      background: var(--crimson);
+      flex: none;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      font-family: var(--font-mono);
+      font-size: 0.64rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      line-height: 1.4;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 1px;
+      background: var(--gold);
+      flex: none;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+      gap: clamp(1.5rem, 5vw, 5rem);
+      align-items: end;
+      margin-bottom: clamp(2.5rem, 6vw, 5rem);
+    }
+
+    .section-head h2 {
+      max-width: 14ch;
+      font-size: clamp(2.6rem, 5.6vw, 5.7rem);
+      margin-top: 1rem;
+    }
+
+    .section-head p {
+      max-width: 48ch;
+      color: var(--muted);
+      font-size: clamp(0.95rem, 1.2vw, 1.08rem);
+      line-height: 1.75;
+    }
+
+    /* ============================================================
+       Buttons
+       ============================================================ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      min-height: 48px;
+      padding: 0.82rem 1.35rem;
+      border: 1px solid transparent;
+      border-radius: 1px;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      line-height: 1.2;
+      transition:
+        background-color 0.25s ease,
+        border-color 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+    .btn .icon {
+      width: 16px;
+      height: 16px;
+      flex: none;
+    }
+
+    .btn--gold {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--ink);
+    }
+
+    .btn--gold:hover {
+      background: var(--gold-soft);
+      border-color: var(--gold-soft);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(228, 184, 92, 0.14);
+    }
+
+    .btn--outline {
+      background: transparent;
+      border-color: var(--line-strong);
+      color: var(--bone);
+    }
+
+    .btn--outline:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(228, 184, 92, 0.06);
+      transform: translateY(-2px);
+    }
+
+    .btn--crimson {
+      background: var(--crimson);
+      border-color: var(--crimson-bright);
+      color: #fff;
+    }
+
+    .btn--crimson:hover {
+      background: var(--crimson-bright);
+      border-color: var(--crimson-bright);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 34px rgba(142, 23, 39, 0.25);
+    }
+
+    .btn--small {
+      min-height: 40px;
+      padding: 0.65rem 1rem;
+      font-size: 0.6rem;
+    }
+
+    /* ============================================================
+       Scroll progress
+       ============================================================ */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1100;
+      width: 100%;
+      height: 2px;
+      transform: scaleX(0);
+      transform-origin: left center;
+      background: linear-gradient(90deg, var(--crimson-bright), var(--gold));
+      pointer-events: none;
+    }
+
+    /* ============================================================
+       Header / navigation
+       ============================================================ */
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 1000;
+      height: var(--header-h);
+      border-bottom: 1px solid transparent;
+      background: transparent;
+      transition: background-color 0.35s ease, border-color 0.35s ease;
+    }
+
+    .site-header.is-scrolled {
+      background: rgba(11, 13, 18, 0.96);
+      border-bottom-color: var(--line);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      height: 100%;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      flex: none;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+    }
+
+    .brand-text {
+      display: flex;
+      align-items: baseline;
+      gap: 0.4rem;
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      letter-spacing: 0.13em;
+      line-height: 1;
+    }
+
+    .brand-text span:last-child {
+      color: var(--gold);
+    }
+
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: clamp(1rem, 2.3vw, 2rem);
+    }
+
+    .nav-link {
+      position: relative;
+      padding: 0.45rem 0;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 0.63rem;
+      font-weight: 500;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      transition: color 0.25s ease;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 1px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.3s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link[aria-current="location"] {
+      color: var(--gold);
+    }
+
+    .nav-link[aria-current="location"]::after {
+      transform: scaleX(1);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      flex: none;
+    }
+
+    .header-cta {
+      min-height: 40px;
+      padding: 0.65rem 1rem;
+      font-size: 0.6rem;
+    }
+
+    .menu-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      border: 1px solid var(--line-strong);
+      border-radius: 1px;
+      background: transparent;
+      color: var(--bone);
+      transition: border-color 0.25s ease, color 0.25s ease;
+    }
+
+    .menu-toggle:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .menu-toggle .icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    .menu-toggle .close-icon {
+      display: none;
+    }
+
+    .menu-toggle[aria-expanded="true"] .menu-icon {
+      display: none;
+    }
+
+    .menu-toggle[aria-expanded="true"] .close-icon {
+      display: block;
+    }
+
+    /* Mobile menu */
+    .mobile-menu {
+      position: fixed;
+      inset: var(--header-h) 0 0;
+      z-index: 990;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1.5rem var(--gutter) 2rem;
+      overflow-y: auto;
+      background:
+        radial-gradient(700px 500px at 90% 10%, rgba(142, 23, 39, 0.28), transparent 65%),
+        var(--ink);
+      animation: menuIn 0.35s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    }
+
+    .mobile-menu[hidden] {
+      display: none;
+    }
+
+    .mobile-nav {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mobile-nav a {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--bone);
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 9vw, 3.4rem);
+      letter-spacing: 0.045em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .mobile-nav a span {
+      color: var(--gold);
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+    }
+
+    .mobile-nav a[aria-current="location"] {
+      color: var(--gold);
+    }
+
+    .mobile-menu-foot {
+      padding-top: 2rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .mobile-menu-foot p {
+      color: var(--muted);
+      font-size: 0.8rem;
+      line-height: 1.6;
+    }
+
+    .mobile-menu-foot .btn {
+      width: 100%;
+      margin-bottom: 0.9rem;
+    }
+
+    .mobile-menu-url {
+      display: block;
+      margin-top: 0.8rem;
+      color: var(--gold);
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      word-break: break-all;
+    }
+
+    @keyframes menuIn {
+      from { opacity: 0; transform: translateY(-12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================================
+       Hero
+       ============================================================ */
+    .hero {
+      position: relative;
+      display: flex;
+      align-items: center;
+      min-height: 100vh;
+      min-height: 100svh;
+      padding-top: calc(var(--header-h) + 3rem);
+      padding-bottom: clamp(3rem, 7vw, 6rem);
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero-media {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      background: var(--ink);
+    }
+
+    .hero-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 26%;
+      filter: saturate(0.78) contrast(1.06) brightness(0.62);
+      transform: scale(1.08);
+      will-change: transform;
+    }
+
+    .hero-shade {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(11, 13, 18, 0.98) 0%, rgba(11, 13, 18, 0.93) 34%, rgba(11, 13, 18, 0.54) 64%, rgba(11, 13, 18, 0.76) 100%),
+        linear-gradient(0deg, var(--ink) 0%, transparent 38%);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: radial-gradient(58% 72% at 82% 38%, rgba(142, 23, 39, 0.30), transparent 68%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: minmax(0, 1.32fr) minmax(0, 0.68fr);
+      gap: clamp(2rem, 6vw, 6rem);
+      align-items: center;
+      width: 100%;
+    }
+
+    .hero-copy {
+      max-width: 790px;
+      min-width: 0;
+    }
+
+    .hero-title {
+      margin: 1.15rem 0 1.35rem;
+      font-size: clamp(4rem, 9.4vw, 9.4rem);
+      line-height: 0.82;
+      text-shadow: 0 14px 44px rgba(0, 0, 0, 0.48);
+    }
+
+    .hero-title span {
+      display: block;
+    }
+
+    .hero-title .accent {
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      max-width: 560px;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.45vw, 1.18rem);
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      margin-top: 2.2rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-top: clamp(2.2rem, 5vw, 4rem);
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .hero-meta span {
+      width: 20px;
+      height: 1px;
+      background: var(--crimson);
+    }
+
+    .hero-art {
+      position: relative;
+      justify-self: end;
+      width: min(100%, 360px);
+      min-width: 0;
+    }
+
+    .poster-wrap {
+      position: relative;
+    }
+
+    .poster-wrap::before {
+      content: "";
+      position: absolute;
+      inset: 18px -16px -18px 16px;
+      border: 1px solid rgba(142, 23, 39, 0.9);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .poster-frame {
+      position: relative;
+      z-index: 1;
+      aspect-ratio: 3 / 4;
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.55),
+        0 0 90px rgba(142, 23, 39, 0.16);
+    }
+
+    .poster-frame > img {
+      object-position: center top;
+    }
+
+    .poster-caption {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 3;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 1.05rem 0.9rem;
+      background: linear-gradient(transparent, rgba(11, 13, 18, 0.94));
+      color: rgba(244, 244, 245, 0.78);
+      font-family: var(--font-mono);
+      font-size: 0.52rem;
+      letter-spacing: 0.12em;
+      line-height: 1.5;
+      text-transform: uppercase;
+    }
+
+    .poster-caption strong {
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    .hero-cue {
+      position: absolute;
+      left: var(--gutter);
+      bottom: 2rem;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 0.56rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .hero-cue .cue-line {
+      width: 1px;
+      height: 46px;
+      background: linear-gradient(var(--gold), transparent);
+      animation: cuePulse 2.4s ease-in-out infinite;
+      transform-origin: top center;
+    }
+
+    @keyframes cuePulse {
+      0%, 100% { transform: scaleY(0.55); opacity: 0.5; }
+      50% { transform: scaleY(1); opacity: 1; }
+    }
+
+    /* ============================================================
+       Media frames & fallbacks
+       ============================================================ */
+    .media-frame {
+      position: relative;
+      overflow: hidden;
+      background: var(--ink-3);
+      border: 1px solid rgba(228, 184, 92, 0.22);
+    }
+
+    .media-frame > img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .media-frame.img-failed > img {
+      display: none;
+    }
+
+    .media-fallback {
+      position: absolute;
+      inset: 0;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 1.5rem;
+      text-align: center;
+      background:
+        linear-gradient(145deg, #141821 0%, #1A070B 100%);
+      color: var(--muted);
+    }
+
+    .media-frame.img-failed .media-fallback {
+      display: flex;
+    }
+
+    .media-fallback strong {
+      color: var(--gold);
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .media-fallback span {
+      max-width: 26ch;
+      font-size: 0.75rem;
+      line-height: 1.55;
+    }
+
+    /* ============================================================
+       About
+       ============================================================ */
+    .about {
+      overflow: hidden;
+    }
+
+    .about-ambient {
+      position: absolute;
+      top: 8%;
+      right: -6%;
+      width: 38%;
+      max-width: 520px;
+      opacity: 0.075;
+      filter: grayscale(1) contrast(1.12);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .about-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+      gap: clamp(2rem, 7vw, 7rem);
+      align-items: start;
+    }
+
+    .about-heading {
+      margin-top: 1.1rem;
+      font-size: clamp(2.7rem, 5.3vw, 5.3rem);
+      max-width: 13ch;
+    }
+
+    .about-name {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.8rem;
+      margin-top: 2rem;
+      color: var(--bone);
+      font-family: var(--font-display);
+      font-size: clamp(1.7rem, 2.6vw, 2.4rem);
+      letter-spacing: 0.08em;
+      line-height: 1;
+    }
+
+    .about-name span {
+      padding: 0.38rem 0.55rem;
+      border: 1px solid var(--line-strong);
+      color: var(--gold);
+      font-family: var(--font-mono);
+      font-size: 0.56rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      line-height: 1.3;
+      text-transform: uppercase;
+    }
+
+    .about-body {
+      color: var(--muted);
+      font-size: clamp(0.98rem, 1.18vw, 1.08rem);
+      line-height: 1.82;
+    }
+
+    .about-body p + p {
+      margin-top: 1.35rem;
+    }
+
+    .about-body .lead {
+      color: var(--bone);
+      font-size: clamp(1.12rem, 1.55vw, 1.38rem);
+      line-height: 1.62;
+    }
+
+    .about-body .signature {
+      margin-top: 2rem;
+      color: var(--gold);
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      letter-spacing: 0.08em;
+    }
+
+    /* ============================================================
+       Reason
+       ============================================================ */
+    .reason-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: clamp(2rem, 7vw, 7rem);
+      align-items: start;
+    }
+
+    .reason-title {
+      margin-top: 1.1rem;
+      max-width: 11ch;
+      font-size: clamp(2.6rem, 5.2vw, 5.2rem);
+    }
+
+    .reason-copy {
+      padding-left: clamp(1.25rem, 4vw, 3rem);
+      border-left: 1px solid var(--line);
+      color: var(--muted);
+      font-size: clamp(0.98rem, 1.18vw, 1.08rem);
+      line-height: 1.82;
+    }
+
+    .reason-copy p + p {
+      margin-top: 1.3rem;
+    }
+
+    .reason-copy .highlight {
+      color: var(--bone);
+    }
+
+    /* ============================================================
+       Project showcase
+       ============================================================ */
+    .project-list {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(4rem, 9vw, 9rem);
+    }
+
+    .project-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+      gap: clamp(2rem, 6vw, 6rem);
+      align-items: center;
+      min-width: 0;
+    }
+
+    .project-card--reverse {
+      grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+    }
+
+    .project-card--reverse .project-media {
+      order: 2;
+    }
+
+    .project-card--reverse .project-copy {
+      order: 1;
+    }
+
+    .project-media {
+      position: relative;
+      min-width: 0;
+    }
+
+    .project-frame {
+      aspect-ratio: 3 / 4;
+      max-height: 640px;
+    }
+
+    .project-frame > img {
+      object-position: center top;
+      transition: transform 1.1s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+
+    .project-card:hover .project-frame > img {
+      transform: scale(1.045);
+    }
+
+    .project-index {
+      position: absolute;
+      top: -1.6rem;
+      left: -0.7rem;
+      z-index: 2;
+      color: transparent;
+      font-family: var(--font-display);
+      font-size: clamp(5rem, 10vw, 10rem);
+      line-height: 1;
+      letter-spacing: 0.02em;
+      -webkit-text-stroke: 1px rgba(228, 184, 92, 0.26);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .project-copy {
+      min-width: 0;
+    }
+
+    .project-label {
+      color: var(--gold);
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .project-title {
+      margin: 0.8rem 0 1rem;
+      font-size: clamp(2.9rem, 5.3vw, 5.4rem);
+      line-height: 0.88;
+    }
+
+    .project-desc {
+      max-width: 50ch;
+      color: var(--muted);
+      font-size: clamp(0.98rem, 1.2vw, 1.08rem);
+      line-height: 1.75;
+    }
+
+    .project-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.4rem;
+      padding: 0.42rem 0.65rem;
+      border: 1px solid var(--amber);
+      color: var(--amber);
+      font-family: var(--font-mono);
+      font-size: 0.56rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      line-height: 1.3;
+      text-transform: uppercase;
+    }
+
+    .project-badge::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      background: currentColor;
+      flex: none;
+    }
+
+    .project-badge--gold {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .mini-status {
+      display: grid;
+      gap: 0.68rem;
+      margin: 1.6rem 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .mini-status li {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 0.64rem;
+      letter-spacing: 0.07em;
+      line-height: 1.45;
+      text-transform: uppercase;
+    }
+
+    .mini-status li::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      flex: none;
+      background: var(--gold);
+    }
+
+    .mini-status li.is-green::before { background: var(--green); }
+    .mini-status li.is-amber::before { background: var(--amber); }
+    .mini-status li.is-red::before { background: var(--red); }
+    .mini-status li.is-purple::before { background: var(--purple); }
+
+    .project-note {
+      margin-top: 1.2rem;
+      color: rgba(161, 161, 170, 0.78);
+      font-size: 0.8rem;
+      line-height: 1.6;
+    }
+
+    /* ============================================================
+       Detailed project records
+       ============================================================ */
+    .project-detail {
+      display: grid;
+      grid-template-columns: minmax(0, 0.84fr) minmax(0, 1.16fr);
+      gap: clamp(2rem, 6vw, 6rem);
+      align-items: start;
+    }
+
+    .project-detail--reverse {
+      grid-template-columns: minmax(0, 1.16fr) minmax(0, 0.84fr);
+    }
+
+    .project-detail--reverse .detail-media {
+      order: 2;
+    }
+
+    .project-detail--reverse .detail-copy {
+      order: 1;
+    }
+
+    .detail-media {
+      min-width: 0;
+    }
+
+    .detail-frame {
+      aspect-ratio: 3 / 4;
+      max-height: 720px;
+    }
+
+    .detail-frame > img {
+      object-position: center top;
+    }
+
+    .detail-copy {
+      min-width: 0;
+    }
+
+    .detail-title {
+      margin: 0.9rem 0 1.2rem;
+      font-size: clamp(2.8rem, 5vw, 5rem);
+    }
+
+    .detail-lede {
+      max-width: 54ch;
+      color: var(--bone);
+      font-size: clamp(1.05rem, 1.4vw, 1.22rem);
+      line-height: 1.7;
+    }
+
+    .detail-body {
+      max-width: 58ch;
+      margin-top: 1.2rem;
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.8;
+    }
+
+    .detail-note {
+      margin-top: 1.4rem;
+      padding-left: 1rem;
+      border-left: 2px solid var(--crimson);
+      color: var(--muted);
+      font-size: 0.86rem;
+      line-height: 1.7;
+    }
+
+    .status-panel {
+      margin-top: 2rem;
+      padding: 1.4rem;
+      border: 1px solid var(--line);
+      background: rgba(20, 24, 33, 0.36);
+    }
+
+    .status-panel h3 {
+      margin-bottom: 0.9rem;
+      color: var(--gold);
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    /* ============================================================
+       Status system
+       ============================================================ */
+    .status-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .status-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.95rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .status-row:last-child {
+      border-bottom: 0;
+    }
+
+    .status-key {
+      color: var(--bone);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      flex: none;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 0.56rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      line-height: 1.4;
+      text-align: right;
+      text-transform: uppercase;
+    }
+
+    .status::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      flex: none;
+      background: currentColor;
+    }
+
+    .status--green { color: var(--green); }
+    .status--amber { color: var(--amber); }
+    .status--red { color: var(--red); }
+    .status--purple { color: var(--purple); }
+
+    .status-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem 1.4rem;
+      margin-top: 1.8rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 0.54rem;
+      letter-spacing: 0.06em;
+      line-height: 1.4;
+      text-transform: uppercase;
+    }
+
+    .legend-dot {
+      width: 7px;
+      height: 7px;
+      flex: none;
+    }
+
+    .legend-dot--green { background: var(--green); }
+    .legend-dot--amber { background: var(--amber); }
+    .legend-dot--red { background: var(--red); }
+    .legend-dot--purple { background: var(--purple); }
+
+    /* ============================================================
+       Original creators
+       ============================================================ */
+    .credits-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: clamp(2rem, 6vw, 6rem);
+    }
+
+    .credit-block {
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line-strong);
+    }
+
+    .credit-kicker {
+      color: var(--gold);
+      font-family: var(--font-mono);
+      font-size: 0.56rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .credit-title {
+      margin: 0.7rem 0 1.2rem;
+      font-size: clamp(2.3rem, 3.8vw, 4rem);
+      line-height: 0.9;
+    }
+
+    .credit-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .credit-company {
+      color: var(--bone);
+      font-size: 0.98rem;
+      line-height: 1.5;
+    }
+
+    .credit-role {
+      flex: none;
+      max-width: 15ch;
+      color: var(--gold);
+      font-family: var(--font-mono);
+      font-size: 0.54rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      line-height: 1.5;
+      text-align: right;
+      text-transform: uppercase;
+    }
+
+    .credit-note {
+      margin-top: 1.2rem;
+      color: var(--muted);
+      font-size: 0.84rem;
+      line-height: 1.7;
+    }
+
+    .credits-disclaimer {
+      margin-top: clamp(2.5rem, 6vw, 4.5rem);
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line-strong);
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.75;
+    }
+
+    .verification-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin-top: 1rem;
+      color: var(--gold);
+      font-family: var(--font-mono);
+      font-size: 0.54rem;
+      letter-spacing: 0.1em;
+      line-height: 1.5;
+      text-transform: uppercase;
+    }
+
+    .verification-note::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border: 1px solid var(--gold);
+      flex: none;
+    }
+
+    /* ============================================================
+       Vision
+       ============================================================ */
+    .vision-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border-top: 1px solid var(--line);
+    }
+
+    .vision-item {
+      min-width: 0;
+      padding: 2.4rem clamp(1.2rem, 3vw, 2.5rem) 0;
+      border-left: 1px solid var(--line);
+    }
+
+    .vision-item:first-child {
+      padding-left: 0;
+      border-left: 0;
+    }
+
+    .vision-number {
+      color: transparent;
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 5.2vw, 5.2rem);
+      line-height: 1;
+      -webkit-text-stroke: 1px rgba(228, 184, 92, 0.56);
+    }
+
+    .vision-title {
+      margin: 1rem 0 0.8rem;
+      font-size: clamp(1.6rem, 2.3vw, 2.3rem);
+    }
+
+    .vision-copy {
+      color: var(--muted);
+      font-size: 0.96rem;
+      line-height: 1.75;
+    }
+
+    /* ============================================================
+       Development center
+       ============================================================ */
+    .dev-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: clamp(2rem, 6vw, 6rem);
+    }
+
+    .dev-block {
+      min-width: 0;
+    }
+
+    .dev-block h3 {
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid var(--line-strong);
+      font-size: clamp(2rem, 3vw, 3rem);
+    }
+
+    .dev-note {
+      margin-top: 1.5rem;
+      color: rgba(161, 161, 170, 0.8);
+      font-size: 0.8rem;
+      line-height: 1.7;
+    }
+
+    /* ============================================================
+       Multiplayer spotlight
+       ============================================================ */
+    .multiplayer {
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid rgba(228, 184, 92, 0.22);
+      border-bottom: 1px solid rgba(228, 184, 92, 0.22);
+      background:
+        radial-gradient(1000px 600px at 82% 16%, rgba(142, 23, 39, 0.46), transparent 62%),
+        linear-gradient(180deg, #0B0D12 0%, #1A070B 100%);
+    }
+
+    .multiplayer-media {
+      position: absolute;
+      inset: 0 0 0 44%;
+      z-index: 0;
+      opacity: 0.38;
+      overflow: hidden;
+    }
+
+    .multiplayer-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: saturate(0.7) contrast(1.06);
+    }
+
+    .multiplayer-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, #16070B 0%, rgba(22, 7, 11, 0.82) 26%, rgba(22, 7, 11, 0.16) 100%);
+    }
+
+    .multiplayer-content {
+      position: relative;
+      z-index: 2;
+      max-width: 820px;
+    }
+
+    .multiplayer-title {
+      max-width: 13ch;
+      margin: 1rem 0 1.2rem;
+      font-size: clamp(2.8rem, 5.6vw, 5.8rem);
+    }
+
+    .multiplayer-copy {
+      max-width: 64ch;
+      color: rgba(244, 244, 245, 0.74);
+      font-size: clamp(0.96rem, 1.2vw, 1.06rem);
+      line-height: 1.8;
+    }
+
+    .multiplayer-copy p + p {
+      margin-top: 1.2rem;
+    }
+
+    .experimental-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+      padding: 0.4rem 0.62rem;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: var(--font-mono);
+      font-size: 0.54rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      line-height: 1.4;
+      text-transform: uppercase;
+    }
+
+    .experimental-badge::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border: 1px solid var(--gold);
+      flex: none;
+    }
+
+    .multiplayer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(1rem, 2.5vw, 2rem);
+      margin-top: clamp(2.5rem, 5vw, 4rem);
+    }
+
+    .concept {
+      min-width: 0;
+      padding-top: 1.1rem;
+      border-top: 1px solid rgba(228, 184, 92, 0.32);
+    }
+
+    .concept-tag {
+      display: inline-block;
+      padding: 0.28rem 0.42rem;
+      border: 1px solid rgba(228, 184, 92, 0.4);
+      color: var(--gold);
+      font-family: var(--font-mono);
+      font-size: 0.5rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      line-height: 1.4;
+      text-transform: uppercase;
+    }
+
+    .concept h3 {
+      margin: 0.8rem 0 0.5rem;
+      font-size: clamp(1.3rem, 1.9vw, 1.9rem);
+    }
+
+    .concept p {
+      color: rgba(244, 244, 245, 0.66);
+      font-size: 0.9rem;
+      line-height: 1.65;
+    }
+
+    /* ============================================================
+       Timeline
+       ============================================================ */
+    .timeline {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 1.2rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 7px;
+      right: 0;
+      left: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold) 8%, var(--gold) 92%, transparent);
+      opacity: 0.55;
+    }
+
+    .timeline-item {
+      position: relative;
+      min-width: 0;
+      padding-top: 2.2rem;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      top: 1px;
+      left: 0;
+      width: 13px;
+      height: 13px;
+      border: 1px solid var(--gold);
+      background: var(--ink-2);
+      transform: rotate(45deg);
+    }
+
+    .timeline-phase {
+      color: var(--gold);
+      font-family: var(--font-mono);
+      font-size: 0.52rem;
+      font-weight: 500;
+      letter-spacing: 0.13em;
+      line-height: 1.5;
+      text-transform: uppercase;
+    }
+
+    .timeline-title {
+      margin: 0.5rem 0 0.55rem;
+      font-size: clamp(1.15rem, 1.55vw, 1.55rem);
+      line-height: 1.05;
+    }
+
+    .timeline-status {
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.05em;
+      line-height: 1.5;
+      text-transform: uppercase;
+    }
+
+    /* ============================================================
+       Philosophy
+       ============================================================ */
+    .philosophy {
+      text-align: center;
+    }
+
+    .philosophy .eyebrow {
+      justify-content: center;
+    }
+
+    .philosophy .eyebrow::before {
+      display: none;
+    }
+
+    .philosophy-title {
+      max-width: 15ch;
+      margin: 1.1rem auto 1.8rem;
+      font-size: clamp(2.6rem, 5vw, 5rem);
+    }
+
+    .philosophy-quote {
+      max-width: 1000px;
+      margin-inline: auto;
+      color: var(--bone);
+      font-family: var(--font-display);
+      font-size: clamp(2.1rem, 4.3vw, 4.4rem);
+      line-height: 1.02;
+    }
+
+    .philosophy-copy {
+      max-width: 760px;
+      margin: 2rem auto 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.85;
+    }
+
+    .philosophy-copy p + p {
+      margin-top: 1.2rem;
+    }
+
+    /* ============================================================
+       Community
+       ============================================================ */
+    .community {
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid var(--line-strong);
+    }
+
+    .community-media {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .community-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: saturate(0.78) contrast(1.06) brightness(0.62);
+    }
+
+    .community-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(11, 13, 18, 0.98) 0%, rgba(11, 13, 18, 0.91) 42%, rgba(42, 11, 16, 0.62) 100%),
+        linear-gradient(0deg, rgba(11, 13, 18, 0.92) 0%, transparent 40%);
+    }
+
+    .community-content {
+      position: relative;
+      z-index: 2;
+      max-width: 830px;
+    }
+
+    .community-title {
+      max-width: 13ch;
+      margin: 1rem 0 1.3rem;
+      font-size: clamp(3rem, 6.2vw, 6.6rem);
+    }
+
+    .community-copy {
+      max-width: 62ch;
+      color: rgba(244, 244, 245, 0.72);
+      font-size: clamp(0.98rem, 1.2vw, 1.08rem);
+      line-height: 1.8;
+    }
+
+    .community-copy p + p {
+      margin-top: 1.1rem;
+    }
+
+    .community-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .community-url {
+      margin-top: 1rem;
+      color: var(--gold);
+      font-family: var(--font-mono);
+      font-size: 0.64rem;
+      letter-spacing: 0.08em;
+      line-height: 1.6;
+      word-break: break-all;
+    }
+
+    .community-support {
+      margin-top: 1.4rem;
+      color: var(--muted);
+      font-size: 0.86rem;
+      line-height: 1.7;
+    }
+
+    /* ============================================================
+       Disclaimer
+       ============================================================ */
+    .disclaimer-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+      gap: clamp(2rem, 6vw, 6rem);
+      align-items: start;
+    }
+
+    .disclaimer-title {
+      margin-top: 1rem;
+      max-width: 11ch;
+      font-size: clamp(2.6rem, 4.8vw, 4.8rem);
+    }
+
+    .disclaimer-box {
+      padding: clamp(1.5rem, 4vw, 3rem);
+      border: 1px solid var(--line);
+      background: rgba(20, 24, 33, 0.42);
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.85;
+    }
+
+    .disclaimer-box p + p {
+      margin-top: 1.15rem;
+    }
+
+    .disclaimer-box strong {
+      color: var(--bone);
+      font-weight: 500;
+    }
+
+    .disclaimer-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.2rem;
+      padding: 0.38rem 0.55rem;
+      border: 1px solid var(--line-strong);
+      color: var(--gold);
+      font-family: var(--font-mono);
+      font-size: 0.52rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      line-height: 1.4;
+      text-transform: uppercase;
+    }
+
+    /* ============================================================
+       Footer
+       ============================================================ */
+    .site-footer {
+      padding: clamp(2.5rem, 5vw, 4rem) 0 2rem;
+      border-top: 1px solid var(--crimson);
+      background: #080A0E;
+    }
+
+    .footer-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .footer-brand {
+      max-width: 360px;
+    }
+
+    .footer-brand .brand {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-brand p {
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.65;
+    }
+
+    .footer-tagline {
+      margin-top: 0.9rem;
+      color: var(--gold) !important;
+      font-family: var(--font-mono);
+      font-size: 0.58rem !important;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem 1.35rem;
+      max-width: 560px;
+    }
+
+    .footer-link {
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.08em;
+      line-height: 1.6;
+      text-transform: uppercase;
+      transition: color 0.25s ease;
+    }
+
+    .footer-link:hover {
+      color: var(--gold);
+    }
+
+    .footer-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1.2rem;
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--white-line);
+      color: var(--muted);
+      font-size: 0.68rem;
+      line-height: 1.6;
+    }
+
+    .footer-bottom a {
+      color: var(--muted);
+      transition: color 0.25s ease;
+    }
+
+    .footer-bottom a:hover {
+      color: var(--gold);
+    }
+
+    .footer-credit {
+      max-width: 72ch;
+      color: rgba(161, 161, 170, 0.72);
+      font-size: 0.64rem;
+      line-height: 1.65;
+    }
+
+    .footer-back-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.56rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .footer-back-top .icon {
+      width: 13px;
+      height: 13px;
+    }
+
+    /* ============================================================
+       Icons
+       ============================================================ */
+    .svg-sprite {
+      position: absolute;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+    }
+
+    .icon {
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      vertical-align: -0.125em;
+    }
+
+    /* ============================================================
+       Reveal animation
+       ============================================================ */
+    .js .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition:
+        opacity 0.85s ease,
+        transform 0.85s cubic-bezier(0.2, 0.7, 0.2, 1);
+      transition-delay: var(--reveal-delay, 0s);
+    }
+
+    .js .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .js .hero-copy .anim {
+        opacity: 0;
+        animation: heroIn 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+        animation-delay: var(--anim-delay, 0s);
+      }
+    }
+
+    @keyframes heroIn {
+      from {
+        opacity: 0;
+        transform: translateY(26px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ============================================================
+       Noscript
+       ============================================================ */
+    .noscript-note {
+      padding: 0.75rem var(--gutter);
+      background: var(--crimson-deep);
+      color: var(--bone);
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.05em;
+      text-align: center;
+    }
+
+    /* ============================================================
+       Responsive
+       ============================================================ */
+    @media (max-width: 1120px) {
+      .desktop-nav {
+        gap: 1rem;
+      }
+
+      .nav-link {
+        font-size: 0.58rem;
+      }
+
+      .hero-art {
+        width: min(100%, 310px);
+      }
+
+      .project-card,
+      .project-card--reverse {
+        gap: clamp(1.5rem, 4vw, 3.5rem);
+      }
+
+      .timeline {
+        gap: 0.9rem;
+      }
+    }
+
+    @media (max-width: 900px) {
+      :root {
+        --header-h: 66px;
+      }
+
+      .desktop-nav {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+      }
+
+      .header-cta .header-cta-text {
+        display: none;
+      }
+
+      .header-cta {
+        width: 44px;
+        min-height: 44px;
+        padding: 0;
+      }
+
+      .header-cta .icon {
+        width: 18px;
+        height: 18px;
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-art {
+        display: none;
+      }
+
+      .hero-media img {
+        object-position: center 18%;
+        filter: saturate(0.8) contrast(1.04) brightness(0.5);
+        transform: scale(1.02);
+      }
+
+      .hero-shade {
+        background:
+          linear-gradient(180deg, rgba(11, 13, 18, 0.86) 0%, rgba(11, 13, 18, 0.68) 42%, rgba(11, 13, 18, 0.97) 100%);
+      }
+
+      .hero::after {
+        background: radial-gradient(80% 60% at 80% 30%, rgba(142, 23, 39, 0.22), transparent 70%);
+      }
+
+      .hero-cue {
+        display: none;
+      }
+
+      .section-head,
+      .about-grid,
+      .reason-grid,
+      .project-card,
+      .project-card--reverse,
+      .project-detail,
+      .project-detail--reverse,
+      .credits-grid,
+      .dev-grid,
+      .disclaimer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-card--reverse .project-media,
+      .project-card--reverse .project-copy,
+      .project-detail--reverse .detail-media,
+      .project-detail--reverse .detail-copy {
+        order: initial;
+      }
+
+      .project-media,
+      .detail-media {
+        max-width: 540px;
+      }
+
+      .project-index {
+        top: -1rem;
+        left: -0.3rem;
+      }
+
+      .reason-copy {
+        padding-top: 1.5rem;
+        padding-left: 0;
+        border-top: 1px solid var(--line);
+        border-left: 0;
+      }
+
+      .about-ambient {
+        width: 70%;
+        right: -20%;
+        opacity: 0.05;
+      }
+
+      .vision-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .vision-item,
+      .vision-item:first-child {
+        padding: 1.8rem 0;
+        border-top: 1px solid var(--line);
+        border-left: 0;
+      }
+
+      .vision-item:first-child {
+        border-top: 0;
+      }
+
+      .multiplayer-media {
+        inset: 0;
+        opacity: 0.17;
+      }
+
+      .multiplayer-media::after {
+        background: linear-gradient(180deg, rgba(22, 7, 11, 0.88) 0%, rgba(22, 7, 11, 0.7) 100%);
+      }
+
+      .multiplayer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      /* Vertical timeline on mobile */
+      .timeline {
+        grid-template-columns: 1fr;
+        gap: 0;
+        padding-left: 1.8rem;
+      }
+
+      .timeline::before {
+        top: 0;
+        right: auto;
+        bottom: 0;
+        left: 6px;
+        width: 1px;
+        height: auto;
+        background: linear-gradient(180deg, var(--gold), rgba(228, 184, 92, 0.08));
+      }
+
+      .timeline-item {
+        padding: 0 0 2rem 1.1rem;
+      }
+
+      .timeline-item::before {
+        top: 3px;
+        left: -1.8rem;
+      }
+
+      .timeline-item:last-child {
+        padding-bottom: 0;
+      }
+
+      .philosophy-title {
+        max-width: 18ch;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .brand-text {
+        font-size: 1.24rem;
+        letter-spacing: 0.1em;
+      }
+
+      .brand-mark {
+        width: 30px;
+        height: 30px;
+        font-size: 0.56rem;
+      }
+
+      .hero {
+        padding-top: calc(var(--header-h) + 2.2rem);
+        padding-bottom: 3rem;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .hero-meta {
+        font-size: 0.52rem;
+        letter-spacing: 0.1em;
+      }
+
+      .section-head h2 {
+        max-width: 12ch;
+      }
+
+      .project-frame,
+      .detail-frame {
+        max-height: none;
+      }
+
+      .poster-caption {
+        font-size: 0.47rem;
+      }
+
+      .credit-row,
+      .status-row {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.35rem;
+      }
+
+      .credit-role,
+      .status {
+        text-align: left;
+      }
+
+      .footer-top {
+        flex-direction: column;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+      }
+
+      .footer-nav {
+        gap: 0.7rem 1rem;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .header-actions {
+        gap: 0.45rem;
+      }
+
+      .header-cta {
+        width: 40px;
+        min-height: 40px;
+      }
+
+      .menu-toggle {
+        width: 40px;
+        height: 40px;
+      }
+
+      .hero-title {
+        font-size: clamp(3.5rem, 17vw, 4.6rem);
+      }
+
+      .community-actions .btn {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+
+      .js .reveal,
+      .js .hero-copy .anim {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+      }
+
+      .hero-media img {
+        transform: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- SVG icon sprite -->
+  <svg xmlns="http://www.w3.org/2000/svg" class="svg-sprite" aria-hidden="true">
+    <symbol id="icon-discord" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z"/>
+    </symbol>
+    <symbol id="icon-arrow" viewBox="0 0 24 24">
+      <path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="icon-arrow-up-right" viewBox="0 0 24 24">
+      <path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="icon-arrow-up" viewBox="0 0 24 24">
+      <path d="M12 19V5M6 11l6-6 6 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="icon-menu" viewBox="0 0 24 24">
+      <path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="icon-close" viewBox="0 0 24 24">
+      <path d="M5 5l14 14M19 5 5 19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a class="brand" href="#home" aria-label="HEROES ARCHIVE home">
+        <span class="brand-mark" aria-hidden="true">HA</span>
+        <span class="brand-text"><span>HEROES</span><span>ARCHIVE</span></span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a class="nav-link" href="#home" data-nav-link="home">Home</a>
+        <a class="nav-link" href="#about" data-nav-link="about">About</a>
+        <a class="nav-link" href="#projects" data-nav-link="projects">Projects</a>
+        <a class="nav-link" href="#creators" data-nav-link="creators">Original Creators</a>
+        <a class="nav-link" href="#development" data-nav-link="development">Development</a>
+        <a class="nav-link" href="#community" data-nav-link="community">Community</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="btn btn--crimson btn--small header-cta" href="https://discord.gg/6whU7guX9v" target="_blank" rel="noopener noreferrer" aria-label="Join the HEROES ARCHIVE Discord community (opens in a new tab)">
+          <svg class="icon" aria-hidden="true"><use href="#icon-discord"></use></svg>
+          <span class="header-cta-text">JOIN DISCORD</span>
+        </a>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open navigation menu">
+          <svg class="icon menu-icon" aria-hidden="true"><use href="#icon-menu"></use></svg>
+          <svg class="icon close-icon" aria-hidden="true"><use href="#icon-close"></use></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile navigation overlay -->
+  <div class="mobile-menu" id="mobileMenu" hidden>
+    <nav class="mobile-nav" aria-label="Mobile navigation">
+      <a href="#home" data-nav-link="home"><span>01</span>Home</a>
+      <a href="#about" data-nav-link="about"><span>02</span>About</a>
+      <a href="#projects" data-nav-link="projects"><span>03</span>Projects</a>
+      <a href="#creators" data-nav-link="creators"><span>04</span>Original Creators</a>
+      <a href="#development" data-nav-link="development"><span>05</span>Development</a>
+      <a href="#community" data-nav-link="community"><span>06</span>Community</a>
+    </nav>
+    <div class="mobile-menu-foot">
+      <a class="btn btn--gold" href="https://discord.gg/6whU7guX9v" target="_blank" rel="noopener noreferrer" aria-label="Join the HEROES ARCHIVE Discord community (opens in a new tab)">
+        <svg class="icon" aria-hidden="true"><use href="#icon-discord"></use></svg>
+        JOIN OUR DISCORD
+      </a>
+      <p>Meet the community. Follow the progress. Help keep the legacy alive.</p>
+      <span class="mobile-menu-url">discord.gg/6whU7guX9v</span>
+    </div>
+  </div>
+
+  <noscript>
+    <div class="noscript-note">JavaScript is required for the mobile navigation menu. All section links remain available in the footer.</div>
+  </noscript>
+
+  <main id="main">
+    <!-- ============================================================
+         HERO
+         ============================================================ -->
+    <section class="hero" id="home" data-nav-section>
+      <div class="hero-media" aria-hidden="true">
+        <img
+          id="heroAmbient"
+          src="https://static.filmvandaag.nl/covers/128000/128914.jpg"
+          alt=""
+          width="980"
+          height="1454"
+          decoding="async"
+          fetchpriority="high"
+          referrerpolicy="no-referrer"
+          onerror="this.style.display='none'"
+        >
+        <div class="hero-shade"></div>
+      </div>
+
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow anim" style="--anim-delay: 0.05s">INDEPENDENT FAN PROJECT</p>
+          <h1 class="hero-title anim" style="--anim-delay: 0.14s">
+            <span>THE</span>
+            <span class="accent">LEGACY</span>
+            <span>LIVES ON.</span>
+          </h1>
+          <p class="hero-sub anim" style="--anim-delay: 0.24s">
+            Two tokusatsu experiences. One independent journey to preserve their legacy.
+          </p>
+          <div class="hero-actions anim" style="--anim-delay: 0.34s">
+            <a class="btn btn--gold" href="#projects">
+              EXPLORE THE PROJECTS
+              <svg class="icon" aria-hidden="true"><use href="#icon-arrow"></use></svg>
+            </a>
+            <a class="btn btn--outline" href="https://discord.gg/6whU7guX9v" target="_blank" rel="noopener noreferrer" aria-label="Join the HEROES ARCHIVE community on Discord (opens in a new tab)">
+              <svg class="icon" aria-hidden="true"><use href="#icon-discord"></use></svg>
+              JOIN THE COMMUNITY
+              <span class="sr-only">(opens in a new tab)</span>
+            </a>
+          </div>
+          <div class="hero-meta anim" style="--anim-delay: 0.44s">
+            <span aria-hidden="true"></span>
+            SATRIA HEROES / BIMA-X / ARCHIVE 001
+          </div>
+        </div>
+
+        <div class="hero-art">
+          <div class="poster-wrap">
+            <figure class="media-frame poster-frame">
+              <img
+                src="https://static.filmvandaag.nl/covers/128000/128914.jpg"
+                alt="Promotional poster artwork for Satria Heroes: Revenge of Darkness, featuring the Satria heroes."
+                width="980"
+                height="1454"
+                decoding="async"
+                fetchpriority="high"
+                referrerpolicy="no-referrer"
+                onerror="window.imgFallback(this)"
+              >
+              <div class="media-fallback">
+                <strong>ARTWORK UNAVAILABLE</strong>
+                <span>Promotional artwork could not be loaded. The archive remains readable.</span>
+              </div>
+              <figcaption class="poster-caption">
+                <span><strong>PROMOTIONAL ARTWORK</strong><br>SATRIA HEROES: REVENGE OF DARKNESS</span>
+                <span>ARCHIVE 001</span>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-cue" aria-hidden="true">
+        <span class="cue-line"></span>
+        <span>SCROLL TO EXPLORE</span>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ABOUT THE DEVELOPER
+         ============================================================ -->
+    <section class="section about" id="about" data-nav-section aria-labelledby="aboutTitle">
+      <img
+        class="about-ambient"
+        src="https://storage.moegirl.org.cn/moegirl/commons/b/b5/Satria_Garuda_Bima_X_Poster.jpg"
+        alt=""
+        width="980"
+        height="1454"
+        loading="lazy"
+        decoding="async"
+        referrerpolicy="no-referrer"
+        onerror="this.style.display='none'"
+        aria-hidden="true"
+      >
+      <div class="container about-grid">
+        <div class="reveal">
+          <p class="eyebrow">BEHIND THE ARCHIVE</p>
+          <h2 class="about-heading" id="aboutTitle">
+            NOT A COMPANY.<br>
+            JUST A FAN WITH A VISION.
+          </h2>
+          <p class="about-name">ZenovX <span>INDEPENDENT DEVELOPER</span></p>
+          <div class="crimson-line" aria-hidden="true"></div>
+        </div>
+
+        <div class="about-body reveal" style="--reveal-delay: 0.08s">
+          <p class="lead">
+            Hi, I'm ZenovX — an independent developer and fan of Satria Heroes and BIMA-X.
+          </p>
+          <p>
+            These projects grew from a desire to revisit classic games that deserve to be remembered.
+            What began as curiosity became a personal journey of technical exploration, troubleshooting,
+            restoration research, and community building.
+          </p>
+          <p>
+            I'm working independently, learning through experimentation, and documenting progress as I go.
+            Every discovery, fix, and experiment is part of that journey.
+          </p>
+          <p>
+            This website is where I share the projects, explain what I'm working on, and connect with people
+            who remember these games or want to see what happens next.
+          </p>
+          <p class="signature">— ZenovX</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         THE REASON
+         ============================================================ -->
+    <section class="section section--alt" id="reason" aria-labelledby="reasonTitle">
+      <div class="container reason-grid">
+        <div class="reveal">
+          <p class="eyebrow">THE REASON</p>
+          <h2 class="reason-title" id="reasonTitle">SOME LEGACIES DESERVE ANOTHER CHANCE.</h2>
+          <div class="crimson-line" aria-hidden="true" style="margin-top: 2rem;"></div>
+        </div>
+
+        <div class="reason-copy reveal" style="--reveal-delay: 0.08s">
+          <p class="highlight">
+            Satria Heroes and BIMA-X are part of the memories of their fans. As time passes, older games
+            can become harder to access because of compatibility issues, missing resources, and outdated
+            technical systems.
+          </p>
+          <p>
+            These projects explore ways to revisit those experiences, investigate technical problems, and
+            keep the community connected to the games.
+          </p>
+          <p>
+            The goal is to learn, restore what is feasible, document discoveries, and celebrate the
+            experiences that made these games memorable — while respecting the original creators and their
+            intellectual property.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PROJECT SHOWCASE
+         ============================================================ -->
+    <section class="section section--crimson" id="projects" data-nav-section aria-labelledby="projectsTitle">
+      <div class="container">
+        <header class="section-head reveal">
+          <div>
+            <p class="eyebrow">THE ARCHIVE</p>
+            <h2 id="projectsTitle">CHOOSE YOUR UNIVERSE.</h2>
+          </div>
+          <p>
+            Two independent restoration efforts, documented in the open. Each project has its own
+            challenges, its own progress, and its own place in the archive.
+          </p>
+        </header>
+
+        <div class="project-list">
+          <!-- PROJECT 01 — SATRIA HEROES -->
+          <article class="project-card reveal" aria-labelledby="projectSatriaTitle">
+            <div class="project-media">
+              <span class="project-index" aria-hidden="true">01</span>
+              <figure class="media-frame project-frame">
+                <img
+                  src="https://static.filmvandaag.nl/covers/128000/128914.jpg"
+                  alt="Promotional artwork for Satria Heroes: Revenge of Darkness."
+                  width="980"
+                  height="1454"
+                  loading="lazy"
+                  decoding="async"
+                  referrerpolicy="no-referrer"
+                  onerror="window.imgFallback(this)"
+                >
+                <div class="media-fallback">
+                  <strong>ARTWORK UNAVAILABLE</strong>
+                  <span>Satria Heroes promotional artwork could not be loaded.</span>
+                </div>
+                <figcaption class="poster-caption">
+                  <span><strong>PROJECT 01</strong><br>SATRIA HEROES</span>
+                  <span>ARCHIVE</span>
+                </figcaption>
+              </figure>
+            </div>
+
+            <div class="project-copy">
+              <p class="project-label">PROJECT 01 — SATRIA HEROES</p>
+              <h3 class="project-title" id="projectSatriaTitle">SATRIA HEROES</h3>
+              <p class="project-desc">
+                An independent fan project exploring the restoration and preservation of the classic
+                Satria Heroes game experience.
+              </p>
+
+              <span class="project-badge">ASSET RECOVERY IN PROGRESS</span>
+
+              <ul class="mini-status" aria-label="Satria Heroes current status">
+                <li class="is-green">Private Server — Operational</li>
+                <li class="is-amber">Game Assets — Some Assets Missing</li>
+                <li class="is-amber">Asset Recovery — In Progress</li>
+                <li class="is-red">Public Release — Not Available</li>
+              </ul>
+
+              <a class="btn btn--outline" href="#satria-heroes">
+                EXPLORE SATRIA HEROES
+                <svg class="icon" aria-hidden="true"><use href="#icon-arrow"></use></svg>
+              </a>
+
+              <p class="project-note">
+                The private server is operational for research and testing. It is not a public release.
+              </p>
+            </div>
+          </article>
+
+          <!-- PROJECT 02 — BIMA-X -->
+          <article class="project-card project-card--reverse reveal" aria-labelledby="projectBimaxTitle">
+            <div class="project-media">
+              <span class="project-index" aria-hidden="true">02</span>
+              <figure class="media-frame project-frame">
+                <img
+                  src="https://storage.moegirl.org.cn/moegirl/commons/b/b5/Satria_Garuda_Bima_X_Poster.jpg"
+                  alt="Promotional poster artwork for Satria Garuda BIMA-X."
+                  width="980"
+                  height="1454"
+                  loading="lazy"
+                  decoding="async"
+                  referrerpolicy="no-referrer"
+                  onerror="window.imgFallback(this)"
+                >
+                <div class="media-fallback">
+                  <strong>ARTWORK UNAVAILABLE</strong>
+                  <span>BIMA-X promotional artwork could not be loaded.</span>
+                </div>
+                <figcaption class="poster-caption">
+                  <span><strong>PROJECT 02</strong><br>BIMA-X</span>
+                  <span>ARCHIVE</span>
+                </figcaption>
+              </figure>
+            </div>
+
+            <div class="project-copy">
+              <p class="project-label">PROJECT 02 — BIMA-X</p>
+              <h3 class="project-title" id="projectBimaxTitle">BIMA-X</h3>
+              <p class="project-desc">
+                An independent fan project focused on restoring the classic BIMA-X experience and
+                researching potential technical improvements.
+              </p>
+
+              <span class="project-badge">ACTIVE DEVELOPMENT</span>
+
+              <ul class="mini-status" aria-label="BIMA-X current status">
+                <li class="is-green">Game Assets — Obtained</li>
+                <li class="is-green">Date Compatibility — Fixed</li>
+                <li class="is-amber">Character Model Graphics — Under Investigation</li>
+                <li class="is-purple">Online Multiplayer — Research Phase</li>
+              </ul>
+
+              <a class="btn btn--outline" href="#bima-x">
+                EXPLORE BIMA-X
+                <svg class="icon" aria-hidden="true"><use href="#icon-arrow"></use></svg>
+              </a>
+
+              <p class="project-note">
+                Online multiplayer is an experimental research topic. It is not a confirmed feature.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SATRIA HEROES — DETAILED RECORD
+         ============================================================ -->
+    <section class="section" id="satria-heroes" data-nav-section data-nav-target="projects" aria-labelledby="satriaDetailTitle">
+      <div class="container project-detail">
+        <div class="detail-media reveal">
+          <figure class="media-frame detail-frame">
+            <img
+              src="https://static.filmvandaag.nl/covers/128000/128914.jpg"
+              alt="Satria Heroes: Revenge of Darkness promotional poster artwork."
+              width="980"
+              height="1454"
+              loading="lazy"
+              decoding="async"
+              referrerpolicy="no-referrer"
+              onerror="window.imgFallback(this)"
+            >
+            <div class="media-fallback">
+              <strong>ARTWORK UNAVAILABLE</strong>
+              <span>Satria Heroes promotional artwork could not be loaded.</span>
+            </div>
+            <figcaption class="poster-caption">
+              <span><strong>DETAILED RECORD</strong><br>SATRIA HEROES</span>
+              <span>01</span>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="detail-copy reveal" style="--reveal-delay: 0.08s">
+          <p class="eyebrow">PROJECT 01 / DETAILED RECORD</p>
+          <h2 class="detail-title" id="satriaDetailTitle">SATRIA HEROES</h2>
+          <p class="detail-lede">
+            An independent fan project exploring the restoration and preservation of the classic
+            Satria Heroes game experience.
+          </p>
+          <p class="detail-body">
+            The private server is operational, but this is not a public release. Asset recovery remains
+            in progress, and some game assets are still missing. The work continues carefully,
+            documenting each discovery and limitation as it appears.
+          </p>
+
+          <div class="status-panel">
+            <h3>STATUS SNAPSHOT</h3>
+            <ul class="status-list">
+              <!-- Update text and status class as progress changes. -->
+              <li class="status-row">
+                <span class="status-key">Private Server</span>
+                <span class="status status--green">Operational</span>
+              </li>
+              <li class="status-row">
+                <span class="status-key">Game Assets</span>
+                <span class="status status--amber">Some Assets Missing</span>
+              </li>
+              <li class="status-row">
+                <span class="status-key">Asset Recovery</span>
+                <span class="status status--amber">In Progress</span>
+              </li>
+              <li class="status-row">
+                <span class="status-key">Public Release</span>
+                <span class="status status--red">Not Available</span>
+              </li>
+            </ul>
+          </div>
+
+          <p class="detail-note">
+            The private server is maintained for research and testing. It is not a public release,
+            and no public availability date is currently announced.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         BIMA-X — DETAILED RECORD
+         ============================================================ -->
+    <section class="section section--alt" id="bima-x" data-nav-section data-nav-target="projects" aria-labelledby="bimaxDetailTitle">
+      <div class="container project-detail project-detail--reverse">
+        <div class="detail-media reveal">
+          <figure class="media-frame detail-frame">
+            <img
+              src="https://storage.moegirl.org.cn/moegirl/commons/b/b5/Satria_Garuda_Bima_X_Poster.jpg"
+              alt="Satria Garuda BIMA-X promotional poster artwork."
+              width="980"
+              height="1454"
+              loading="lazy"
+              decoding="async"
+              referrerpolicy="no-referrer"
+              onerror="window.imgFallback(this)"
+            >
+            <div class="media-fallback">
+              <strong>ARTWORK UNAVAILABLE</strong>
+              <span>BIMA-X promotional artwork could not be loaded.</span>
+            </div>
+            <figcaption class="poster-caption">
+              <span><strong>DETAILED RECORD</strong><br>BIMA-X</span>
+              <span>02</span>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="detail-copy reveal" style="--reveal-delay: 0.08s">
+          <p class="eyebrow">PROJECT 02 / DETAILED RECORD</p>
+          <h2 class="detail-title" id="bimaxDetailTitle">BIMA-X</h2>
+          <p class="detail-lede">
+            An independent fan project focused on restoring the classic BIMA-X experience and
+            researching potential technical improvements.
+          </p>
+          <p class="detail-body">
+            Required game assets have been obtained and date compatibility has been fixed. Character
+            model graphics remain under investigation, while online multiplayer is in a research phase.
+          </p>
+
+          <div class="status-panel">
+            <h3>STATUS SNAPSHOT</h3>
+            <ul class="status-list">
+              <!-- Update text and status class as progress changes. -->
+              <li class="status-row">
+                <span class="status-key">Game Assets</span>
+                <span class="status status--green">Obtained</span>
+              </li>
+              <li class="status-row">
+                <span class="status-key">Date Compatibility</span>
+                <span class="status status--green">Fixed</span>
+              </li>
+              <li class="status-row">
+                <span class="status-key">Character Model Graphics</span>
+                <span class="status status--amber">Under Investigation</span>
+              </li>
+              <li class="status-row">
+                <span class="status-key">Online Multiplayer</span>
+                <span class="status status--purple">Research Phase</span>
+              </li>
+            </ul>
+          </div>
+
+          <p class="detail-note">
+            Online multiplayer is an experimental research topic. Feasibility, compatibility
+            requirements, and implementation have not yet been confirmed.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ORIGINAL CREATORS & CREDITS
+         ============================================================ -->
+    <section class="section" id="creators" data-nav-section aria-labelledby="creatorsTitle">
+      <div class="container">
+        <header class="section-head reveal">
+          <div>
+            <p class="eyebrow">THE CREATORS BEHIND THE LEGACY</p>
+            <h2 id="creatorsTitle">BEHIND THE ORIGINAL EXPERIENCES.</h2>
+          </div>
+          <p>
+            Recognizing the developers and publishers associated with these games.
+            These credits are presented for informational attribution, not as an endorsement
+            of this archive.
+          </p>
+        </header>
+
+        <div class="credits-grid">
+          <div class="credit-block reveal">
+            <p class="credit-kicker">GAME</p>
+            <h3 class="credit-title">SATRIA HEROES</h3>
+
+            <div class="credit-row">
+              <span class="credit-company">Latido Co., Ltd.</span>
+              <span class="credit-role">Developer<br>Listed Credit</span>
+            </div>
+
+            <p class="credit-note">
+              Developer of the Satria Heroes mobile game, subject to verification against reliable
+              game listings and original credits.
+            </p>
+          </div>
+
+          <div class="credit-block reveal" style="--reveal-delay: 0.08s">
+            <p class="credit-kicker">GAME</p>
+            <h3 class="credit-title">BIMA-X</h3>
+
+            <div class="credit-row">
+              <span class="credit-company">CRAFTS &amp; MEISTER</span>
+              <span class="credit-role">Developer<br>Listed Credit</span>
+            </div>
+
+            <div class="credit-row">
+              <span class="credit-company">Bandai Namco Games</span>
+              <span class="credit-role">Publisher<br>Listed Credit</span>
+            </div>
+
+            <p class="credit-note">
+              Developer and publisher credits for the BIMA-X mobile game, subject to verification
+              against reliable game listings and original credits.
+            </p>
+          </div>
+        </div>
+
+        <span class="verification-note reveal">
+          Credits remain subject to verification against original game materials
+        </span>
+
+        <p class="credits-disclaimer reveal">
+          Company names and development credits are provided for informational attribution.
+          The original games and associated intellectual property remain the property of their
+          respective rights holders. HEROES ARCHIVE is an independent fan project and is not
+          affiliated with, endorsed by, or sponsored by these companies.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PROJECT VISION
+         ============================================================ -->
+    <section class="section section--alt" id="vision" aria-labelledby="visionTitle">
+      <div class="container">
+        <header class="section-head reveal">
+          <div>
+            <p class="eyebrow">WHAT DRIVES THE WORK</p>
+            <h2 id="visionTitle">PRESERVE. RESTORE. CONNECT.</h2>
+          </div>
+          <p>
+            Three principles guide every experiment, fix, and update. They keep the work honest
+            and the archive focused on what matters.
+          </p>
+        </header>
+
+        <div class="vision-grid">
+          <article class="vision-item reveal">
+            <span class="vision-number" aria-hidden="true">01</span>
+            <h3 class="vision-title">PRESERVE</h3>
+            <p class="vision-copy">
+              Explore and document classic game experiences while respecting their original creators.
+            </p>
+          </article>
+
+          <article class="vision-item reveal" style="--reveal-delay: 0.08s">
+            <span class="vision-number" aria-hidden="true">02</span>
+            <h3 class="vision-title">RESTORE</h3>
+            <p class="vision-copy">
+              Investigate compatibility issues, missing resources, and technical problems where feasible.
+            </p>
+          </article>
+
+          <article class="vision-item reveal" style="--reveal-delay: 0.16s">
+            <span class="vision-number" aria-hidden="true">03</span>
+            <h3 class="vision-title">CONNECT</h3>
+            <p class="vision-copy">
+              Build a community where fans can share memories, discoveries, feedback, and development updates.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         DEVELOPMENT CENTER
+         ============================================================ -->
+    <section class="section" id="development" data-nav-section aria-labelledby="developmentTitle">
+      <div class="container">
+        <header class="section-head reveal">
+          <div>
+            <p class="eyebrow">CURRENT PROGRESS</p>
+            <h2 id="developmentTitle">WORK IN PROGRESS.<br>ALWAYS HONEST.</h2>
+          </div>
+          <p>
+            A transparent snapshot of where each project stands. Status entries are updated as
+            research continues, and unfinished work is never presented as complete.
+          </p>
+        </header>
+
+        <div class="dev-grid">
+          <div class="dev-block reveal">
+            <h3>SATRIA HEROES</h3>
+            <ul class="status-list">
+              <!-- Update text and status class as progress changes. -->
+              <li class="status-row">
+                <span class="status-key">Private Server</span>
+                <span class="status status--green">Operational</span>
+              </li>
+              <li class="status-row">
+                <span class="status-key">Game Assets</span>
+                <span class="status status--amber">Some Missing</span>
+              </li>
+              <li class="status-row">
+                <span class="status-key">Asset Recovery</span>
+                <span class="status status--amber">In Progress</span>
+              </li>
+              <li class="status-row">
+                <span class="status-key">Public Release</span>
+                <span class="status status--red">Not Available</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="dev-block reveal" style="--reveal-delay: 0.08s">
+            <h3>BIMA-X</h3>
+            <ul class="status-list">
+              <!-- Update text and status class as progress changes. -->
+              <li class="status-row">
+                <span class="status-key">Game Assets</span>
+                <span class="status status--green">Obtained</span>
+              </li>
+              <li class="status-row">
+                <span class="status-key">Date Compatibility</span>
+                <span class="status status--green">Fixed</span>
+              </li>
+              <li class="status-row">
+                <span class="status-key">Character Model Graphics</span>
+                <span class="status status--amber">Under Investigation</span>
+              </li>
+              <li class="status-row">
+                <span class="status-key">Online Multiplayer</span>
+                <span class="status status--purple">Research Phase</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="status-legend reveal">
+          <span class="legend-item"><span class="legend-dot legend-dot--green"></span>Completed / Operational</span>
+          <span class="legend-item"><span class="legend-dot legend-dot--amber"></span>In Progress</span>
+          <span class="legend-item"><span class="legend-dot legend-dot--red"></span>Blocked / Unavailable</span>
+          <span class="legend-item"><span class="legend-dot legend-dot--purple"></span>Experimental Research</span>
+        </div>
+
+        <p class="dev-note reveal">
+          Development status reflects current progress and may change as research continues.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         BIMA-X ONLINE MULTIPLAYER SPOTLIGHT
+         ============================================================ -->
+    <section class="section multiplayer" id="multiplayer" aria-labelledby="multiplayerTitle">
+      <div class="multiplayer-media" aria-hidden="true">
+        <img
+          src="https://img.youtube.com/vi/FDmRF6sR3eg/maxresdefault.jpg"
+          data-fallback="https://img.youtube.com/vi/FDmRF6sR3eg/hqdefault.jpg"
+          alt=""
+          width="1280"
+          height="720"
+          loading="lazy"
+          decoding="async"
+          referrerpolicy="no-referrer"
+          onerror="window.imgFallback(this)"
+        >
+      </div>
+
+      <div class="container">
+        <div class="multiplayer-content reveal">
+          <p class="eyebrow">EXPERIMENTAL RESEARCH</p>
+          <h2 class="multiplayer-title" id="multiplayerTitle">THE NEXT BATTLE: ONLINE?</h2>
+
+          <div class="multiplayer-copy">
+            <p>
+              The original BIMA-X VS Friend mode relies on Bluetooth multiplayer. I'm exploring whether
+              it can be adapted into an online, room-based multiplayer experience, potentially allowing
+              players to compete over the internet instead.
+            </p>
+            <p>
+              This is an ongoing technical investigation. The feasibility of the approach, compatibility
+              requirements, and implementation have not yet been confirmed.
+            </p>
+          </div>
+
+          <span class="experimental-badge">EXPERIMENTAL / NOT A CONFIRMED FEATURE</span>
+
+          <div class="multiplayer-grid">
+            <article class="concept">
+              <span class="concept-tag">EXPERIMENTAL</span>
+              <h3>ONLINE ROOMS</h3>
+              <p>Researching the possibility of internet-based player rooms.</p>
+            </article>
+
+            <article class="concept">
+              <span class="concept-tag">EXPERIMENTAL</span>
+              <h3>PLAYER VS PLAYER</h3>
+              <p>Exploring the possibility of online battles.</p>
+            </article>
+
+            <article class="concept">
+              <span class="concept-tag">EXPERIMENTAL</span>
+              <h3>MULTIPLAYER COMPATIBILITY</h3>
+              <p>
+                Investigating ways to reduce device and operating-system restrictions associated
+                with the original mode.
+              </p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         DEVELOPMENT JOURNEY / TIMELINE
+         ============================================================ -->
+    <section class="section section--alt" id="journey" aria-labelledby="journeyTitle">
+      <div class="container">
+        <header class="section-head reveal">
+          <div>
+            <p class="eyebrow">THE PROCESS</p>
+            <h2 id="journeyTitle">EVERY FIX HAS A STORY.</h2>
+          </div>
+          <p>
+            A living record of what has been achieved and what is still being investigated.
+            Phases are listed without invented dates; the work is documented as it happens.
+          </p>
+        </header>
+
+        <ol class="timeline reveal">
+          <li class="timeline-item">
+            <span class="timeline-phase">PHASE 01</span>
+            <h3 class="timeline-title">Satria Heroes Private Server</h3>
+            <span class="timeline-status status status--green">Operational</span>
+          </li>
+          <li class="timeline-item">
+            <span class="timeline-phase">PHASE 02</span>
+            <h3 class="timeline-title">Satria Heroes Asset Recovery</h3>
+            <span class="timeline-status status status--amber">Ongoing</span>
+          </li>
+          <li class="timeline-item">
+            <span class="timeline-phase">PHASE 03</span>
+            <h3 class="timeline-title">BIMA-X Required Game Assets</h3>
+            <span class="timeline-status status status--green">Obtained</span>
+          </li>
+          <li class="timeline-item">
+            <span class="timeline-phase">PHASE 04</span>
+            <h3 class="timeline-title">BIMA-X Date Compatibility</h3>
+            <span class="timeline-status status status--green">Fixed</span>
+          </li>
+          <li class="timeline-item">
+            <span class="timeline-phase">PHASE 05</span>
+            <h3 class="timeline-title">BIMA-X Character Model Graphics</h3>
+            <span class="timeline-status status status--amber">Investigation Ongoing</span>
+          </li>
+          <li class="timeline-item">
+            <span class="timeline-phase">PHASE 06</span>
+            <h3 class="timeline-title">BIMA-X Online Multiplayer</h3>
+            <span class="timeline-status status status--purple">Feasibility Research</span>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         DEVELOPMENT PHILOSOPHY
+         ============================================================ -->
+    <section class="section philosophy" id="philosophy" aria-labelledby="philosophyTitle">
+      <div class="container reveal">
+        <p class="eyebrow">HOW I WORK</p>
+        <h2 class="philosophy-title" id="philosophyTitle">CURIOSITY FIRST. PROMISES SECOND.</h2>
+
+        <p class="philosophy-quote">
+          “This is an independent, evolving project.”
+        </p>
+
+        <div class="philosophy-copy">
+          <p>
+            Not every idea will become a working feature, and not every technical problem has an
+            immediate solution.
+          </p>
+          <p>
+            Development updates will distinguish completed work from experiments and future plans.
+            Transparency matters more than exaggerated promises. If a feature is still being
+            researched, it will be presented as experimental. If a fix is completed, its status will
+            be updated accordingly.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         COMMUNITY HUB
+         ============================================================ -->
+    <section class="section community" id="community" data-nav-section aria-labelledby="communityTitle">
+      <div class="community-media" aria-hidden="true">
+        <img
+          src="https://img.youtube.com/vi/hdv8kXJB1gQ/maxresdefault.jpg"
+          data-fallback="https://img.youtube.com/vi/hdv8kXJB1gQ/hqdefault.jpg"
+          alt=""
+          width="1280"
+          height="720"
+          loading="lazy"
+          decoding="async"
+          referrerpolicy="no-referrer"
+          onerror="window.imgFallback(this)"
+        >
+        <div class="community-overlay"></div>
+      </div>
+
+      <div class="container">
+        <div class="community-content reveal">
+          <p class="eyebrow">JOIN THE JOURNEY</p>
+          <h2 class="community-title" id="communityTitle">THE LEGACY IS BETTER TOGETHER.</h2>
+
+          <div class="community-copy">
+            <p>
+              Whether you grew up playing these games, recently rediscovered them, or are curious
+              about the development process, you're welcome to follow the journey.
+            </p>
+            <p>
+              Join fellow fans, share memories, discuss discoveries, and follow the latest project updates.
+            </p>
+          </div>
+
+          <div class="community-actions">
+            <a class="btn btn--gold" href="https://discord.gg/6whU7guX9v" target="_blank" rel="noopener noreferrer" aria-label="Join our Discord community (opens in a new tab)">
+              <svg class="icon" aria-hidden="true"><use href="#icon-discord"></use></svg>
+              JOIN OUR DISCORD
+              <span class="sr-only">(opens in a new tab)</span>
+            </a>
+          </div>
+
+          <p class="community-url">https://discord.gg/6whU7guX9v</p>
+          <p class="community-support">
+            Meet the community. Follow the progress. Help keep the legacy alive.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         OWNERSHIP & DISCLAIMER
+         ============================================================ -->
+    <section class="section" id="disclaimer" aria-labelledby="disclaimerTitle">
+      <div class="container disclaimer-grid">
+        <div class="reveal">
+          <p class="eyebrow">A NOTE ON OWNERSHIP</p>
+          <h2 class="disclaimer-title" id="disclaimerTitle">INDEPENDENT BY DESIGN.</h2>
+          <div class="crimson-line" aria-hidden="true" style="margin-top: 1.8rem;"></div>
+        </div>
+
+        <div class="disclaimer-box reveal" style="--reveal-delay: 0.08s">
+          <span class="disclaimer-tag">UNOFFICIAL FAN PROJECT</span>
+
+          <p>
+            <strong>HEROES ARCHIVE</strong> is an independent, unofficial fan project created by
+            <strong>ZenovX</strong>. It is not affiliated with, endorsed by, or sponsored by
+            Latido Co., Ltd., CRAFTS &amp; MEISTER, Bandai Namco, or any other original rights holders.
+          </p>
+          <p>
+            Satria Heroes, BIMA-X, their original characters, trademarks, game assets, and related
+            intellectual property belong to their respective rights holders.
+          </p>
+          <p>
+            This website documents independent fan activity and technical research. It does not
+            claim ownership of the original games or imply authorization from their creators.
+            Fan-made status does not automatically grant permission to use copyrighted material.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a class="brand" href="#home" aria-label="HEROES ARCHIVE home">
+            <span class="brand-mark" aria-hidden="true">HA</span>
+            <span class="brand-text"><span>HEROES</span><span>ARCHIVE</span></span>
+          </a>
+          <p>An independent fan project by ZenovX.</p>
+          <p class="footer-tagline">THE LEGACY LIVES ON.</p>
+        </div>
+
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a class="footer-link" href="#home">Home</a>
+          <a class="footer-link" href="#about">About</a>
+          <a class="footer-link" href="#projects">Projects</a>
+          <a class="footer-link" href="#creators">Original Creators</a>
+          <a class="footer-link" href="#development">Development</a>
+          <a class="footer-link" href="#community">Community</a>
+          <a class="footer-link" href="https://discord.gg/6whU7guX9v" target="_blank" rel="noopener noreferrer" aria-label="Join the HEROES ARCHIVE Discord community (opens in a new tab)">
+            Discord
+          </a>
+          <a class="footer-link" href="#disclaimer">Disclaimer</a>
+        </nav>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          <p>&copy; <span id="year">2025</span> HEROES ARCHIVE. Independent fan project by ZenovX.</p>
+          <p class="footer-credit">
+            Promotional artwork is used for informational, non-commercial fan-archive purposes.
+            All rights remain with the respective rights holders. This archive is not an official
+            website or game release.
+          </p>
+        </div>
+        <a class="footer-back-top" href="#home">
+          <svg class="icon" aria-hidden="true"><use href="#icon-arrow-up"></use></svg>
+          Back to top
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var header = document.getElementById('siteHeader');
+      var progress = document.getElementById('scrollProgress');
+      var heroAmbient = document.getElementById('heroAmbient');
+      var menuToggle = document.getElementById('menuToggle');
+      var mobileMenu = document.getElementById('mobileMenu');
+      var navLinks = Array.prototype.slice.call(document.querySelectorAll('[data-nav-link]'));
+      var navSections = Array.prototype.slice.call(document.querySelectorAll('[data-nav-section]'));
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      var desktopQuery = window.matchMedia('(min-width: 901px)');
+      var menuOpen = false;
+      var lastFocused = null;
+
+      /* ------------------------------------------------------------
+         Active navigation
+         ------------------------------------------------------------ */
+      function setActiveNav(id) {
+        navLinks.forEach(function (link) {
+          if (link.getAttribute('data-nav-link') === id) {
+            link.setAttribute('aria-current', 'location');
+          } else {
+            link.removeAttribute('aria-current');
+          }
+        });
+      }
+
+      function initActiveNav() {
+        if (!('IntersectionObserver' in window)) {
+          return;
+        }
+
+        var navMap = {
+          'satria-heroes': 'projects',
+          'bima-x': 'projects'
+        };
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) {
+              return;
+            }
+            var id = entry.target.getAttribute('data-nav-target') || entry.target.id;
+            id = navMap[id] || id;
+            if (id) {
+              setActiveNav(id);
+            }
+          });
+        }, {
+          rootMargin: '-42% 0px -50% 0px',
+          threshold: 0
+        });
+
+        navSections.forEach(function (section) {
+          observer.observe(section);
+        });
+      }
+
+      /* ------------------------------------------------------------
+         Header state, scroll progress, subtle hero parallax
+         ------------------------------------------------------------ */
+      var ticking = false;
+
+      function updateScrollUI() {
+        var scrollY = window.scrollY || window.pageYOffset;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var ratio = docHeight > 0 ? Math.min(1, Math.max(0, scrollY / docHeight)) : 0;
+
+        if (header) {
+          header.classList.toggle('is-scrolled', scrollY > 20);
+        }
+
+        if (progress) {
+          progress.style.transform = 'scaleX(' + ratio + ')';
+        }
+
+        if (
+          heroAmbient &&
+          !reduceMotion.matches &&
+          desktopQuery.matches &&
+          scrollY < window.innerHeight * 1.2
+        ) {
+          var offset = Math.min(scrollY * 0.11, 110);
+          heroAmbient.style.transform = 'translate3d(0, ' + offset + 'px, 0) scale(1.1)';
+        }
+      }
+
+      function onScroll() {
+        if (ticking) {
+          return;
+        }
+        ticking = true;
+        window.requestAnimationFrame(function () {
+          updateScrollUI();
+          ticking = false;
+        });
+      }
+
+      /* ------------------------------------------------------------
+         Mobile menu
+         ------------------------------------------------------------ */
+      function getMenuFocusables() {
+        if (!mobileMenu) {
+          return [];
+        }
+        return Array.prototype.slice.call(
+          mobileMenu.querySelectorAll('a[href], button:not([disabled])')
+        );
+      }
+
+      function openMenu() {
+        if (!mobileMenu || !menuToggle) {
+          return;
+        }
+
+        menuOpen = true;
+        lastFocused = document.activeElement;
+        mobileMenu.hidden = false;
+        menuToggle.setAttribute('aria-expanded', 'true');
+        menuToggle.setAttribute('aria-label', 'Close navigation menu');
+        document.body.classList.add('menu-open');
+
+        window.requestAnimationFrame(function () {
+          var focusables = getMenuFocusables();
+          if (focusables.length) {
+            focusables[0].focus();
+          }
+        });
+      }
+
+      function closeMenu(returnFocus) {
+        if (!mobileMenu || !menuToggle || !menuOpen) {
+          return;
+        }
+
+        menuOpen = false;
+        mobileMenu.hidden = true;
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'Open navigation menu');
+        document.body.classList.remove('menu-open');
+
+        if (returnFocus) {
+          if (lastFocused && typeof lastFocused.focus === 'function') {
+            lastFocused.focus();
+          } else {
+            menuToggle.focus();
+          }
+        }
+      }
+
+      function toggleMenu() {
+        if (menuOpen) {
+          closeMenu(true);
+        } else {
+          openMenu();
+        }
+      }
+
+      function initMobileMenu() {
+        if (!menuToggle || !mobileMenu) {
+          return;
+        }
+
+        menuToggle.addEventListener('click', toggleMenu);
+
+        mobileMenu.addEventListener('click', function (event) {
+          var target = event.target.closest('a');
+          if (target) {
+            closeMenu(false);
+          }
+        });
+
+        document.addEventListener('keydown', function (event) {
+          if (!menuOpen) {
+            return;
+          }
+
+          if (event.key === 'Escape') {
+            closeMenu(true);
+            return;
+          }
+
+          if (event.key !== 'Tab') {
+            return;
+          }
+
+          var focusables = getMenuFocusables();
+          if (!focusables.length) {
+            return;
+          }
+
+          var first = focusables[0];
+          var last = focusables[focusables.length - 1];
+
+          if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+          } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+          }
+        });
+
+        desktopQuery.addEventListener('change', function (event) {
+          if (event.matches && menuOpen) {
+            closeMenu(false);
+          }
+        });
+      }
+
+      /* ------------------------------------------------------------
+         Reveal-on-scroll
+         ------------------------------------------------------------ */
+      function initReveal() {
+        var reveals = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+
+        if (!('IntersectionObserver' in window) || reduceMotion.matches) {
+          reveals.forEach(function (element) {
+            element.classList.add('is-visible');
+          });
+          return;
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.1,
+          rootMargin: '0px 0px -6% 0px'
+        });
+
+        reveals.forEach(function (element) {
+          observer.observe(element);
+        });
+      }
+
+      /* ------------------------------------------------------------
+         Current year
+         ------------------------------------------------------------ */
+      function initYear() {
+        var year = document.getElementById('year');
+        if (year) {
+          year.textContent = String(new Date().getFullYear());
+        }
+      }
+
+      /* ------------------------------------------------------------
+         Initialise
+         ------------------------------------------------------------ */
+      function init() {
+        initYear();
+        initActiveNav();
+        initMobileMenu();
+        initReveal();
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll, { passive: true });
+
+        if (reduceMotion.addEventListener) {
+          reduceMotion.addEventListener('change', function () {
+            if (reduceMotion.matches && heroAmbient) {
+              heroAmbient.style.transform = '';
+            }
+            updateScrollUI();
+          });
+        }
+
+        updateScrollUI();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>
