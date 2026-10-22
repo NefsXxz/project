@@ -223,7 +223,6 @@
       cursor: not-allowed;
       pointer-events: none;
     }
-    /* Maintenance state for download button */
     .btn--maintenance {
       background: rgba(142, 23, 39, 0.18);
       border-color: var(--crimson);
@@ -665,6 +664,10 @@
       content: ""; width: 6px; height: 6px;
       background: currentColor; flex: none;
     }
+    .project-badge--gold {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
 
     .mini-status {
       display: grid; gap: 0.68rem;
@@ -730,6 +733,62 @@
       color: var(--muted);
       font-size: 0.86rem; line-height: 1.7;
     }
+
+    /* Update banner — BIMA-X major progress */
+    .update-banner {
+      position: relative;
+      margin: 2rem 0;
+      padding: 1.5rem 1.5rem 1.5rem 1.7rem;
+      border: 1px solid var(--line-strong);
+      background:
+        linear-gradient(180deg, rgba(228, 184, 92, 0.08) 0%, rgba(11, 13, 18, 0.4) 100%);
+    }
+    .update-banner::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      width: 3px;
+      background: var(--gold);
+    }
+    .update-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin-bottom: 0.9rem;
+      padding: 0.36rem 0.62rem;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: var(--font-mono);
+      font-size: 0.54rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      line-height: 1.4;
+      text-transform: uppercase;
+    }
+    .update-tag::before {
+      content: "";
+      width: 6px; height: 6px;
+      background: var(--gold);
+      flex: none;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+    .update-banner h3 {
+      font-size: clamp(1.5rem, 2.3vw, 2.1rem);
+      line-height: 1;
+      margin: 0 0 0.85rem;
+    }
+    .update-banner p {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.72;
+      max-width: 56ch;
+    }
+    .update-banner p + p { margin-top: 0.7rem; }
+    .update-banner strong { color: var(--bone); font-weight: 500; }
 
     .status-panel {
       margin-top: 2rem; padding: 1.4rem;
@@ -914,6 +973,7 @@
       line-height: 1.8;
     }
     .multiplayer-copy p + p { margin-top: 1.2rem; }
+    .multiplayer-copy strong { color: var(--bone); font-weight: 500; }
 
     .experimental-badge {
       display: inline-flex; align-items: center; gap: 0.5rem;
@@ -927,6 +987,7 @@
     .experimental-badge::before {
       content: ""; width: 6px; height: 6px;
       border: 1px solid var(--gold); flex: none;
+      animation: pulse 2s ease-in-out infinite;
     }
 
     .multiplayer-grid {
@@ -948,6 +1009,10 @@
       font-size: 0.5rem; font-weight: 500;
       letter-spacing: 0.12em; line-height: 1.4;
       text-transform: uppercase;
+    }
+    .concept-tag--green {
+      border-color: var(--green);
+      color: var(--green);
     }
     .concept h3 { margin: 0.8rem 0 0.5rem; font-size: clamp(1.3rem, 1.9vw, 1.9rem); }
     .concept p { color: rgba(244, 244, 245, 0.66); font-size: 0.9rem; line-height: 1.65; }
@@ -1097,9 +1162,6 @@
       text-transform: uppercase;
     }
 
-    /* ============================================================
-       DOWNLOAD BLOCK
-       ============================================================ */
     .download-block {
       position: relative;
       margin-top: 2rem;
@@ -1174,9 +1236,6 @@
       color: var(--amber);
     }
 
-    /* ============================================================
-       DOWNLOAD MODAL
-       ============================================================ */
     .modal {
       position: fixed;
       inset: 0;
@@ -1570,6 +1629,7 @@
       .footer-bottom { flex-direction: column; }
       .footer-nav { gap: 0.7rem 1rem; }
       .download-block { padding: 1.25rem 1.25rem 1.25rem 1.4rem; }
+      .update-banner { padding: 1.25rem 1.25rem 1.25rem 1.4rem; }
     }
 
     @media (max-width: 420px) {
@@ -1902,19 +1962,19 @@
                 An independent fan project focused on restoring the classic BIMA-X experience and
                 researching potential technical improvements.
               </p>
-              <span class="project-badge">ACTIVE DEVELOPMENT</span>
+              <span class="project-badge project-badge--gold">EXPERIMENTAL BETA — ONLINE 1v1 LIVE</span>
               <ul class="mini-status" aria-label="BIMA-X current status">
                 <li class="is-green">Game Assets — Obtained</li>
                 <li class="is-green">Date Compatibility — Fixed</li>
-                <li class="is-amber">Character Model Graphics — Under Investigation</li>
-                <li class="is-purple">Online Multiplayer — Research Phase</li>
+                <li class="is-green">Character Model Graphics — Fixed</li>
+                <li class="is-purple">Online 1v1 Multiplayer — Functional in Testing</li>
               </ul>
               <a class="btn btn--outline" href="#bima-x">
                 EXPLORE BIMA-X
                 <svg class="icon" aria-hidden="true"><use href="#icon-arrow"></use></svg>
               </a>
               <p class="project-note">
-                Online multiplayer is an experimental research topic. It is not a confirmed feature.
+                Online 1v1 multiplayer is functional in initial testing. Network lag is still being optimized.
               </p>
             </div>
           </article>
@@ -1983,7 +2043,6 @@
             and no public availability date is currently announced.
           </p>
 
-          <!-- DOWNLOAD BLOCK — SATRIA HEROES -->
           <div class="download-block" data-download-block="satria-heroes">
             <span class="download-label">FREE DOWNLOAD</span>
             <h3>FREE TO PLAY. HELP KEEP IT ONLINE.</h3>
@@ -2037,12 +2096,31 @@
             researching potential technical improvements.
           </p>
           <p class="detail-body">
-            Required game assets have been obtained and date compatibility has been fixed. Character
-            model graphics remain under investigation, while online multiplayer is in a research phase.
+            Required game assets have been obtained and date compatibility is fixed. Character model
+            graphics have been repaired to their intended quality, and online 1v1 multiplayer is now
+            functional in initial testing across two separate devices.
           </p>
 
+          <!-- MAJOR PROGRESS UPDATE BANNER -->
+          <div class="update-banner">
+            <span class="update-tag">MAJOR PROGRESS UPDATE</span>
+            <h3>CHARACTER GRAPHICS FIXED.<br>ONLINE 1v1 NOW FUNCTIONAL.</h3>
+            <p>
+              <strong>Character graphics fixed.</strong> The issue that caused character models to appear
+              pixelated, blurry, or unusually low-resolution has been resolved. Character visuals can
+              now return to their intended quality. If the issue persists, clearing the game's cache
+              may help.
+            </p>
+            <p>
+              <strong>Online 1v1 multiplayer implemented.</strong> Players can now connect using two
+              separate devices and battle each other without requiring a direct Bluetooth connection.
+              The feature passed initial testing with no crashes observed, though network lag is still
+              present and further optimization is needed to improve stability and responsiveness.
+            </p>
+          </div>
+
           <div class="status-panel">
-            <h3>STATUS SNAPSHOT</h3>
+            <h3>STATUS SNAPSHOT — EXPERIMENTAL BETA</h3>
             <ul class="status-list">
               <li class="status-row">
                 <span class="status-key">Game Assets</span>
@@ -2054,21 +2132,28 @@
               </li>
               <li class="status-row">
                 <span class="status-key">Character Model Graphics</span>
-                <span class="status status--amber">Under Investigation</span>
+                <span class="status status--green">Fixed</span>
               </li>
               <li class="status-row">
-                <span class="status-key">Online Multiplayer</span>
-                <span class="status status--purple">Research Phase</span>
+                <span class="status-key">Online 1v1 Multiplayer</span>
+                <span class="status status--purple">Functional in Testing</span>
+              </li>
+              <li class="status-row">
+                <span class="status-key">Network Performance</span>
+                <span class="status status--amber">Optimizing</span>
+              </li>
+              <li class="status-row">
+                <span class="status-key">Public Release</span>
+                <span class="status status--red">Not Yet Confirmed</span>
               </li>
             </ul>
           </div>
 
           <p class="detail-note">
-            Online multiplayer is an experimental research topic. Feasibility, compatibility
-            requirements, and implementation have not yet been confirmed.
+            This is an experimental beta. Online multiplayer has passed initial testing but remains
+            under active optimization, and public availability has not yet been confirmed.
           </p>
 
-          <!-- DOWNLOAD BLOCK — BIMA-X -->
           <div class="download-block" data-download-block="bima-x">
             <span class="download-label">FREE DOWNLOAD</span>
             <h3>FREE TO PLAY. HELP KEEP IT ONLINE.</h3>
@@ -2240,11 +2325,19 @@
               </li>
               <li class="status-row">
                 <span class="status-key">Character Model Graphics</span>
-                <span class="status status--amber">Under Investigation</span>
+                <span class="status status--green">Fixed</span>
               </li>
               <li class="status-row">
-                <span class="status-key">Online Multiplayer</span>
-                <span class="status status--purple">Research Phase</span>
+                <span class="status-key">Online 1v1 Multiplayer</span>
+                <span class="status status--purple">Functional in Testing</span>
+              </li>
+              <li class="status-row">
+                <span class="status-key">Network Performance</span>
+                <span class="status status--amber">Optimizing</span>
+              </li>
+              <li class="status-row">
+                <span class="status-key">Public Release</span>
+                <span class="status status--red">Not Yet Confirmed</span>
               </li>
             </ul>
           </div>
@@ -2275,40 +2368,46 @@
 
       <div class="container">
         <div class="multiplayer-content reveal">
-          <p class="eyebrow">EXPERIMENTAL RESEARCH</p>
-          <h2 class="multiplayer-title" id="multiplayerTitle">THE NEXT BATTLE: ONLINE?</h2>
+          <p class="eyebrow">EXPERIMENTAL BETA — FUNCTIONAL</p>
+          <h2 class="multiplayer-title" id="multiplayerTitle">THE NEXT BATTLE: ONLINE.</h2>
 
           <div class="multiplayer-copy">
             <p>
-              The original BIMA-X VS Friend mode relies on Bluetooth multiplayer. I'm exploring whether
-              it can be adapted into an online, room-based multiplayer experience, potentially allowing
-              players to compete over the internet instead.
+              <strong>Online 1v1 multiplayer is now functional in initial testing.</strong> Players can
+              connect using two separate devices and battle each other without requiring a direct
+              Bluetooth connection — the original BIMA-X VS Friend mode relied on local Bluetooth, but
+              this adaptation opens up internet-based play.
             </p>
             <p>
-              This is an ongoing technical investigation. The feasibility of the approach, compatibility
-              requirements, and implementation have not yet been confirmed.
+              The feature has successfully passed initial testing with no crashes observed during those
+              tests. However, network lag is still present, and further optimization is needed to
+              improve stability and responsiveness.
+            </p>
+            <p>
+              This remains an experimental beta. The feasibility of the approach has been validated in
+              practice, but public availability has not been confirmed.
             </p>
           </div>
 
-          <span class="experimental-badge">EXPERIMENTAL / NOT A CONFIRMED FEATURE</span>
+          <span class="experimental-badge">EXPERIMENTAL BETA / IN ACTIVE TESTING</span>
 
           <div class="multiplayer-grid">
             <article class="concept">
-              <span class="concept-tag">EXPERIMENTAL</span>
+              <span class="concept-tag concept-tag--green">FUNCTIONAL IN TESTING</span>
               <h3>ONLINE ROOMS</h3>
-              <p>Researching the possibility of internet-based player rooms.</p>
+              <p>Online 1v1 connections now work across two separate devices during initial testing.</p>
             </article>
             <article class="concept">
-              <span class="concept-tag">EXPERIMENTAL</span>
+              <span class="concept-tag concept-tag--green">FUNCTIONAL IN TESTING</span>
               <h3>PLAYER VS PLAYER</h3>
-              <p>Exploring the possibility of online battles.</p>
+              <p>Basic online 1v1 battles are working. Network lag remains and is being optimized.</p>
             </article>
             <article class="concept">
-              <span class="concept-tag">EXPERIMENTAL</span>
+              <span class="concept-tag">EXPANDING</span>
               <h3>MULTIPLAYER COMPATIBILITY</h3>
               <p>
-                Investigating ways to reduce device and operating-system restrictions associated
-                with the original mode.
+                Device requirements have been reduced through online play. Further improvements to
+                stability and responsiveness are ongoing.
               </p>
             </article>
           </div>
@@ -2353,12 +2452,12 @@
           <li class="timeline-item">
             <span class="timeline-phase">PHASE 05</span>
             <h3 class="timeline-title">BIMA-X Character Model Graphics</h3>
-            <span class="timeline-status status status--amber">Investigation Ongoing</span>
+            <span class="timeline-status status status--green">Fixed</span>
           </li>
           <li class="timeline-item">
             <span class="timeline-phase">PHASE 06</span>
-            <h3 class="timeline-title">BIMA-X Online Multiplayer</h3>
-            <span class="timeline-status status status--purple">Feasibility Research</span>
+            <h3 class="timeline-title">BIMA-X Online 1v1 Multiplayer</h3>
+            <span class="timeline-status status status--purple">Functional / Testing</span>
           </li>
         </ol>
       </div>
@@ -2368,7 +2467,7 @@
       <div class="container reveal">
         <p class="eyebrow">HOW I WORK</p>
         <h2 class="philosophy-title" id="philosophyTitle">CURIOSITY FIRST. PROMISES SECOND.</h2>
-        <p class="philosophy-quote">“This is an independent, evolving project.”</p>
+        <p class="philosophy-quote">"This is an independent, evolving project."</p>
         <div class="philosophy-copy">
           <p>
             Not every idea will become a working feature, and not every technical problem has an
@@ -2496,7 +2595,6 @@
     </div>
   </footer>
 
-  <!-- DOWNLOAD MODAL -->
   <div class="modal" id="downloadModal" role="dialog" aria-modal="true" aria-labelledby="downloadModalTitle" aria-describedby="downloadModalDesc" hidden>
     <div class="modal-backdrop" data-modal-close></div>
     <div class="modal-panel">
@@ -2798,53 +2896,20 @@
   </script>
 
   <script>
-    /* ════════════════════════════════════════════════════════════════════════
-       DOWNLOAD SYSTEM — SAFELINKU → MEDIAFIRE
-       ════════════════════════════════════════════════════════════════════════
-
-       ⚙️  MAINTENANCE / ON-OFF CONTROL
-       ────────────────────────────────────────────────────────────────────────
-       Tidak ada tombol on/off di website. Kamu mengontrolnya dari code ini.
-
-       MASTER SWITCH (semua project sekaligus):
-         DOWNLOAD_CONFIG.masterSwitch = true  → download aktif (normal)
-         DOWNLOAD_CONFIG.masterSwitch = false → SEMUA download dalam maintenance
-
-       PER PROJECT (control masing-masing):
-         'satria-heroes'.enabled = true  → tombol Satria Heroes bisa diklik
-         'satria-heroes'.enabled = false → tombol Satria Heroes jadi maintenance
-
-         'bima-x'.enabled = true  → tombol BIMA-X bisa diklik
-         'bima-x'.enabled = false → tombol BIMA-X jadi maintenance
-
-       URL SAFELINKU:
-         Isi field `safelink` dengan URL Safelinku untuk masing-masing project.
-         Kalau `safelink` kosong ('') → tombol disabled + "DOWNLOAD LINK COMING SOON".
-
-       CARA PAKAI:
-         1. Edit nilai di bawah
-         2. Save file
-         3. Refresh browser
-       ════════════════════════════════════════════════════════════════════════ */
-
+    /* DOWNLOAD SYSTEM — SAFELINKU → MEDIAFIRE */
     var DOWNLOAD_CONFIG = {
-      // ── MASTER SWITCH ──────────────────────────────────────────────
-      // true  = download mengikuti setting per-project di bawah
-      // false = SEMUA download dimatikan (maintenance global)
       masterSwitch: true,
-
-      // ── PER PROJECT ────────────────────────────────────────────────
       projects: {
         'satria-heroes': {
           name: 'Satria Heroes',
-          enabled: true,   // ← true = bisa download, false = maintenance
-          safelink: '',    // ← paste URL Safelinku di sini (misal 'https://safelinku.com/xxx')
-          mediafire: ''    // ← URL MediaFire (info saja, redirect di-handle Safelinku)
+          enabled: true,
+          safelink: '',
+          mediafire: ''
         },
         'bima-x': {
           name: 'BIMA-X',
-          enabled: true,   // ← true = bisa download, false = maintenance
-          safelink: '',    // ← paste URL Safelinku di sini
+          enabled: true,
+          safelink: '',
           mediafire: ''
         }
       }
@@ -2855,11 +2920,6 @@
 
       var CONFIG = DOWNLOAD_CONFIG;
 
-      /* Which UI state should this project be in?
-         'maintenance' → tombol disabled + label maintenance
-         'coming'      → tombol aktif, tapi modal tampilkan "coming soon"
-         'active'      → tombol aktif, klik membuka Safelinku
-      */
       function getProjectState(key) {
         var p = CONFIG.projects[key];
         if (!p) return 'unknown';
@@ -2869,9 +2929,6 @@
         return 'active';
       }
 
-      /* ---------------------------------------------------------------
-         Apply visual state to every download button + support note.
-         --------------------------------------------------------------- */
       function applyDownloadStates() {
         var blocks = document.querySelectorAll('[data-download-block]');
         blocks.forEach(function (block) {
@@ -2915,9 +2972,6 @@
         });
       }
 
-      /* ---------------------------------------------------------------
-         Modal wiring
-         --------------------------------------------------------------- */
       var modal = document.getElementById('downloadModal');
       if (!modal) return;
 
@@ -3009,7 +3063,6 @@
         }
       });
 
-      /* Boot */
       applyDownloadStates();
     })();
   </script>
