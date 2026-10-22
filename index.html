@@ -343,6 +343,11 @@
       font-size: 0.58rem; letter-spacing: 0.12em;
     }
     .mobile-nav a[aria-current="location"] { color: var(--gold); }
+    .mobile-nav a.mobile-nav-support {
+      color: var(--gold);
+      border-bottom: none;
+      margin-top: 0.5rem;
+    }
 
     .mobile-menu-foot { padding-top: 2rem; border-top: 1px solid var(--line); }
     .mobile-menu-foot p { color: var(--muted); font-size: 0.8rem; line-height: 1.6; }
@@ -1162,6 +1167,49 @@
     }
 
     /* ============================================================
+       SUPPORT SECTION
+       ============================================================ */
+    .support-card {
+      text-align: center;
+      padding: clamp(2rem, 6vw, 4rem);
+      border: 1px solid var(--line-strong);
+      background: linear-gradient(180deg, rgba(228, 184, 92, 0.04) 0%, rgba(11, 13, 18, 0.6) 100%);
+      position: relative;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+    .support-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .support-title {
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      margin: 0.8rem 0 1.2rem;
+      line-height: 1;
+    }
+    .support-desc {
+      color: var(--muted);
+      font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+      line-height: 1.75;
+      margin-bottom: 2rem;
+      max-width: 60ch;
+      margin-inline: auto;
+    }
+    .support-note {
+      display: block;
+      margin-top: 1.5rem;
+      color: rgba(161, 161, 170, 0.7);
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.05em;
+      line-height: 1.6;
+      text-transform: uppercase;
+    }
+
+    /* ============================================================
        VIDEO PROOF + MEDIA COMPARE
        ============================================================ */
     .video-proof { margin-top: 2rem; }
@@ -1195,8 +1243,7 @@
     }
     .video-frame:hover { border-color: rgba(228, 184, 92, 0.55); }
 
-    /* YouTube iframe */
-    .video-frame iframe {
+    .video-frame iframe, .video-frame video {
       position: absolute;
       inset: 0;
       width: 100%;
@@ -1204,18 +1251,7 @@
       border: 0;
       display: block;
     }
-
-    /* Direct video file (catbox, MP4, WebM, etc.) */
-    .video-frame video {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      background: #000;
-      display: block;
-      border: 0;
-    }
+    .video-frame video { object-fit: contain; background: #000; }
 
     .video-placeholder {
       position: absolute;
@@ -1283,7 +1319,6 @@
       line-height: 1.6;
     }
 
-    /* Before/After comparison — 2 images in 1 frame */
     .media-compare {
       position: relative;
       aspect-ratio: 16 / 9;
@@ -1309,6 +1344,7 @@
       position: relative;
       overflow: hidden;
       background: var(--ink-3);
+      cursor: zoom-in;
     }
     .media-compare-half > img {
       position: absolute;
@@ -1317,41 +1353,6 @@
       object-fit: cover;
       object-position: center;
       z-index: 1;
-    }
-    .media-compare-empty {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.4rem;
-      padding: 1rem;
-      text-align: center;
-      background:
-        repeating-linear-gradient(
-          45deg,
-          rgba(20, 24, 33, 0.9) 0,
-          rgba(20, 24, 33, 0.9) 12px,
-          rgba(11, 13, 18, 0.92) 12px,
-          rgba(11, 13, 18, 0.92) 24px
-        );
-      color: var(--muted);
-      z-index: 0;
-    }
-    .media-compare-empty span {
-      color: var(--gold);
-      font-family: var(--font-mono);
-      font-size: 0.54rem;
-      font-weight: 500;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-    .media-compare-empty small {
-      max-width: 20ch;
-      font-size: 0.68rem;
-      line-height: 1.4;
-      color: rgba(161, 161, 170, 0.85);
     }
     .media-compare-label {
       position: absolute;
@@ -1375,6 +1376,63 @@
       color: var(--gold);
     }
 
+    .image-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background: rgba(11, 13, 18, 0.95);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .image-lightbox.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+    .image-lightbox-content {
+      position: relative;
+      display: flex;
+      gap: 0.5rem;
+      max-width: 100%;
+      max-height: 100%;
+      overflow: auto;
+    }
+    .image-lightbox-content img {
+      max-width: 100%;
+      max-height: 85vh;
+      object-fit: contain;
+      border: 1px solid var(--line-strong);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+    .image-lightbox-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      width: 44px;
+      height: 44px;
+      background: rgba(11, 13, 18, 0.8);
+      border: 1px solid var(--line-strong);
+      color: var(--bone);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .image-lightbox-close:hover {
+      color: var(--gold);
+      border-color: var(--gold);
+    }
+    @media (max-width: 768px) {
+      .image-lightbox-content { flex-direction: column; }
+      .image-lightbox-content img { max-height: 45vh; }
+    }
     @media (max-width: 720px) {
       .video-grid { grid-template-columns: 1fr; }
     }
@@ -1845,6 +1903,95 @@
       }
       .hero-media img { transform: none !important; }
     }
+
+    /* ============================================================
+       LEGAL PAGES (TERMS & PRIVACY)
+       ============================================================ */
+    .legal-page {
+      min-height: calc(100vh - var(--header-h) - 100px);
+      padding-top: calc(var(--header-h) + 4rem);
+      padding-bottom: 5rem;
+    }
+    .legal-container { max-width: 900px; }
+    .legal-title {
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      margin: 1rem 0 0.5rem;
+      line-height: 1;
+    }
+    .legal-updated {
+      color: var(--gold);
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 3rem;
+    }
+    .legal-toc {
+      padding: 1.5rem;
+      border: 1px solid var(--line);
+      background: rgba(20, 24, 33, 0.4);
+      margin-bottom: 3rem;
+    }
+    .legal-toc h3 {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--bone);
+      letter-spacing: 0.15em;
+      margin-bottom: 1rem;
+    }
+    .legal-toc ul {
+      list-style: none; padding: 0; margin: 0;
+      display: grid; gap: 0.6rem;
+    }
+    .legal-toc a {
+      color: var(--muted); font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .legal-toc a:hover { color: var(--gold); }
+    
+    .legal-content h2 {
+      font-size: 1.8rem;
+      margin: 2.5rem 0 1rem;
+      color: var(--bone);
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 0.5rem;
+    }
+    .legal-content h3 {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 1.1rem;
+      text-transform: none;
+      letter-spacing: 0;
+      margin: 1.5rem 0 0.5rem;
+      color: var(--bone);
+    }
+    .legal-content p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .legal-content ul {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .legal-content li { margin-bottom: 0.5rem; }
+    .legal-content strong { color: var(--bone); font-weight: 500; }
+    .legal-content a { color: var(--gold); text-decoration: underline; text-underline-offset: 3px; }
+    .legal-content a:hover { color: var(--gold-soft); }
+    .legal-placeholder {
+      display: inline-block;
+      background: rgba(228, 184, 92, 0.1);
+      border: 1px dashed var(--gold);
+      color: var(--gold);
+      padding: 0.1rem 0.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      border-radius: 2px;
+    }
   </style>
 </head>
 
@@ -1886,6 +2033,9 @@
       <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/>
       <path d="M10 8.5v7l6-3.5-6-3.5z" fill="currentColor"/>
     </symbol>
+    <symbol id="icon-coffee" viewBox="0 0 24 24">
+      <path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8zM6 1v3M10 1v3M14 1v3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
   </svg>
 
   <header class="site-header" id="siteHeader">
@@ -1925,6 +2075,7 @@
       <a href="#creators" data-nav-link="creators"><span>04</span>Original Creators</a>
       <a href="#development" data-nav-link="development"><span>05</span>Development</a>
       <a href="#community" data-nav-link="community"><span>06</span>Community</a>
+      <a href="https://sociabuzz.com/kece8358/tribe" target="_blank" rel="noopener noreferrer" class="mobile-nav-support"><span>07</span>Support</a>
     </nav>
     <div class="mobile-menu-foot">
       <a class="btn btn--gold" href="https://discord.gg/6whU7guX9v" target="_blank" rel="noopener noreferrer">
@@ -1940,6 +2091,7 @@
     <div class="noscript-note">JavaScript is required for the mobile navigation menu, audio features, and the download flow. All section links remain available in the footer.</div>
   </noscript>
 
+  <!-- MAIN CONTENT (HOME) -->
   <main id="main">
     <section class="hero" id="home" data-nav-section>
       <div class="hero-media" aria-hidden="true">
@@ -2400,29 +2552,19 @@
               <figure class="video-card">
                 <div class="media-compare" role="img" aria-label="Before and after comparison of the BIMA-X character model graphics fix">
                   <div class="media-compare-half">
-                    <div class="media-compare-empty">
-                      <span>BEFORE IMAGE</span>
-                      <small>paste url here</small>
-                    </div>
                     <img src="https://i.ibb.co.com/BVWsH9f4/Screenshot-20261016-143452.jpg"
-                         alt="BIMA-X character model graphics before the fix — pixelated and blurry"
+                         alt="BIMA-X character model graphics before the fix"
                          loading="lazy"
                          decoding="async"
-                         referrerpolicy="no-referrer"
-                         onerror="this.remove()">
+                         referrerpolicy="no-referrer">
                     <span class="media-compare-label">BEFORE</span>
                   </div>
                   <div class="media-compare-half">
-                    <div class="media-compare-empty">
-                      <span>AFTER IMAGE</span>
-                      <small>Paste url here</small>
-                    </div>
                     <img src="https://i.ibb.co.com/Y4JRtHd9/Screenshot-20261022-132332.jpg"
-                         alt="BIMA-X character model graphics after the fix — restored to intended quality"
+                         alt="BIMA-X character model graphics after the fix"
                          loading="lazy"
                          decoding="async"
-                         referrerpolicy="no-referrer"
-                         onerror="this.remove()">
+                         referrerpolicy="no-referrer">
                     <span class="media-compare-label media-compare-label--gold">AFTER</span>
                   </div>
                 </div>
@@ -2821,6 +2963,27 @@
       </div>
     </section>
 
+    <!-- SUPPORT THE PROJECT SECTION -->
+    <section class="section" id="support" aria-labelledby="supportTitle">
+      <div class="container">
+        <div class="support-card reveal">
+          <p class="eyebrow" style="justify-content: center;">OPTIONAL SUPPORT</p>
+          <h2 class="support-title" id="supportTitle">SUPPORT HEROES ARCHIVE</h2>
+          <p class="support-desc">
+            Enjoying the project? If you'd like to support its development, you can leave a voluntary donation. Every contribution is appreciated and helps support future improvements.
+          </p>
+          <a class="btn btn--gold" href="https://sociabuzz.com/kece8358/tribe" target="_blank" rel="noopener noreferrer" style="font-size: 0.75rem; padding: 1rem 2rem; min-height: 52px;">
+            <svg class="icon" aria-hidden="true"><use href="#icon-coffee"></use></svg>
+            Support the Project
+            <span class="sr-only">(opens in a new tab)</span>
+          </a>
+          <p class="support-note">
+            Donations are completely voluntary and not required to access the archive, download games, or use any website features.
+          </p>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="disclaimer" aria-labelledby="disclaimerTitle">
       <div class="container disclaimer-grid">
         <div class="reveal">
@@ -2850,6 +3013,164 @@
     </section>
   </main>
 
+  <!-- TERMS OF SERVICE PAGE -->
+  <main id="page-terms" class="legal-page section section--alt" hidden>
+    <div class="container legal-container">
+      <a href="#home" class="btn btn--outline btn--small" style="margin-bottom: 2rem;">&larr; Back to Home</a>
+      
+      <p class="eyebrow">LEGAL INFORMATION</p>
+      <h1 class="legal-title">TERMS OF SERVICE</h1>
+      <p class="legal-updated" id="terms-updated">Last Updated: Pending Confirmation</p>
+
+      <div class="legal-toc">
+        <h3>TABLE OF CONTENTS</h3>
+        <ul>
+          <li><a href="#terms-intro">1. Introduction and Acceptance</a></li>
+          <li><a href="#terms-use">2. Acceptable Use</a></li>
+          <li><a href="#terms-ip">3. Intellectual Property</a></li>
+          <li><a href="#terms-disclaimer">4. Fan-Project Disclaimer</a></li>
+          <li><a href="#terms-links">5. Third-Party Links</a></li>
+          <li><a href="#terms-availability">6. Website Availability</a></li>
+          <li><a href="#terms-liability">7. Limitation of Liability</a></li>
+          <li><a href="#terms-changes">8. Changes to These Terms</a></li>
+          <li><a href="#terms-contact">9. Contact Information</a></li>
+        </ul>
+      </div>
+
+      <div class="legal-content">
+        <section id="terms-intro">
+          <h2>1. Introduction and Acceptance</h2>
+          <p>Welcome to HEROES ARCHIVE. These Terms of Service ("Terms") govern your access to and use of the HEROES ARCHIVE website (the "Site"). By accessing or using the Site, you agree to be bound by these Terms. If you do not agree to these Terms, please do not use the Site.</p>
+        </section>
+
+        <section id="terms-use">
+          <h2>2. Acceptable Use</h2>
+          <p>You agree to use the Site only for lawful purposes and in accordance with these Terms. You agree not to:</p>
+          <ul>
+            <li>Use the Site in any way that violates any applicable national or international law or regulation.</li>
+            <li>Attempt to gain unauthorized access to, interfere with, damage, or disrupt any parts of the Site, the server on which the Site is stored, or any server, computer, or database connected to the Site.</li>
+            <li>Use the Site to transmit, or procure the sending of, any advertising or promotional material without our prior written consent.</li>
+            <li>Impersonate or attempt to impersonate ZenovX, HEROES ARCHIVE, or any other person or entity.</li>
+          </ul>
+        </section>
+
+        <section id="terms-ip">
+          <h2>3. Intellectual Property and Ownership</h2>
+          <p>The Site and its original content, features, and functionality (including but not limited to text, design, graphics, and the arrangement thereof) are owned by ZenovX and are protected by international copyright, trademark, and other intellectual property laws.</p>
+          <p>However, HEROES ARCHIVE does not claim ownership of any third-party characters, trademarks, game assets, logos, or copyrighted materials featured on this Site. All original game assets, characters, and related intellectual property belong to their respective rights holders.</p>
+        </section>
+
+        <section id="terms-disclaimer">
+          <h2>4. Fan-Project Disclaimer</h2>
+          <p><strong>HEROES ARCHIVE is an independent fan project.</strong> It is not an official website, game release, or authorized partnership. It is not officially affiliated with, endorsed by, or sponsored by the owners of the BIMA-X or Satria Heroes franchises, including but not limited to Latido Co., Ltd., CRAFTS &amp; MEISTER, or Bandai Namco.</p>
+          <p>The Site is provided for informational and research purposes only. We do not claim to own or hold any rights to the original games.</p>
+        </section>
+
+        <section id="terms-links">
+          <h2>5. Third-Party Links and External Resources</h2>
+          <p>The Site may contain links to third-party websites or services that are not owned or controlled by HEROES ARCHIVE, such as Discord or YouTube. We have no control over, and assume no responsibility for, the content, privacy policies, or practices of any third-party websites or services.</p>
+          <p>You acknowledge and agree that HEROES ARCHIVE shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with the use of or reliance on any such content, goods, or services available on or through any such websites or services.</p>
+        </section>
+
+        <section id="terms-availability">
+          <h2>6. Website Availability and Service Changes</h2>
+          <p>We reserve the right to withdraw or amend this Site, and any service or material we provide on the Site, in our sole discretion without notice. We will not be liable if for any reason all or any part of the Site is unavailable at any time or for any period.</p>
+        </section>
+
+        <section id="terms-liability">
+          <h2>7. Limitation of Liability</h2>
+          <p>In no event shall HEROES ARCHIVE or ZenovX be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your access to or use of or inability to access or use the Site.</p>
+        </section>
+
+        <section id="terms-changes">
+          <h2>8. Changes to These Terms</h2>
+          <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. It is your responsibility to check these Terms periodically for changes. Your continued use of the Site following the posting of any changes to these Terms constitutes acceptance of those changes.</p>
+        </section>
+
+        <section id="terms-contact">
+          <h2>9. Contact Information</h2>
+          <p>If you have any questions about these Terms, please contact us via our community Discord or at: <span class="legal-placeholder">[INSERT CONTACT EMAIL]</span>.</p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- PRIVACY POLICY PAGE -->
+  <main id="page-privacy" class="legal-page section section--alt" hidden>
+    <div class="container legal-container">
+      <a href="#home" class="btn btn--outline btn--small" style="margin-bottom: 2rem;">&larr; Back to Home</a>
+      
+      <p class="eyebrow">LEGAL INFORMATION</p>
+      <h1 class="legal-title">PRIVACY POLICY</h1>
+      <p class="legal-updated" id="privacy-updated">Last Updated: Pending Confirmation</p>
+
+      <div class="legal-toc">
+        <h3>TABLE OF CONTENTS</h3>
+        <ul>
+          <li><a href="#privacy-collect">1. Information We Collect</a></li>
+          <li><a href="#privacy-cookies">2. Cookies and Tracking</a></li>
+          <li><a href="#privacy-use">3. How We Use Information</a></li>
+          <li><a href="#privacy-sharing">4. Data Sharing and Third-Party Services</a></li>
+          <li><a href="#privacy-retention">5. Data Retention and Security</a></li>
+          <li><a href="#privacy-rights">6. Your Privacy Rights</a></li>
+          <li><a href="#privacy-updates">7. Policy Updates</a></li>
+          <li><a href="#privacy-contact">8. Contact Information</a></li>
+        </ul>
+      </div>
+
+      <div class="legal-content">
+        <section id="privacy-collect">
+          <h2>1. Information We Collect</h2>
+          <p>HEROES ARCHIVE is a static informational website. We do not have user accounts, login systems, or contact forms on this Site that collect personal information directly.</p>
+          <ul>
+            <li><strong>Form Submissions:</strong> We do not have any web forms that collect personal data.</li>
+            <li><strong>Technical Information:</strong> Our web hosting provider (e.g., Vercel) may automatically collect standard server log data, including your IP address, browser type, operating system, and access times, for security and operational purposes. <span class="legal-placeholder">[OWNER: VERIFY HOSTING PROVIDER'S SPECIFIC LOGGING POLICIES]</span></li>
+          </ul>
+        </section>
+
+        <section id="privacy-cookies">
+          <h2>2. Cookies and Tracking</h2>
+          <p>We do not use analytics providers (like Google Analytics) or set tracking cookies on this Site.</p>
+          <p>However, third-party services embedded on this Site may set cookies or collect data:</p>
+          <ul>
+            <li><strong>YouTube:</strong> We embed videos using YouTube's privacy-enhanced mode (<code>youtube-nocookie.com</code>). YouTube may still collect data when you play a video.</li>
+            <li><strong>External Links:</strong> Clicking the Discord invite link or the donation link will take you to external platforms (Discord, Sociabuzz), which have their own privacy policies and cookies.</li>
+          </ul>
+        </section>
+
+        <section id="privacy-use">
+          <h2>3. How Information Is Used</h2>
+          <p>Any technical data collected by our hosting provider is used solely to ensure the stability, security, and performance of the website. We do not sell, rent, or trade your personal information.</p>
+        </section>
+
+        <section id="privacy-sharing">
+          <h2>4. Data Sharing and Third-Party Services</h2>
+          <p>We do not share your data with third parties except as necessary through our hosting infrastructure (Vercel). Your use of third-party services (like Discord, YouTube, or Sociabuzz) is governed by their respective privacy policies.</p>
+        </section>
+
+        <section id="privacy-retention">
+          <h2>5. Data Retention and Security</h2>
+          <p>Any server logs collected by our hosting provider are retained according to their standard retention policies for security purposes. The Site is served over HTTPS to encrypt data in transit.</p>
+        </section>
+
+        <section id="privacy-rights">
+          <h2>6. User Privacy Rights</h2>
+          <p>Because we do not collect personal data directly, there is no personal profile to access, modify, or delete. If you have concerns about the technical data (like IP addresses) logged by our hosting provider, you may contact us.</p>
+        </section>
+
+        <section id="privacy-updates">
+          <h2>7. Policy Updates</h2>
+          <p>We may update this Privacy Policy from time to time. We will post the new policy on this page and update the "Last Updated" date.</p>
+        </section>
+
+        <section id="privacy-contact">
+          <h2>8. Contact Information</h2>
+          <p>If you have any questions about this Privacy Policy, please contact us via our community Discord or at: <span class="legal-placeholder">[INSERT CONTACT EMAIL]</span>.</p>
+        </section>
+      </div>
+    </div>
+  </main>
+
   <footer class="site-footer">
     <div class="container">
       <div class="footer-top">
@@ -2870,7 +3191,12 @@
           <a class="footer-link" href="#development">Development</a>
           <a class="footer-link" href="#community">Community</a>
           <a class="footer-link" href="https://discord.gg/6whU7guX9v" target="_blank" rel="noopener noreferrer">Discord</a>
-          <a class="footer-link" href="#disclaimer">Disclaimer</a>
+          <!-- LEGAL LINKS -->
+          <a class="footer-link" href="#/terms">Terms of Service</a>
+          <a class="footer-link" href="#/privacy">Privacy Policy</a>
+          <a class="footer-link" href="https://discord.gg/6whU7guX9v" target="_blank" rel="noopener noreferrer">Contact</a>
+          <!-- SUPPORT LINK -->
+          <a class="footer-link" href="https://sociabuzz.com/kece8358/tribe" target="_blank" rel="noopener noreferrer" style="color: var(--gold);">Support the Project</a>
         </nav>
       </div>
 
@@ -2891,6 +3217,7 @@
     </div>
   </footer>
 
+  <!-- DOWNLOAD MODAL -->
   <div class="modal" id="downloadModal" role="dialog" aria-modal="true" aria-labelledby="downloadModalTitle" aria-describedby="downloadModalDesc" hidden>
     <div class="modal-backdrop" data-modal-close></div>
     <div class="modal-panel">
@@ -2935,6 +3262,17 @@
       </div>
 
       <span class="modal-support">Free download · Shortlink support helps cover server costs</span>
+    </div>
+  </div>
+
+  <!-- IMAGE LIGHTBOX (FULL SCREEN) -->
+  <div class="image-lightbox" id="imageLightbox" aria-hidden="true">
+    <button class="image-lightbox-close" id="lightboxClose" type="button" aria-label="Close enlarged image">
+      <svg class="icon" aria-hidden="true"><use href="#icon-close"></use></svg>
+    </button>
+    <div class="image-lightbox-content">
+      <img id="lightboxImgBefore" src="" alt="BIMA-X Before">
+      <img id="lightboxImgAfter" src="" alt="BIMA-X After">
     </div>
   </div>
 
@@ -3106,8 +3444,8 @@
     (function () {
       'use strict';
 
-      var BGM_URL = 'https://cdn.discordapp.com/attachments/1455029046638415998/1561336229142724729/Satria_Heroes_Mobile_Game_OST_-_Main_Menu_Theme_1.mp3?ex=6ada986d&is=6ad946ed&hm=3c2b353d82d0b1238ae7f9977fd67af83d075a01d9a042de14bfe5914ce94662&';
-      var CLICK_URL = 'https://cdn.discordapp.com/attachments/1455029046638415998/1561336295911985212/sys_001_se.mp3?ex=6ada987d&is=6ad946fd&hm=0f5a2a202efab4fb7778d6557a5f6148c3eb8a34ee5342a750f2693734c22285&';
+      var BGM_URL = 'https://cdn.discordapp.com/attachments/1455029046638415998/1561336229142724729/Satria_Heroes_Mobile_Game_OST_-_Main_Menu_Theme_1.mp3?ex=6ad5fb2d&is=6ad4a9ad&hm=c58a8349680a3fda877aef0ee608993e0eeb4de6970215735a1081fc58a38a84';
+      var CLICK_URL = 'https://cdn.discordapp.com/attachments/1455029046638415998/1561336295911985212/sys_001_se.mp3?ex=6ad5fb3d&is=6ad4a9bd&hm=5e6c4c9c33a8958402a34398e3eb1475311da154e967a3db8e033fd58220dff0';
 
       var toggle = document.getElementById('audioToggle');
       var label = document.getElementById('audioLabel');
@@ -3364,13 +3702,7 @@
   </script>
 
   <script>
-    /* ============================================================
-       VIDEO PROOF — supports any video URL
-       ------------------------------------------------------------
-       - Catbox / direct file (MP4, WebM, OGG) → <video> tag
-       - YouTube URL → YouTube iframe (auto-detected)
-       - Empty src → placeholder stays visible
-       ============================================================ */
+    /* VIDEO PROOF */
     (function () {
       'use strict';
 
@@ -3381,7 +3713,6 @@
 
         var title = frame.getAttribute('data-video-title') || 'Project development footage';
 
-        /* YouTube URL detection */
         var ytMatch = raw.match(/(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/)|youtu\.be\/)([A-Za-z0-9_-]{6,20})/);
         if (ytMatch) {
           var iframe = document.createElement('iframe');
@@ -3396,7 +3727,6 @@
           return;
         }
 
-        /* Direct video file (catbox, any MP4/WebM/OGG URL) */
         var video = document.createElement('video');
         video.src = raw;
         video.controls = true;
@@ -3416,6 +3746,107 @@
         frame.innerHTML = '';
         frame.appendChild(video);
       });
+    })();
+  </script>
+
+  <script>
+    /* LIGHTBOX LOGIC */
+    (function () {
+      'use strict';
+
+      var compareBlock = document.querySelector('.media-compare');
+      var lightbox = document.getElementById('imageLightbox');
+      var btnClose = document.getElementById('lightboxClose');
+      var imgBefore = document.getElementById('lightboxImgBefore');
+      var imgAfter = document.getElementById('lightboxImgAfter');
+
+      if (!compareBlock || !lightbox) return;
+
+      compareBlock.addEventListener('click', function () {
+        var srcBefore = compareBlock.querySelector('.media-compare-half:nth-child(1) img').src;
+        var srcAfter = compareBlock.querySelector('.media-compare-half:nth-child(2) img').src;
+
+        if (!srcBefore && !srcAfter) return;
+
+        imgBefore.src = srcBefore || '';
+        imgAfter.src = srcAfter || '';
+        
+        imgBefore.style.display = srcBefore ? 'block' : 'none';
+        imgAfter.style.display = srcAfter ? 'block' : 'none';
+
+        lightbox.classList.add('is-open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+      });
+
+      function closeLightbox() {
+        lightbox.classList.remove('is-open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+      }
+
+      btnClose.addEventListener('click', closeLightbox);
+      
+      lightbox.addEventListener('click', function (e) {
+        if (e.target === lightbox) {
+          closeLightbox();
+        }
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && lightbox.classList.contains('is-open')) {
+          closeLightbox();
+        }
+      });
+    })();
+  </script>
+
+  <script>
+    /* ============================================================
+       LEGAL PAGES ROUTER
+       Handles navigation to #/terms and #/privacy without a reload.
+       ============================================================ */
+    (function () {
+      'use strict';
+
+      var mainPage = document.getElementById('main');
+      var termsPage = document.getElementById('page-terms');
+      var privacyPage = document.getElementById('page-privacy');
+
+      if (!mainPage || !termsPage || !privacyPage) return;
+
+      // Set current date for "Last Updated"
+      var today = new Date();
+      var dateString = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      document.getElementById('terms-updated').textContent = 'Last Updated: ' + dateString;
+      document.getElementById('privacy-updated').textContent = 'Last Updated: ' + dateString;
+
+      function handleRoute() {
+        var hash = window.location.hash;
+
+        if (hash === '#/terms') {
+          mainPage.hidden = true;
+          privacyPage.hidden = true;
+          termsPage.hidden = false;
+          window.scrollTo(0, 0);
+        } else if (hash === '#/privacy') {
+          mainPage.hidden = true;
+          termsPage.hidden = true;
+          privacyPage.hidden = false;
+          window.scrollTo(0, 0);
+        } else {
+          // Default to main page (let native anchor scrolling handle sections)
+          termsPage.hidden = true;
+          privacyPage.hidden = true;
+          mainPage.hidden = false;
+        }
+      }
+
+      // Listen for hash changes
+      window.addEventListener('hashchange', handleRoute);
+
+      // Initialize on load
+      handleRoute();
     })();
   </script>
 </body>
