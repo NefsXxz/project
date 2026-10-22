@@ -1162,14 +1162,10 @@
     }
 
     /* ============================================================
-       VIDEO PROOF
+       VIDEO PROOF + MEDIA COMPARE
        ============================================================ */
-    .video-proof {
-      margin-top: 2rem;
-    }
-    .video-proof-header {
-      margin-bottom: 1.2rem;
-    }
+    .video-proof { margin-top: 2rem; }
+    .video-proof-header { margin-bottom: 1.2rem; }
     .video-proof-header h3 {
       font-size: clamp(1.4rem, 2.1vw, 1.9rem);
       margin: 0.6rem 0 0.5rem;
@@ -1187,21 +1183,19 @@
       gap: 1.2rem;
       margin-top: 1.2rem;
     }
-    .video-card {
-      margin: 0;
-      min-width: 0;
-    }
+    .video-card { margin: 0; min-width: 0; }
+
     .video-frame {
       position: relative;
       aspect-ratio: 16 / 9;
       overflow: hidden;
       border: 1px solid var(--line-strong);
-      background: var(--ink-3);
+      background: #000;
       transition: border-color 0.3s ease;
     }
-    .video-frame:hover {
-      border-color: rgba(228, 184, 92, 0.55);
-    }
+    .video-frame:hover { border-color: rgba(228, 184, 92, 0.55); }
+
+    /* YouTube iframe */
     .video-frame iframe {
       position: absolute;
       inset: 0;
@@ -1210,6 +1204,19 @@
       border: 0;
       display: block;
     }
+
+    /* Direct video file (catbox, MP4, WebM, etc.) */
+    .video-frame video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #000;
+      display: block;
+      border: 0;
+    }
+
     .video-placeholder {
       position: absolute;
       inset: 0;
@@ -1233,18 +1240,13 @@
     .video-placeholder::before {
       content: "";
       position: absolute;
-      top: 0.75rem;
-      left: 0.75rem;
-      right: 0.75rem;
-      bottom: 0.75rem;
+      top: 0.75rem; left: 0.75rem; right: 0.75rem; bottom: 0.75rem;
       border: 1px dashed rgba(228, 184, 92, 0.28);
       pointer-events: none;
     }
     .video-placeholder .icon {
-      width: 42px;
-      height: 42px;
-      color: var(--gold);
-      opacity: 0.65;
+      width: 42px; height: 42px;
+      color: var(--gold); opacity: 0.65;
     }
     .video-placeholder strong {
       color: var(--gold);
@@ -1260,6 +1262,7 @@
       line-height: 1.55;
       color: rgba(161, 161, 170, 0.9);
     }
+
     .video-caption {
       padding: 0.85rem 0.15rem 0;
       display: flex;
@@ -1279,6 +1282,99 @@
       font-size: 0.82rem;
       line-height: 1.6;
     }
+
+    /* Before/After comparison — 2 images in 1 frame */
+    .media-compare {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border: 1px solid var(--line-strong);
+      background: var(--ink-3);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      transition: border-color 0.3s ease;
+    }
+    .media-compare:hover { border-color: rgba(228, 184, 92, 0.55); }
+    .media-compare::before {
+      content: "";
+      position: absolute;
+      top: 0; bottom: 0; left: 50%;
+      width: 1px;
+      background: var(--gold);
+      transform: translateX(-0.5px);
+      z-index: 4;
+      pointer-events: none;
+    }
+    .media-compare-half {
+      position: relative;
+      overflow: hidden;
+      background: var(--ink-3);
+    }
+    .media-compare-half > img {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: 1;
+    }
+    .media-compare-empty {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 1rem;
+      text-align: center;
+      background:
+        repeating-linear-gradient(
+          45deg,
+          rgba(20, 24, 33, 0.9) 0,
+          rgba(20, 24, 33, 0.9) 12px,
+          rgba(11, 13, 18, 0.92) 12px,
+          rgba(11, 13, 18, 0.92) 24px
+        );
+      color: var(--muted);
+      z-index: 0;
+    }
+    .media-compare-empty span {
+      color: var(--gold);
+      font-family: var(--font-mono);
+      font-size: 0.54rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .media-compare-empty small {
+      max-width: 20ch;
+      font-size: 0.68rem;
+      line-height: 1.4;
+      color: rgba(161, 161, 170, 0.85);
+    }
+    .media-compare-label {
+      position: absolute;
+      top: 0.55rem; left: 0.55rem;
+      z-index: 3;
+      padding: 0.28rem 0.5rem;
+      background: rgba(11, 13, 18, 0.85);
+      border: 1px solid var(--line-strong);
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 0.5rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      line-height: 1.4;
+      text-transform: uppercase;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+    .media-compare-label--gold {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
     @media (max-width: 720px) {
       .video-grid { grid-template-columns: 1fr; }
     }
@@ -1299,9 +1395,7 @@
       background: var(--gold);
       transition: background 0.3s ease;
     }
-    .download-block.is-maintenance::before {
-      background: var(--crimson);
-    }
+    .download-block.is-maintenance::before { background: var(--crimson); }
     .download-block .download-label {
       display: flex; align-items: center; gap: 0.55rem;
       color: var(--gold);
@@ -1311,9 +1405,7 @@
       margin-bottom: 0.7rem;
       transition: color 0.3s ease;
     }
-    .download-block.is-maintenance .download-label {
-      color: var(--amber);
-    }
+    .download-block.is-maintenance .download-label { color: var(--amber); }
     .download-block .download-label::before {
       content: ""; width: 6px; height: 6px;
       background: currentColor; flex: none;
@@ -1350,12 +1442,8 @@
       color: var(--gold);
       transition: color 0.3s ease;
     }
-    .download-support.is-maintenance {
-      color: var(--amber);
-    }
-    .download-support.is-maintenance::before {
-      color: var(--amber);
-    }
+    .download-support.is-maintenance { color: var(--amber); }
+    .download-support.is-maintenance::before { color: var(--amber); }
 
     .modal {
       position: fixed;
@@ -1368,16 +1456,14 @@
     }
     .modal[hidden] { display: none; }
     .modal-backdrop {
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background: rgba(11, 13, 18, 0.94);
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
       animation: modalFade 0.25s ease;
     }
     .modal-panel {
-      position: relative;
-      z-index: 1;
+      position: relative; z-index: 1;
       width: min(100%, 580px);
       max-height: 92vh;
       overflow-y: auto;
@@ -1386,9 +1472,7 @@
       background:
         radial-gradient(500px 260px at 100% 0%, rgba(142, 23, 39, 0.22), transparent 65%),
         linear-gradient(180deg, #141821 0%, #1A070B 100%);
-      box-shadow:
-        0 40px 100px rgba(0, 0, 0, 0.8),
-        0 0 80px rgba(142, 23, 39, 0.14);
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8), 0 0 80px rgba(142, 23, 39, 0.14);
       animation: modalIn 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
     }
     .modal-close {
@@ -1398,8 +1482,7 @@
       display: grid; place-items: center;
       padding: 0;
       border: 1px solid var(--line);
-      background: transparent;
-      color: var(--muted);
+      background: transparent; color: var(--muted);
       transition: color 0.2s ease, border-color 0.2s ease;
     }
     .modal-close:hover { color: var(--gold); border-color: var(--gold); }
@@ -1451,10 +1534,7 @@
       font-weight: 500;
       letter-spacing: 0.1em;
     }
-    .modal-flow .flow-arrow {
-      color: var(--gold);
-      flex: none;
-    }
+    .modal-flow .flow-arrow { color: var(--gold); flex: none; }
     .modal-flow .flow-step {
       display: inline-flex; align-items: center; gap: 0.4rem;
     }
@@ -1480,10 +1560,7 @@
       line-height: 1.6;
       text-transform: uppercase;
     }
-    .modal-support::before {
-      content: "· ";
-      color: var(--gold);
-    }
+    .modal-support::before { content: "· "; color: var(--gold); }
 
     .modal-coming {
       display: none;
@@ -1500,10 +1577,7 @@
     }
     .modal-coming.is-visible { display: block; }
 
-    @keyframes modalFade {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+    @keyframes modalFade { from { opacity: 0; } to { opacity: 1; } }
     @keyframes modalIn {
       from { opacity: 0; transform: translateY(20px) scale(0.98); }
       to { opacity: 1; transform: translateY(0) scale(1); }
@@ -1555,7 +1629,6 @@
     }
     .footer-bottom a { color: var(--muted); transition: color 0.25s ease; }
     .footer-bottom a:hover { color: var(--gold); }
-
     .footer-credit {
       max-width: 72ch;
       color: rgba(161, 161, 170, 0.72);
@@ -1698,9 +1771,7 @@
         padding-top: 1.5rem; padding-left: 0;
         border-top: 1px solid var(--line); border-left: 0;
       }
-      .about-ambient {
-        width: 70%; right: -20%; opacity: 0.05;
-      }
+      .about-ambient { width: 70%; right: -20%; opacity: 0.05; }
       .vision-grid { grid-template-columns: 1fr; }
       .vision-item, .vision-item:first-child {
         padding: 1.8rem 0;
@@ -2168,7 +2239,6 @@
             and no public availability date is currently announced.
           </p>
 
-          <!-- VIDEO PROOF — SATRIA HEROES -->
           <div class="video-proof">
             <div class="video-proof-header">
               <p class="eyebrow">VIDEO EVIDENCE</p>
@@ -2178,7 +2248,7 @@
             <div class="video-grid">
               <figure class="video-card">
                 <div class="video-frame"
-                     data-youtube-id=""
+                     data-video-src=""
                      data-video-title="Satria Heroes — Private server test footage">
                   <div class="video-placeholder">
                     <svg class="icon" aria-hidden="true"><use href="#icon-play"></use></svg>
@@ -2194,7 +2264,7 @@
 
               <figure class="video-card">
                 <div class="video-frame"
-                     data-youtube-id=""
+                     data-video-src=""
                      data-video-title="Satria Heroes — Asset recovery preview">
                   <div class="video-placeholder">
                     <svg class="icon" aria-hidden="true"><use href="#icon-play"></use></svg>
@@ -2320,22 +2390,40 @@
             under active optimization, and public availability has not yet been confirmed.
           </p>
 
-          <!-- VIDEO PROOF — BIMA-X -->
           <div class="video-proof">
             <div class="video-proof-header">
               <p class="eyebrow">VIDEO EVIDENCE</p>
               <h3>PROOF OF PROGRESS.</h3>
-              <p>Two recorded clips documenting BIMA-X's current state — character graphics fix and online 1v1 gameplay.</p>
+              <p>Two evidence cards documenting BIMA-X's current state — a before/after character graphics comparison and online 1v1 gameplay.</p>
             </div>
             <div class="video-grid">
               <figure class="video-card">
-                <div class="video-frame"
-                     data-youtube-id=""
-                     data-video-title="BIMA-X — Character graphics fix comparison">
-                  <div class="video-placeholder">
-                    <svg class="icon" aria-hidden="true"><use href="#icon-play"></use></svg>
-                    <strong>VIDEO COMING SOON</strong>
-                    <span>Footage will be published here when available.</span>
+                <div class="media-compare" role="img" aria-label="Before and after comparison of the BIMA-X character model graphics fix">
+                  <div class="media-compare-half">
+                    <div class="media-compare-empty">
+                      <span>BEFORE IMAGE</span>
+                      <small>Paste URL into the img src</small>
+                    </div>
+                    <img src=""
+                         alt="BIMA-X character model graphics before the fix — pixelated and blurry"
+                         loading="lazy"
+                         decoding="async"
+                         referrerpolicy="no-referrer"
+                         onerror="this.remove()">
+                    <span class="media-compare-label">BEFORE</span>
+                  </div>
+                  <div class="media-compare-half">
+                    <div class="media-compare-empty">
+                      <span>AFTER IMAGE</span>
+                      <small>Paste URL into the img src</small>
+                    </div>
+                    <img src=""
+                         alt="BIMA-X character model graphics after the fix — restored to intended quality"
+                         loading="lazy"
+                         decoding="async"
+                         referrerpolicy="no-referrer"
+                         onerror="this.remove()">
+                    <span class="media-compare-label media-compare-label--gold">AFTER</span>
                   </div>
                 </div>
                 <figcaption class="video-caption">
@@ -2346,7 +2434,7 @@
 
               <figure class="video-card">
                 <div class="video-frame"
-                     data-youtube-id=""
+                     data-video-src=""
                      data-video-title="BIMA-X — Online 1v1 multiplayer test">
                   <div class="video-placeholder">
                     <svg class="icon" aria-hidden="true"><use href="#icon-play"></use></svg>
@@ -3276,30 +3364,57 @@
   </script>
 
   <script>
-    /* VIDEO PROOF — YouTube embed injection */
+    /* ============================================================
+       VIDEO PROOF — supports any video URL
+       ------------------------------------------------------------
+       - Catbox / direct file (MP4, WebM, OGG) → <video> tag
+       - YouTube URL → YouTube iframe (auto-detected)
+       - Empty src → placeholder stays visible
+       ============================================================ */
     (function () {
       'use strict';
 
-      var frames = document.querySelectorAll('[data-youtube-id]');
+      var frames = document.querySelectorAll('[data-video-src]');
       frames.forEach(function (frame) {
-        var id = (frame.getAttribute('data-youtube-id') || '').trim();
-        if (!id) return;
+        var raw = (frame.getAttribute('data-video-src') || '').trim();
+        if (!raw) return;
 
-        if (!/^[A-Za-z0-9_-]{6,20}$/.test(id)) {
-          console.warn('Invalid YouTube ID skipped:', id);
+        var title = frame.getAttribute('data-video-title') || 'Project development footage';
+
+        /* YouTube URL detection */
+        var ytMatch = raw.match(/(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/)|youtu\.be\/)([A-Za-z0-9_-]{6,20})/);
+        if (ytMatch) {
+          var iframe = document.createElement('iframe');
+          iframe.src = 'https://www.youtube-nocookie.com/embed/' + ytMatch[1];
+          iframe.title = title;
+          iframe.loading = 'lazy';
+          iframe.referrerPolicy = 'no-referrer';
+          iframe.setAttribute('allow', 'accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+          iframe.setAttribute('allowfullscreen', '');
+          frame.innerHTML = '';
+          frame.appendChild(iframe);
           return;
         }
 
-        var iframe = document.createElement('iframe');
-        iframe.src = 'https://www.youtube-nocookie.com/embed/' + id;
-        iframe.title = frame.getAttribute('data-video-title') || 'Project development footage';
-        iframe.loading = 'lazy';
-        iframe.referrerPolicy = 'no-referrer';
-        iframe.setAttribute('allow', 'accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
-        iframe.setAttribute('allowfullscreen', '');
+        /* Direct video file (catbox, any MP4/WebM/OGG URL) */
+        var video = document.createElement('video');
+        video.src = raw;
+        video.controls = true;
+        video.preload = 'metadata';
+        video.playsInline = true;
+        video.setAttribute('playsinline', '');
+        video.setAttribute('aria-label', title);
+
+        video.addEventListener('error', function () {
+          frame.innerHTML =
+            '<div class="video-placeholder">' +
+              '<strong>VIDEO UNAVAILABLE</strong>' +
+              '<span>Footage could not be loaded. The link may be broken or blocked.</span>' +
+            '</div>';
+        });
 
         frame.innerHTML = '';
-        frame.appendChild(iframe);
+        frame.appendChild(video);
       });
     })();
   </script>
