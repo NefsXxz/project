@@ -343,10 +343,25 @@
       font-size: 0.58rem; letter-spacing: 0.12em;
     }
     .mobile-nav a[aria-current="location"] { color: var(--gold); }
+    
+    /* Styling for Support & Legal links in mobile menu */
     .mobile-nav a.mobile-nav-support {
       color: var(--gold);
       border-bottom: none;
       margin-top: 0.5rem;
+    }
+    .mobile-nav a.mobile-nav-legal {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      padding: 0.6rem 0;
+      color: var(--muted);
+    }
+    .mobile-nav a.mobile-nav-legal:hover {
+      color: var(--bone);
+    }
+    .mobile-nav a.mobile-nav-legal span {
+      font-size: 0.5rem;
     }
 
     .mobile-menu-foot { padding-top: 2rem; border-top: 1px solid var(--line); }
@@ -2075,7 +2090,11 @@
       <a href="#creators" data-nav-link="creators"><span>04</span>Original Creators</a>
       <a href="#development" data-nav-link="development"><span>05</span>Development</a>
       <a href="#community" data-nav-link="community"><span>06</span>Community</a>
+      
+      <!-- Support & Legal Links -->
       <a href="https://sociabuzz.com/kece8358/tribe" target="_blank" rel="noopener noreferrer" class="mobile-nav-support"><span>07</span>Support</a>
+      <a href="#/terms" class="mobile-nav-legal"><span>08</span>Terms of Service</a>
+      <a href="#/privacy" class="mobile-nav-legal"><span>09</span>Privacy Policy</a>
     </nav>
     <div class="mobile-menu-foot">
       <a class="btn btn--gold" href="https://discord.gg/6whU7guX9v" target="_blank" rel="noopener noreferrer">
@@ -3444,8 +3463,8 @@
     (function () {
       'use strict';
 
-      var BGM_URL = 'https://cdn.discordapp.com/attachments/1455029046638415998/1561336229142724729/Satria_Heroes_Mobile_Game_OST_-_Main_Menu_Theme_1.mp3?ex=6ad5fb2d&is=6ad4a9ad&hm=c58a8349680a3fda877aef0ee608993e0eeb4de6970215735a1081fc58a38a84';
-      var CLICK_URL = 'https://cdn.discordapp.com/attachments/1455029046638415998/1561336295911985212/sys_001_se.mp3?ex=6ad5fb3d&is=6ad4a9bd&hm=5e6c4c9c33a8958402a34398e3eb1475311da154e967a3db8e033fd58220dff0';
+      var BGM_URL = 'https://cdn.discordapp.com/attachments/1455029046638415998/1561336229142724729/Satria_Heroes_Mobile_Game_OST_-_Main_Menu_Theme_1.mp3?ex=6adb412d&is=6ad9efad&hm=89c7c86a52bb397a79dafb62e1cf7e597566170d4b793837e2045f05ea524250&';
+      var CLICK_URL = 'https://cdn.discordapp.com/attachments/1455029046638415998/1561336295911985212/sys_001_se.mp3?ex=6adb413d&is=6ad9efbd&hm=e88d055cf79082c158e4916ee98a40f454ddbfeea2ffae0310fcdc5101703f8f&';
 
       var toggle = document.getElementById('audioToggle');
       var label = document.getElementById('audioLabel');
