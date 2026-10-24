@@ -381,6 +381,37 @@
     .mobile-nav a.mobile-nav-legal:hover { color: var(--bone); }
     .mobile-nav a.mobile-nav-legal span { font-size: 0.5rem; }
 
+    /* Styling for Mobile Language Button specifically */
+    .mobile-lang-container {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+    .mobile-lang-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      padding: 0.85rem;
+      background: transparent;
+      border: 1px solid var(--line-strong);
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: all 0.2s;
+    }
+    .mobile-lang-toggle span.active {
+      color: var(--gold);
+      font-weight: bold;
+    }
+    .mobile-lang-toggle:hover {
+      border-color: var(--gold);
+      color: var(--bone);
+    }
+
     .mobile-menu-foot { padding-top: 2rem; border-top: 1px solid var(--line); }
     .mobile-menu-foot p { color: var(--muted); font-size: 0.8rem; line-height: 1.6; }
     .mobile-menu-foot .btn { width: 100%; margin-bottom: 0.9rem; }
@@ -1900,7 +1931,10 @@
       .header-cta .header-cta-text { display: none; }
       .header-cta { width: 44px; min-height: 44px; padding: 0; }
       .header-cta .icon { width: 18px; height: 18px; }
-      .lang-switch { display: none; }
+      
+      /* FIX: Only hide the language switch in the HEADER, keep it in mobile menu */
+      .header-actions .lang-switch { display: none; }
+      
       .hero-inner { grid-template-columns: 1fr; }
       .hero-art { display: none; }
       .hero-media img {
@@ -2162,6 +2196,7 @@
       </nav>
 
       <div class="header-actions">
+        <!-- Desktop Language Switcher -->
         <button class="lang-switch" id="langToggle" aria-label="Switch Language">
           <span id="langEN" class="active">EN</span> | <span id="langID">ID</span>
         </button>
@@ -2191,10 +2226,10 @@
       <a href="#/terms" class="mobile-nav-legal"><span>08</span><span data-i18n="nav-terms">Terms of Service</span></a>
       <a href="#/privacy" class="mobile-nav-legal"><span>09</span><span data-i18n="nav-privacy">Privacy Policy</span></a>
       
-      <!-- Mobile Language Toggle -->
-      <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--line);">
-        <button class="lang-switch" style="width: 100%; justify-content: center; padding: 1rem;" onclick="document.getElementById('langToggle').click()">
-          Switch Language / Ubah Bahasa
+      <!-- FIXED: Mobile Language Toggle -->
+      <div class="mobile-lang-container">
+        <button class="mobile-lang-toggle" onclick="document.getElementById('langToggle').click()">
+          <span id="mobileLangEN" class="active">ENGLISH</span> | <span id="mobileLangID">INDONESIA</span>
         </button>
       </div>
     </nav>
@@ -3261,7 +3296,7 @@
 
         <section id="terms-contact">
           <h2>9. Contact Information</h2>
-          <p>If you have any questions about these Terms, please contact us via our community Discord or at: <span class="legal-placeholder">[INSERT CONTACT EMAIL]</span>.</p>
+          <p>If you have any questions about these Terms, please contact us via our community Discord or at: <span class="legal-placeholder">nefsxxzanjay@gmail.com</span>.</p>
         </section>
       </div>
     </div>
@@ -3337,7 +3372,7 @@
 
         <section id="privacy-contact">
           <h2>8. Contact Information</h2>
-          <p>If you have any questions about this Privacy Policy, please contact us via our community Discord or at: <span class="legal-placeholder">[INSERT CONTACT EMAIL]</span>.</p>
+          <p>If you have any questions about this Privacy Policy, please contact us via our community Discord or at: <span class="legal-placeholder">nefsxxzanjay@gmail.com</span>.</p>
         </section>
       </div>
     </div>
@@ -4076,23 +4111,38 @@
 
     (function() {
       let currentLang = localStorage.getItem('heroes-lang') || 'en';
+      
       const langToggle = document.getElementById('langToggle');
       const langEN = document.getElementById('langEN');
       const langID = document.getElementById('langID');
+      
+      const mobileLangEN = document.getElementById('mobileLangEN');
+      const mobileLangID = document.getElementById('mobileLangID');
 
       function setLanguage(lang) {
         currentLang = lang;
         localStorage.setItem('heroes-lang', lang);
         document.documentElement.lang = lang;
 
+        // Update visual state for Desktop Toggle
         if (lang === 'en') {
-          langEN.classList.add('active');
-          langID.classList.remove('active');
+          if(langEN) langEN.classList.add('active');
+          if(langID) langID.classList.remove('active');
         } else {
-          langID.classList.add('active');
-          langEN.classList.remove('active');
+          if(langID) langID.classList.add('active');
+          if(langEN) langEN.classList.remove('active');
         }
 
+        // Update visual state for Mobile Toggle
+        if (lang === 'en') {
+          if(mobileLangEN) mobileLangEN.classList.add('active');
+          if(mobileLangID) mobileLangID.classList.remove('active');
+        } else {
+          if(mobileLangID) mobileLangID.classList.add('active');
+          if(mobileLangEN) mobileLangEN.classList.remove('active');
+        }
+
+        // Translate text
         document.querySelectorAll('[data-i18n]').forEach(el => {
           const key = el.getAttribute('data-i18n');
           if (translations[lang] && translations[lang][key]) {
@@ -4101,10 +4151,13 @@
         });
       }
 
-      langToggle.addEventListener('click', () => {
-        setLanguage(currentLang === 'en' ? 'id' : 'en');
-      });
+      if (langToggle) {
+        langToggle.addEventListener('click', () => {
+          setLanguage(currentLang === 'en' ? 'id' : 'en');
+        });
+      }
 
+      // Initialize
       setLanguage(currentLang);
     })();
   </script>
