@@ -301,6 +301,28 @@
     .header-actions { display: flex; align-items: center; gap: 0.8rem; flex: none; }
     .header-cta { min-height: 40px; padding: 0.65rem 1rem; font-size: 0.6rem; }
 
+    .lang-switch {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      color: var(--muted);
+      background: transparent;
+      border: 1px solid var(--line-strong);
+      padding: 0.4rem 0.6rem;
+      border-radius: 1px;
+      transition: all 0.2s;
+    }
+    .lang-switch:hover {
+      border-color: var(--gold);
+      color: var(--bone);
+    }
+    .lang-switch span.active {
+      color: var(--gold);
+      font-weight: bold;
+    }
+
     .menu-toggle {
       display: none; align-items: center; justify-content: center;
       width: 44px; height: 44px; padding: 0;
@@ -344,7 +366,6 @@
     }
     .mobile-nav a[aria-current="location"] { color: var(--gold); }
     
-    /* Styling for Support & Legal links in mobile menu */
     .mobile-nav a.mobile-nav-support {
       color: var(--gold);
       border-bottom: none;
@@ -357,12 +378,8 @@
       padding: 0.6rem 0;
       color: var(--muted);
     }
-    .mobile-nav a.mobile-nav-legal:hover {
-      color: var(--bone);
-    }
-    .mobile-nav a.mobile-nav-legal span {
-      font-size: 0.5rem;
-    }
+    .mobile-nav a.mobile-nav-legal:hover { color: var(--bone); }
+    .mobile-nav a.mobile-nav-legal span { font-size: 0.5rem; }
 
     .mobile-menu-foot { padding-top: 2rem; border-top: 1px solid var(--line); }
     .mobile-menu-foot p { color: var(--muted); font-size: 0.8rem; line-height: 1.6; }
@@ -1182,6 +1199,77 @@
     }
 
     /* ============================================================
+       FAQ SECTION
+       ============================================================ */
+    .faq-section {
+      margin-top: 3rem;
+      border-top: 1px solid var(--line);
+      padding-top: 2rem;
+    }
+    .faq-heading {
+      font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+      color: var(--bone);
+      margin-bottom: 1.5rem;
+    }
+    .faq-accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .faq-item {
+      border: 1px solid var(--line);
+      background: rgba(20, 24, 33, 0.4);
+      border-radius: 1px;
+      transition: border-color 0.3s ease;
+    }
+    .faq-item[open] {
+      border-color: var(--line-strong);
+      background: rgba(20, 24, 33, 0.7);
+    }
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      cursor: pointer;
+      list-style: none; /* Hide default arrow */
+      color: var(--bone);
+      font-size: 0.95rem;
+      font-weight: 500;
+      line-height: 1.5;
+      transition: color 0.2s ease;
+    }
+    .faq-question::-webkit-details-marker { display: none; }
+    .faq-question:hover {
+      color: var(--gold);
+    }
+    .faq-item[open] .faq-question {
+      color: var(--gold);
+    }
+    .faq-icon {
+      flex: none;
+      width: 18px;
+      height: 18px;
+      color: currentColor;
+      transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+    .faq-item[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+    .faq-answer {
+      padding: 0 1.25rem 1.25rem 1.25rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.75;
+      animation: faqFadeIn 0.3s ease;
+    }
+    @keyframes faqFadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================================
        SUPPORT SECTION
        ============================================================ */
     .support-card {
@@ -1812,6 +1900,7 @@
       .header-cta .header-cta-text { display: none; }
       .header-cta { width: 44px; min-height: 44px; padding: 0; }
       .header-cta .icon { width: 18px; height: 18px; }
+      .lang-switch { display: none; }
       .hero-inner { grid-template-columns: 1fr; }
       .hero-art { display: none; }
       .hero-media img {
@@ -2051,6 +2140,9 @@
     <symbol id="icon-coffee" viewBox="0 0 24 24">
       <path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8zM6 1v3M10 1v3M14 1v3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
     </symbol>
+    <symbol id="icon-chevron-down" viewBox="0 0 24 24">
+      <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
   </svg>
 
   <header class="site-header" id="siteHeader">
@@ -2061,18 +2153,21 @@
       </a>
 
       <nav class="desktop-nav" aria-label="Primary navigation">
-        <a class="nav-link" href="#home" data-nav-link="home">Home</a>
-        <a class="nav-link" href="#about" data-nav-link="about">About</a>
-        <a class="nav-link" href="#projects" data-nav-link="projects">Projects</a>
-        <a class="nav-link" href="#creators" data-nav-link="creators">Original Creators</a>
-        <a class="nav-link" href="#development" data-nav-link="development">Development</a>
-        <a class="nav-link" href="#community" data-nav-link="community">Community</a>
+        <a class="nav-link" href="#home" data-nav-link="home" data-i18n="nav-home">Home</a>
+        <a class="nav-link" href="#about" data-nav-link="about" data-i18n="nav-about">About</a>
+        <a class="nav-link" href="#projects" data-nav-link="projects" data-i18n="nav-projects">Projects</a>
+        <a class="nav-link" href="#creators" data-nav-link="creators" data-i18n="nav-creators">Original Creators</a>
+        <a class="nav-link" href="#development" data-nav-link="development" data-i18n="nav-development">Development</a>
+        <a class="nav-link" href="#community" data-nav-link="community" data-i18n="nav-community">Community</a>
       </nav>
 
       <div class="header-actions">
+        <button class="lang-switch" id="langToggle" aria-label="Switch Language">
+          <span id="langEN" class="active">EN</span> | <span id="langID">ID</span>
+        </button>
         <a class="btn btn--crimson btn--small header-cta" href="https://discord.gg/6whU7guX9v" target="_blank" rel="noopener noreferrer" aria-label="Join the HEROES ARCHIVE Discord community (opens in a new tab)">
           <svg class="icon" aria-hidden="true"><use href="#icon-discord"></use></svg>
-          <span class="header-cta-text">JOIN DISCORD</span>
+          <span class="header-cta-text" data-i18n="btn-join-discord">JOIN DISCORD</span>
         </a>
         <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open navigation menu">
           <svg class="icon menu-icon" aria-hidden="true"><use href="#icon-menu"></use></svg>
@@ -2084,24 +2179,31 @@
 
   <div class="mobile-menu" id="mobileMenu" hidden>
     <nav class="mobile-nav" aria-label="Mobile navigation">
-      <a href="#home" data-nav-link="home"><span>01</span>Home</a>
-      <a href="#about" data-nav-link="about"><span>02</span>About</a>
-      <a href="#projects" data-nav-link="projects"><span>03</span>Projects</a>
-      <a href="#creators" data-nav-link="creators"><span>04</span>Original Creators</a>
-      <a href="#development" data-nav-link="development"><span>05</span>Development</a>
-      <a href="#community" data-nav-link="community"><span>06</span>Community</a>
+      <a href="#home" data-nav-link="home"><span>01</span><span data-i18n="nav-home">Home</span></a>
+      <a href="#about" data-nav-link="about"><span>02</span><span data-i18n="nav-about">About</span></a>
+      <a href="#projects" data-nav-link="projects"><span>03</span><span data-i18n="nav-projects">Projects</span></a>
+      <a href="#creators" data-nav-link="creators"><span>04</span><span data-i18n="nav-creators">Original Creators</span></a>
+      <a href="#development" data-nav-link="development"><span>05</span><span data-i18n="nav-development">Development</span></a>
+      <a href="#community" data-nav-link="community"><span>06</span><span data-i18n="nav-community">Community</span></a>
       
       <!-- Support & Legal Links -->
-      <a href="https://sociabuzz.com/kece8358/tribe" target="_blank" rel="noopener noreferrer" class="mobile-nav-support"><span>07</span>Support</a>
-      <a href="#/terms" class="mobile-nav-legal"><span>08</span>Terms of Service</a>
-      <a href="#/privacy" class="mobile-nav-legal"><span>09</span>Privacy Policy</a>
+      <a href="https://sociabuzz.com/kece8358/tribe" target="_blank" rel="noopener noreferrer" class="mobile-nav-support"><span>07</span><span data-i18n="nav-support">Support</span></a>
+      <a href="#/terms" class="mobile-nav-legal"><span>08</span><span data-i18n="nav-terms">Terms of Service</span></a>
+      <a href="#/privacy" class="mobile-nav-legal"><span>09</span><span data-i18n="nav-privacy">Privacy Policy</span></a>
+      
+      <!-- Mobile Language Toggle -->
+      <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--line);">
+        <button class="lang-switch" style="width: 100%; justify-content: center; padding: 1rem;" onclick="document.getElementById('langToggle').click()">
+          Switch Language / Ubah Bahasa
+        </button>
+      </div>
     </nav>
     <div class="mobile-menu-foot">
       <a class="btn btn--gold" href="https://discord.gg/6whU7guX9v" target="_blank" rel="noopener noreferrer">
         <svg class="icon" aria-hidden="true"><use href="#icon-discord"></use></svg>
-        JOIN OUR DISCORD
+        <span data-i18n="btn-join-community">JOIN OUR DISCORD</span>
       </a>
-      <p>Meet the community. Follow the progress. Help keep the legacy alive.</p>
+      <p data-i18n="mobile-foot-desc">Meet the community. Follow the progress. Help keep the legacy alive.</p>
       <span class="mobile-menu-url">discord.gg/6whU7guX9v</span>
     </div>
   </div>
@@ -2125,23 +2227,23 @@
 
       <div class="container hero-inner">
         <div class="hero-copy">
-          <p class="eyebrow anim" style="--anim-delay: 0.05s">INDEPENDENT FAN PROJECT</p>
+          <p class="eyebrow anim" style="--anim-delay: 0.05s" data-i18n="hero-eyebrow">INDEPENDENT FAN PROJECT</p>
           <h1 class="hero-title anim" style="--anim-delay: 0.14s">
-            <span>THE</span>
-            <span class="accent">LEGACY</span>
-            <span>LIVES ON.</span>
+            <span data-i18n="hero-title-1">THE</span>
+            <span class="accent" data-i18n="hero-title-2">LEGACY</span>
+            <span data-i18n="hero-title-3">LIVES ON.</span>
           </h1>
-          <p class="hero-sub anim" style="--anim-delay: 0.24s">
+          <p class="hero-sub anim" style="--anim-delay: 0.24s" data-i18n="hero-sub">
             Two tokusatsu experiences. One independent journey to preserve their legacy.
           </p>
           <div class="hero-actions anim" style="--anim-delay: 0.34s">
             <a class="btn btn--gold" href="#projects">
-              EXPLORE THE PROJECTS
+              <span data-i18n="btn-explore">EXPLORE THE PROJECTS</span>
               <svg class="icon" aria-hidden="true"><use href="#icon-arrow"></use></svg>
             </a>
             <a class="btn btn--outline" href="https://discord.gg/6whU7guX9v" target="_blank" rel="noopener noreferrer">
               <svg class="icon" aria-hidden="true"><use href="#icon-discord"></use></svg>
-              JOIN THE COMMUNITY
+              <span data-i18n="btn-join">JOIN THE COMMUNITY</span>
               <span class="sr-only">(opens in a new tab)</span>
             </a>
           </div>
@@ -2174,7 +2276,7 @@
 
       <div class="hero-cue" aria-hidden="true">
         <span class="cue-line"></span>
-        <span>SCROLL TO EXPLORE</span>
+        <span data-i18n="hero-scroll">SCROLL TO EXPLORE</span>
       </div>
     </section>
 
@@ -2188,26 +2290,26 @@
            aria-hidden="true">
       <div class="container about-grid">
         <div class="reveal">
-          <p class="eyebrow">BEHIND THE ARCHIVE</p>
-          <h2 class="about-heading" id="aboutTitle">
+          <p class="eyebrow" data-i18n="about-eyebrow">BEHIND THE ARCHIVE</p>
+          <h2 class="about-heading" id="aboutTitle" data-i18n="about-title">
             NOT A COMPANY.<br>JUST A FAN WITH A VISION.
           </h2>
-          <p class="about-name">ZenovX <span>INDEPENDENT DEVELOPER</span></p>
+          <p class="about-name">ZenovX <span data-i18n="about-role">INDEPENDENT DEVELOPER</span></p>
           <div class="crimson-line" aria-hidden="true"></div>
         </div>
 
         <div class="about-body reveal" style="--reveal-delay: 0.08s">
-          <p class="lead">Hi, I'm ZenovX — an independent developer and fan of Satria Heroes and BIMA-X.</p>
-          <p>
+          <p class="lead" data-i18n="about-lead">Hi, I'm ZenovX — an independent developer and fan of Satria Heroes and BIMA-X.</p>
+          <p data-i18n="about-p1">
             These projects grew from a desire to revisit classic games that deserve to be remembered.
             What began as curiosity became a personal journey of technical exploration, troubleshooting,
             restoration research, and community building.
           </p>
-          <p>
+          <p data-i18n="about-p2">
             I'm working independently, learning through experimentation, and documenting progress as I go.
             Every discovery, fix, and experiment is part of that journey.
           </p>
-          <p>
+          <p data-i18n="about-p3">
             This website is where I share the projects, explain what I'm working on, and connect with people
             who remember these games or want to see what happens next.
           </p>
@@ -2219,21 +2321,21 @@
     <section class="section section--alt" id="reason" aria-labelledby="reasonTitle">
       <div class="container reason-grid">
         <div class="reveal">
-          <p class="eyebrow">THE REASON</p>
-          <h2 class="reason-title" id="reasonTitle">SOME LEGACIES DESERVE ANOTHER CHANCE.</h2>
+          <p class="eyebrow" data-i18n="reason-eyebrow">THE REASON</p>
+          <h2 class="reason-title" id="reasonTitle" data-i18n="reason-title">SOME LEGACIES DESERVE ANOTHER CHANCE.</h2>
           <div class="crimson-line" aria-hidden="true" style="margin-top: 2rem;"></div>
         </div>
         <div class="reason-copy reveal" style="--reveal-delay: 0.08s">
-          <p class="highlight">
+          <p class="highlight" data-i18n="reason-p1">
             Satria Heroes and BIMA-X are part of the memories of their fans. As time passes, older games
             can become harder to access because of compatibility issues, missing resources, and outdated
             technical systems.
           </p>
-          <p>
+          <p data-i18n="reason-p2">
             These projects explore ways to revisit those experiences, investigate technical problems, and
             keep the community connected to the games.
           </p>
-          <p>
+          <p data-i18n="reason-p3">
             The goal is to learn, restore what is feasible, document discoveries, and celebrate the
             experiences that made these games memorable — while respecting the original creators and their
             intellectual property.
@@ -2246,10 +2348,10 @@
       <div class="container">
         <header class="section-head reveal">
           <div>
-            <p class="eyebrow">THE ARCHIVE</p>
-            <h2 id="projectsTitle">CHOOSE YOUR UNIVERSE.</h2>
+            <p class="eyebrow" data-i18n="projects-eyebrow">THE ARCHIVE</p>
+            <h2 id="projectsTitle" data-i18n="projects-title">CHOOSE YOUR UNIVERSE.</h2>
           </div>
-          <p>
+          <p data-i18n="projects-desc">
             Two independent restoration efforts, documented in the open. Each project has its own
             challenges, its own progress, and its own place in the archive.
           </p>
@@ -2278,24 +2380,24 @@
             </div>
 
             <div class="project-copy">
-              <p class="project-label">PROJECT 01 — SATRIA HEROES</p>
+              <p class="project-label" data-i18n="proj1-label">PROJECT 01 — SATRIA HEROES</p>
               <h3 class="project-title" id="projectSatriaTitle">SATRIA HEROES</h3>
-              <p class="project-desc">
+              <p class="project-desc" data-i18n="proj1-desc">
                 An independent fan project exploring the restoration and preservation of the classic
                 Satria Heroes game experience.
               </p>
-              <span class="project-badge">ASSET RECOVERY IN PROGRESS</span>
+              <span class="project-badge" data-i18n="proj1-badge">ASSET RECOVERY IN PROGRESS</span>
               <ul class="mini-status" aria-label="Satria Heroes current status">
-                <li class="is-green">Private Server — Operational</li>
-                <li class="is-amber">Game Assets — Some Assets Missing</li>
-                <li class="is-amber">Asset Recovery — In Progress</li>
-                <li class="is-red">Public Release — Not Available</li>
+                <li class="is-green" data-i18n="proj1-status1">Private Server — Operational</li>
+                <li class="is-amber" data-i18n="proj1-status2">Game Assets — Some Assets Missing</li>
+                <li class="is-amber" data-i18n="proj1-status3">Asset Recovery — In Progress</li>
+                <li class="is-red" data-i18n="proj1-status4">Public Release — Not Available</li>
               </ul>
               <a class="btn btn--outline" href="#satria-heroes">
-                EXPLORE SATRIA HEROES
+                <span data-i18n="proj1-btn">EXPLORE SATRIA HEROES</span>
                 <svg class="icon" aria-hidden="true"><use href="#icon-arrow"></use></svg>
               </a>
-              <p class="project-note">
+              <p class="project-note" data-i18n="proj1-note">
                 The private server is operational for research and testing. It is not a public release.
               </p>
             </div>
@@ -2323,24 +2425,24 @@
             </div>
 
             <div class="project-copy">
-              <p class="project-label">PROJECT 02 — BIMA-X</p>
+              <p class="project-label" data-i18n="proj2-label">PROJECT 02 — BIMA-X</p>
               <h3 class="project-title" id="projectBimaxTitle">BIMA-X</h3>
-              <p class="project-desc">
+              <p class="project-desc" data-i18n="proj2-desc">
                 An independent fan project focused on restoring the classic BIMA-X experience and
                 researching potential technical improvements.
               </p>
-              <span class="project-badge project-badge--gold">EXPERIMENTAL BETA — ONLINE 1v1 LIVE</span>
+              <span class="project-badge project-badge--gold" data-i18n="proj2-badge">EXPERIMENTAL BETA — ONLINE 1v1 LIVE</span>
               <ul class="mini-status" aria-label="BIMA-X current status">
-                <li class="is-green">Game Assets — Obtained</li>
-                <li class="is-green">Date Compatibility — Fixed</li>
-                <li class="is-green">Character Model Graphics — Fixed</li>
-                <li class="is-purple">Online 1v1 Multiplayer — Functional in Testing</li>
+                <li class="is-green" data-i18n="proj2-status1">Game Assets — Obtained</li>
+                <li class="is-green" data-i18n="proj2-status2">Date Compatibility — Fixed</li>
+                <li class="is-green" data-i18n="proj2-status3">Character Model Graphics — Fixed</li>
+                <li class="is-purple" data-i18n="proj2-status4">Online 1v1 Multiplayer — Functional in Testing</li>
               </ul>
               <a class="btn btn--outline" href="#bima-x">
-                EXPLORE BIMA-X
+                <span data-i18n="proj2-btn">EXPLORE BIMA-X</span>
                 <svg class="icon" aria-hidden="true"><use href="#icon-arrow"></use></svg>
               </a>
-              <p class="project-note">
+              <p class="project-note" data-i18n="proj2-note">
                 Online 1v1 multiplayer is functional in initial testing. Network lag is still being optimized.
               </p>
             </div>
@@ -2371,50 +2473,50 @@
         </div>
 
         <div class="detail-copy reveal" style="--reveal-delay: 0.08s">
-          <p class="eyebrow">PROJECT 01 / DETAILED RECORD</p>
+          <p class="eyebrow" data-i18n="satria-detail-eyebrow">PROJECT 01 / DETAILED RECORD</p>
           <h2 class="detail-title" id="satriaDetailTitle">SATRIA HEROES</h2>
-          <p class="detail-lede">
+          <p class="detail-lede" data-i18n="satria-detail-lede">
             An independent fan project exploring the restoration and preservation of the classic
             Satria Heroes game experience.
           </p>
-          <p class="detail-body">
+          <p class="detail-body" data-i18n="satria-detail-body">
             The private server is operational, but this is not a public release. Asset recovery remains
             in progress, and some game assets are still missing. The work continues carefully,
             documenting each discovery and limitation as it appears.
           </p>
 
           <div class="status-panel">
-            <h3>STATUS SNAPSHOT</h3>
+            <h3 data-i18n="status-snapshot">STATUS SNAPSHOT</h3>
             <ul class="status-list">
               <li class="status-row">
-                <span class="status-key">Private Server</span>
-                <span class="status status--green">Operational</span>
+                <span class="status-key" data-i18n="status-private">Private Server</span>
+                <span class="status status--green" data-i18n="status-operational">Operational</span>
               </li>
               <li class="status-row">
-                <span class="status-key">Game Assets</span>
-                <span class="status status--amber">Some Assets Missing</span>
+                <span class="status-key" data-i18n="status-assets">Game Assets</span>
+                <span class="status status--amber" data-i18n="status-missing">Some Assets Missing</span>
               </li>
               <li class="status-row">
-                <span class="status-key">Asset Recovery</span>
-                <span class="status status--amber">In Progress</span>
+                <span class="status-key" data-i18n="status-recovery">Asset Recovery</span>
+                <span class="status status--amber" data-i18n="status-progress">In Progress</span>
               </li>
               <li class="status-row">
-                <span class="status-key">Public Release</span>
-                <span class="status status--red">Not Available</span>
+                <span class="status-key" data-i18n="status-public">Public Release</span>
+                <span class="status status--red" data-i18n="status-not-avail">Not Available</span>
               </li>
             </ul>
           </div>
 
-          <p class="detail-note">
+          <p class="detail-note" data-i18n="satria-detail-note">
             The private server is maintained for research and testing. It is not a public release,
             and no public availability date is currently announced.
           </p>
 
           <div class="video-proof">
             <div class="video-proof-header">
-              <p class="eyebrow">VIDEO EVIDENCE</p>
-              <h3>DEVELOPMENT FOOTAGE.</h3>
-              <p>Two recorded clips documenting the Satria Heroes project's current state.</p>
+              <p class="eyebrow" data-i18n="video-evidence">VIDEO EVIDENCE</p>
+              <h3 data-i18n="dev-footage">DEVELOPMENT FOOTAGE.</h3>
+              <p data-i18n="video-desc-satria">Two recorded clips documenting the Satria Heroes project's current state.</p>
             </div>
             <div class="video-grid">
               <figure class="video-card">
@@ -2423,13 +2525,13 @@
                      data-video-title="Satria Heroes — Private server test footage">
                   <div class="video-placeholder">
                     <svg class="icon" aria-hidden="true"><use href="#icon-play"></use></svg>
-                    <strong>VIDEO COMING SOON</strong>
-                    <span>Footage will be published here when available.</span>
+                    <strong data-i18n="video-soon">VIDEO COMING SOON</strong>
+                    <span data-i18n="video-pub">Footage will be published here when available.</span>
                   </div>
                 </div>
                 <figcaption class="video-caption">
-                  <strong>01 — PRIVATE SERVER</strong>
-                  <span>Recorded session from the Satria Heroes private server.</span>
+                  <strong data-i18n="video-01-private">01 — PRIVATE SERVER</strong>
+                  <span data-i18n="video-01-desc">Recorded session from the Satria Heroes private server.</span>
                 </figcaption>
               </figure>
 
@@ -2439,37 +2541,37 @@
                      data-video-title="Satria Heroes — Asset recovery preview">
                   <div class="video-placeholder">
                     <svg class="icon" aria-hidden="true"><use href="#icon-play"></use></svg>
-                    <strong>VIDEO COMING SOON</strong>
-                    <span>Footage will be published here when available.</span>
+                    <strong data-i18n="video-soon">VIDEO COMING SOON</strong>
+                    <span data-i18n="video-pub">Footage will be published here when available.</span>
                   </div>
                 </div>
                 <figcaption class="video-caption">
-                  <strong>02 — ASSET RECOVERY</strong>
-                  <span>Preview of recovered assets and in-game visuals.</span>
+                  <strong data-i18n="video-02-recovery">02 — ASSET RECOVERY</strong>
+                  <span data-i18n="video-02-desc">Preview of recovered assets and in-game visuals.</span>
                 </figcaption>
               </figure>
             </div>
           </div>
 
           <div class="download-block" data-download-block="satria-heroes">
-            <span class="download-label">FREE DOWNLOAD</span>
-            <h3>FREE TO PLAY. HELP KEEP IT ONLINE.</h3>
-            <p>
+            <span class="download-label" data-i18n="download-free">FREE DOWNLOAD</span>
+            <h3 data-i18n="download-title">FREE TO PLAY. HELP KEEP IT ONLINE.</h3>
+            <p data-i18n="download-desc1">
               These games are free to download. Before downloading, you'll need to pass through a
               Safelinku shortlink first. Revenue generated through the shortlink helps me cover server
               hosting and maintenance costs so I can continue working on these projects independently.
             </p>
-            <p>
+            <p data-i18n="download-desc2">
               You don't need to purchase the games or pay a subscription. Completing the shortlink is
               a way to support the project while accessing the download.
             </p>
             <div class="download-actions">
               <button class="btn btn--gold" type="button" data-download="satria-heroes">
                 <svg class="icon" aria-hidden="true"><use href="#icon-download"></use></svg>
-                <span class="btn-text">DOWNLOAD GAME</span>
+                <span class="btn-text" data-i18n="btn-download">DOWNLOAD GAME</span>
               </button>
             </div>
-            <span class="download-support" data-download-support>Free download · Shortlink support helps cover server costs</span>
+            <span class="download-support" data-download-support data-i18n="download-support">Free download · Shortlink support helps cover server costs</span>
           </div>
         </div>
       </div>
@@ -2497,28 +2599,28 @@
         </div>
 
         <div class="detail-copy reveal" style="--reveal-delay: 0.08s">
-          <p class="eyebrow">PROJECT 02 / DETAILED RECORD</p>
+          <p class="eyebrow" data-i18n="bima-detail-eyebrow">PROJECT 02 / DETAILED RECORD</p>
           <h2 class="detail-title" id="bimaxDetailTitle">BIMA-X</h2>
-          <p class="detail-lede">
+          <p class="detail-lede" data-i18n="bima-detail-lede">
             An independent fan project focused on restoring the classic BIMA-X experience and
             researching potential technical improvements.
           </p>
-          <p class="detail-body">
+          <p class="detail-body" data-i18n="bima-detail-body">
             Required game assets have been obtained and date compatibility is fixed. Character model
             graphics have been repaired to their intended quality, and online 1v1 multiplayer is now
             functional in initial testing across two separate devices.
           </p>
 
           <div class="update-banner">
-            <span class="update-tag">MAJOR PROGRESS UPDATE</span>
-            <h3>CHARACTER GRAPHICS FIXED.<br>ONLINE 1v1 NOW FUNCTIONAL.</h3>
-            <p>
+            <span class="update-tag" data-i18n="update-tag">MAJOR PROGRESS UPDATE</span>
+            <h3 data-i18n="update-title">CHARACTER GRAPHICS FIXED.<br>ONLINE 1v1 NOW FUNCTIONAL.</h3>
+            <p data-i18n="update-p1">
               <strong>Character graphics fixed.</strong> The issue that caused character models to appear
               pixelated, blurry, or unusually low-resolution has been resolved. Character visuals can
               now return to their intended quality. If the issue persists, clearing the game's cache
               may help.
             </p>
-            <p>
+            <p data-i18n="update-p2">
               <strong>Online 1v1 multiplayer implemented.</strong> Players can now connect using two
               separate devices and battle each other without requiring a direct Bluetooth connection.
               The feature passed initial testing with no crashes observed, though network lag is still
@@ -2527,45 +2629,45 @@
           </div>
 
           <div class="status-panel">
-            <h3>STATUS SNAPSHOT — EXPERIMENTAL BETA</h3>
+            <h3 data-i18n="status-snapshot-beta">STATUS SNAPSHOT — EXPERIMENTAL BETA</h3>
             <ul class="status-list">
               <li class="status-row">
-                <span class="status-key">Game Assets</span>
-                <span class="status status--green">Obtained</span>
+                <span class="status-key" data-i18n="status-assets">Game Assets</span>
+                <span class="status status--green" data-i18n="status-obtained">Obtained</span>
               </li>
               <li class="status-row">
-                <span class="status-key">Date Compatibility</span>
-                <span class="status status--green">Fixed</span>
+                <span class="status-key" data-i18n="status-date">Date Compatibility</span>
+                <span class="status status--green" data-i18n="status-fixed">Fixed</span>
               </li>
               <li class="status-row">
-                <span class="status-key">Character Model Graphics</span>
-                <span class="status status--green">Fixed</span>
+                <span class="status-key" data-i18n="status-graphics">Character Model Graphics</span>
+                <span class="status status--green" data-i18n="status-fixed">Fixed</span>
               </li>
               <li class="status-row">
-                <span class="status-key">Online 1v1 Multiplayer</span>
-                <span class="status status--purple">Functional in Testing</span>
+                <span class="status-key" data-i18n="status-multiplayer">Online 1v1 Multiplayer</span>
+                <span class="status status--purple" data-i18n="status-functional">Functional in Testing</span>
               </li>
               <li class="status-row">
-                <span class="status-key">Network Performance</span>
-                <span class="status status--amber">Optimizing</span>
+                <span class="status-key" data-i18n="status-network">Network Performance</span>
+                <span class="status status--amber" data-i18n="status-optimizing">Optimizing</span>
               </li>
               <li class="status-row">
-                <span class="status-key">Public Release</span>
-                <span class="status status--red">Not Yet Confirmed</span>
+                <span class="status-key" data-i18n="status-public">Public Release</span>
+                <span class="status status--red" data-i18n="status-not-confirmed">Not Yet Confirmed</span>
               </li>
             </ul>
           </div>
 
-          <p class="detail-note">
+          <p class="detail-note" data-i18n="bima-detail-note">
             This is an experimental beta. Online multiplayer has passed initial testing but remains
             under active optimization, and public availability has not yet been confirmed.
           </p>
 
           <div class="video-proof">
             <div class="video-proof-header">
-              <p class="eyebrow">VIDEO EVIDENCE</p>
-              <h3>PROOF OF PROGRESS.</h3>
-              <p>Two evidence cards documenting BIMA-X's current state — a before/after character graphics comparison and online 1v1 gameplay.</p>
+              <p class="eyebrow" data-i18n="video-evidence">VIDEO EVIDENCE</p>
+              <h3 data-i18n="proof-progress">PROOF OF PROGRESS.</h3>
+              <p data-i18n="video-desc-bima">Two evidence cards documenting BIMA-X's current state — a before/after character graphics comparison and online 1v1 gameplay.</p>
             </div>
             <div class="video-grid">
               <figure class="video-card">
@@ -2576,7 +2678,7 @@
                          loading="lazy"
                          decoding="async"
                          referrerpolicy="no-referrer">
-                    <span class="media-compare-label">BEFORE</span>
+                    <span class="media-compare-label" data-i18n="label-before">BEFORE</span>
                   </div>
                   <div class="media-compare-half">
                     <img src="https://i.ibb.co.com/Y4JRtHd9/Screenshot-20261022-132332.jpg"
@@ -2584,12 +2686,12 @@
                          loading="lazy"
                          decoding="async"
                          referrerpolicy="no-referrer">
-                    <span class="media-compare-label media-compare-label--gold">AFTER</span>
+                    <span class="media-compare-label media-compare-label--gold" data-i18n="label-after">AFTER</span>
                   </div>
                 </div>
                 <figcaption class="video-caption">
-                  <strong>01 — CHARACTER GRAPHICS</strong>
-                  <span>Before / after comparison of the character model graphics fix.</span>
+                  <strong data-i18n="video-graphics">01 — CHARACTER GRAPHICS</strong>
+                  <span data-i18n="video-graphics-desc">Before / after comparison of the character model graphics fix.</span>
                 </figcaption>
               </figure>
 
@@ -2599,37 +2701,88 @@
                      data-video-title="BIMA-X — Online 1v1 multiplayer test">
                   <div class="video-placeholder">
                     <svg class="icon" aria-hidden="true"><use href="#icon-play"></use></svg>
-                    <strong>VIDEO COMING SOON</strong>
-                    <span>Footage will be published here when available.</span>
+                    <strong data-i18n="video-soon">VIDEO COMING SOON</strong>
+                    <span data-i18n="video-pub">Footage will be published here when available.</span>
                   </div>
                 </div>
                 <figcaption class="video-caption">
-                  <strong>02 — ONLINE 1v1</strong>
-                  <span>Recorded online 1v1 battle between two separate devices.</span>
+                  <strong data-i18n="video-online">02 — ONLINE 1v1</strong>
+                  <span data-i18n="video-online-desc">Recorded online 1v1 battle between two separate devices.</span>
                 </figcaption>
               </figure>
             </div>
           </div>
 
+          <!-- ============================================= -->
+          <!-- NEW FAQ SECTION FOR BIMA-X                    -->
+          <!-- ============================================= -->
+          <div class="faq-section">
+            <h3 class="faq-heading" data-i18n="faq-title">FREQUENTLY ASKED QUESTIONS</h3>
+            <div class="faq-accordion">
+              
+              <details class="faq-item">
+                <summary class="faq-question">
+                  <span data-i18n="faq-q1">Does BIMA-X work on Android 16?</span>
+                  <svg class="faq-icon" aria-hidden="true"><use href="#icon-chevron-down"></use></svg>
+                </summary>
+                <div class="faq-answer" data-i18n="faq-a1">
+                  Android 16 compatibility has not been fully tested yet. BIMA-X has been confirmed to work on Android 15. An update will be shared once further testing is completed.
+                </div>
+              </details>
+
+              <details class="faq-item">
+                <summary class="faq-question">
+                  <span data-i18n="faq-q2">Does BIMA-X contain any viruses or malware?</span>
+                  <svg class="faq-icon" aria-hidden="true"><use href="#icon-chevron-down"></use></svg>
+                </summary>
+                <div class="faq-answer" data-i18n="faq-a2">
+                  BIMA-X is not intended to contain any viruses or malware. However, no software can be guaranteed to be completely risk-free without independent security testing. For your safety, download the game only from the official source and scan the APK with a trusted security tool before installing it.
+                </div>
+              </details>
+
+              <details class="faq-item">
+                <summary class="faq-question">
+                  <span data-i18n="faq-q3">Can I play 1v1 using a mobile hotspot or Wi-Fi?</span>
+                  <svg class="faq-icon" aria-hidden="true"><use href="#icon-chevron-down"></use></svg>
+                </summary>
+                <div class="faq-answer" data-i18n="faq-a3">
+                  It should be possible! BIMA-X has a room list feature, so you can try connecting through Wi-Fi or a mobile hotspot. However, connection stability may vary depending on your network.
+                </div>
+              </details>
+
+              <details class="faq-item">
+                <summary class="faq-question">
+                  <span data-i18n="faq-q4">Can I play BIMA-X offline?</span>
+                  <svg class="faq-icon" aria-hidden="true"><use href="#icon-chevron-down"></use></svg>
+                </summary>
+                <div class="faq-answer" data-i18n="faq-a4">
+                  Yes! BIMA-X supports offline gameplay. However, online features such as 1v1 multiplayer require a network connection.
+                </div>
+              </details>
+
+            </div>
+          </div>
+          <!-- ============================================= -->
+
           <div class="download-block" data-download-block="bima-x">
-            <span class="download-label">FREE DOWNLOAD</span>
-            <h3>FREE TO PLAY. HELP KEEP IT ONLINE.</h3>
-            <p>
+            <span class="download-label" data-i18n="download-free">FREE DOWNLOAD</span>
+            <h3 data-i18n="download-title">FREE TO PLAY. HELP KEEP IT ONLINE.</h3>
+            <p data-i18n="download-desc1">
               These games are free to download. Before downloading, you'll need to pass through a
               Safelinku shortlink first. Revenue generated through the shortlink helps me cover server
               hosting and maintenance costs so I can continue working on these projects independently.
             </p>
-            <p>
+            <p data-i18n="download-desc2">
               You don't need to purchase the games or pay a subscription. Completing the shortlink is
               a way to support the project while accessing the download.
             </p>
             <div class="download-actions">
               <button class="btn btn--gold" type="button" data-download="bima-x">
                 <svg class="icon" aria-hidden="true"><use href="#icon-download"></use></svg>
-                <span class="btn-text">DOWNLOAD GAME</span>
+                <span class="btn-text" data-i18n="btn-download">DOWNLOAD GAME</span>
               </button>
             </div>
-            <span class="download-support" data-download-support>Free download · Shortlink support helps cover server costs</span>
+            <span class="download-support" data-download-support data-i18n="download-support">Free download · Shortlink support helps cover server costs</span>
           </div>
         </div>
       </div>
@@ -2639,10 +2792,10 @@
       <div class="container">
         <header class="section-head reveal">
           <div>
-            <p class="eyebrow">THE CREATORS BEHIND THE LEGACY</p>
-            <h2 id="creatorsTitle">BEHIND THE ORIGINAL EXPERIENCES.</h2>
+            <p class="eyebrow" data-i18n="creators-eyebrow">THE CREATORS BEHIND THE LEGACY</p>
+            <h2 id="creatorsTitle" data-i18n="creators-title">BEHIND THE ORIGINAL EXPERIENCES.</h2>
           </div>
-          <p>
+          <p data-i18n="creators-desc">
             Recognizing the developers and publishers associated with these games.
             These credits are presented for informational attribution, not as an endorsement
             of this archive.
@@ -2651,41 +2804,41 @@
 
         <div class="credits-grid">
           <div class="credit-block reveal">
-            <p class="credit-kicker">GAME</p>
+            <p class="credit-kicker" data-i18n="game">GAME</p>
             <h3 class="credit-title">SATRIA HEROES</h3>
             <div class="credit-row">
               <span class="credit-company">Latido Co., Ltd.</span>
-              <span class="credit-role">Developer<br>Listed Credit</span>
+              <span class="credit-role"><span data-i18n="role-dev">Developer</span><br><span data-i18n="role-credit">Listed Credit</span></span>
             </div>
-            <p class="credit-note">
+            <p class="credit-note" data-i18n="credit-note1">
               Developer of the Satria Heroes mobile game, subject to verification against reliable
               game listings and original credits.
             </p>
           </div>
 
           <div class="credit-block reveal" style="--reveal-delay: 0.08s">
-            <p class="credit-kicker">GAME</p>
+            <p class="credit-kicker" data-i18n="game">GAME</p>
             <h3 class="credit-title">BIMA-X</h3>
             <div class="credit-row">
               <span class="credit-company">CRAFTS &amp; MEISTER</span>
-              <span class="credit-role">Developer<br>Listed Credit</span>
+              <span class="credit-role"><span data-i18n="role-dev">Developer</span><br><span data-i18n="role-credit">Listed Credit</span></span>
             </div>
             <div class="credit-row">
               <span class="credit-company">Bandai Namco Games</span>
-              <span class="credit-role">Publisher<br>Listed Credit</span>
+              <span class="credit-role"><span data-i18n="role-pub">Publisher</span><br><span data-i18n="role-credit">Listed Credit</span></span>
             </div>
-            <p class="credit-note">
+            <p class="credit-note" data-i18n="credit-note2">
               Developer and publisher credits for the BIMA-X mobile game, subject to verification
               against reliable game listings and original credits.
             </p>
           </div>
         </div>
 
-        <span class="verification-note reveal">
+        <span class="verification-note reveal" data-i18n="verify-note">
           Credits remain subject to verification against original game materials
         </span>
 
-        <p class="credits-disclaimer reveal">
+        <p class="credits-disclaimer reveal" data-i18n="credits-disclaimer">
           Company names and development credits are provided for informational attribution.
           The original games and associated intellectual property remain the property of their
           respective rights holders. HEROES ARCHIVE is an independent fan project and is not
@@ -2698,10 +2851,10 @@
       <div class="container">
         <header class="section-head reveal">
           <div>
-            <p class="eyebrow">WHAT DRIVES THE WORK</p>
-            <h2 id="visionTitle">PRESERVE. RESTORE. CONNECT.</h2>
+            <p class="eyebrow" data-i18n="vision-eyebrow">WHAT DRIVES THE WORK</p>
+            <h2 id="visionTitle" data-i18n="vision-title">PRESERVE. RESTORE. CONNECT.</h2>
           </div>
-          <p>
+          <p data-i18n="vision-desc">
             Three principles guide every experiment, fix, and update. They keep the work honest
             and the archive focused on what matters.
           </p>
@@ -2710,22 +2863,22 @@
         <div class="vision-grid">
           <article class="vision-item reveal">
             <span class="vision-number" aria-hidden="true">01</span>
-            <h3 class="vision-title">PRESERVE</h3>
-            <p class="vision-copy">
+            <h3 class="vision-title" data-i18n="vision-1-title">PRESERVE</h3>
+            <p class="vision-copy" data-i18n="vision-1-desc">
               Explore and document classic game experiences while respecting their original creators.
             </p>
           </article>
           <article class="vision-item reveal" style="--reveal-delay: 0.08s">
             <span class="vision-number" aria-hidden="true">02</span>
-            <h3 class="vision-title">RESTORE</h3>
-            <p class="vision-copy">
+            <h3 class="vision-title" data-i18n="vision-2-title">RESTORE</h3>
+            <p class="vision-copy" data-i18n="vision-2-desc">
               Investigate compatibility issues, missing resources, and technical problems where feasible.
             </p>
           </article>
           <article class="vision-item reveal" style="--reveal-delay: 0.16s">
             <span class="vision-number" aria-hidden="true">03</span>
-            <h3 class="vision-title">CONNECT</h3>
-            <p class="vision-copy">
+            <h3 class="vision-title" data-i18n="vision-3-title">CONNECT</h3>
+            <p class="vision-copy" data-i18n="vision-3-desc">
               Build a community where fans can share memories, discoveries, feedback, and development updates.
             </p>
           </article>
@@ -2737,10 +2890,10 @@
       <div class="container">
         <header class="section-head reveal">
           <div>
-            <p class="eyebrow">CURRENT PROGRESS</p>
-            <h2 id="developmentTitle">WORK IN PROGRESS.<br>ALWAYS HONEST.</h2>
+            <p class="eyebrow" data-i18n="dev-eyebrow">CURRENT PROGRESS</p>
+            <h2 id="developmentTitle" data-i18n="dev-title">WORK IN PROGRESS.<br>ALWAYS HONEST.</h2>
           </div>
-          <p>
+          <p data-i18n="dev-desc">
             A transparent snapshot of where each project stands. Status entries are updated as
             research continues, and unfinished work is never presented as complete.
           </p>
@@ -2751,20 +2904,20 @@
             <h3>SATRIA HEROES</h3>
             <ul class="status-list">
               <li class="status-row">
-                <span class="status-key">Private Server</span>
-                <span class="status status--green">Operational</span>
+                <span class="status-key" data-i18n="status-private">Private Server</span>
+                <span class="status status--green" data-i18n="status-operational">Operational</span>
               </li>
               <li class="status-row">
-                <span class="status-key">Game Assets</span>
-                <span class="status status--amber">Some Missing</span>
+                <span class="status-key" data-i18n="status-assets">Game Assets</span>
+                <span class="status status--amber" data-i18n="status-some-missing">Some Missing</span>
               </li>
               <li class="status-row">
-                <span class="status-key">Asset Recovery</span>
-                <span class="status status--amber">In Progress</span>
+                <span class="status-key" data-i18n="status-recovery">Asset Recovery</span>
+                <span class="status status--amber" data-i18n="status-progress">In Progress</span>
               </li>
               <li class="status-row">
-                <span class="status-key">Public Release</span>
-                <span class="status status--red">Not Available</span>
+                <span class="status-key" data-i18n="status-public">Public Release</span>
+                <span class="status status--red" data-i18n="status-not-avail">Not Available</span>
               </li>
             </ul>
           </div>
@@ -2773,41 +2926,41 @@
             <h3>BIMA-X</h3>
             <ul class="status-list">
               <li class="status-row">
-                <span class="status-key">Game Assets</span>
-                <span class="status status--green">Obtained</span>
+                <span class="status-key" data-i18n="status-assets">Game Assets</span>
+                <span class="status status--green" data-i18n="status-obtained">Obtained</span>
               </li>
               <li class="status-row">
-                <span class="status-key">Date Compatibility</span>
-                <span class="status status--green">Fixed</span>
+                <span class="status-key" data-i18n="status-date">Date Compatibility</span>
+                <span class="status status--green" data-i18n="status-fixed">Fixed</span>
               </li>
               <li class="status-row">
-                <span class="status-key">Character Model Graphics</span>
-                <span class="status status--green">Fixed</span>
+                <span class="status-key" data-i18n="status-graphics">Character Model Graphics</span>
+                <span class="status status--green" data-i18n="status-fixed">Fixed</span>
               </li>
               <li class="status-row">
-                <span class="status-key">Online 1v1 Multiplayer</span>
-                <span class="status status--purple">Functional in Testing</span>
+                <span class="status-key" data-i18n="status-multiplayer">Online 1v1 Multiplayer</span>
+                <span class="status status--purple" data-i18n="status-functional">Functional in Testing</span>
               </li>
               <li class="status-row">
-                <span class="status-key">Network Performance</span>
-                <span class="status status--amber">Optimizing</span>
+                <span class="status-key" data-i18n="status-network">Network Performance</span>
+                <span class="status status--amber" data-i18n="status-optimizing">Optimizing</span>
               </li>
               <li class="status-row">
-                <span class="status-key">Public Release</span>
-                <span class="status status--red">Not Yet Confirmed</span>
+                <span class="status-key" data-i18n="status-public">Public Release</span>
+                <span class="status status--red" data-i18n="status-not-confirmed">Not Yet Confirmed</span>
               </li>
             </ul>
           </div>
         </div>
 
         <div class="status-legend reveal">
-          <span class="legend-item"><span class="legend-dot legend-dot--green"></span>Completed / Operational</span>
-          <span class="legend-item"><span class="legend-dot legend-dot--amber"></span>In Progress</span>
-          <span class="legend-item"><span class="legend-dot legend-dot--red"></span>Blocked / Unavailable</span>
-          <span class="legend-item"><span class="legend-dot legend-dot--purple"></span>Experimental Research</span>
+          <span class="legend-item"><span class="legend-dot legend-dot--green"></span><span data-i18n="leg-green">Completed / Operational</span></span>
+          <span class="legend-item"><span class="legend-dot legend-dot--amber"></span><span data-i18n="leg-amber">In Progress</span></span>
+          <span class="legend-item"><span class="legend-dot legend-dot--red"></span><span data-i18n="leg-red">Blocked / Unavailable</span></span>
+          <span class="legend-item"><span class="legend-dot legend-dot--purple"></span><span data-i18n="leg-purple">Experimental Research</span></span>
         </div>
 
-        <p class="dev-note reveal">
+        <p class="dev-note reveal" data-i18n="dev-note">
           Development status reflects current progress and may change as research continues.
         </p>
       </div>
@@ -2825,44 +2978,44 @@
 
       <div class="container">
         <div class="multiplayer-content reveal">
-          <p class="eyebrow">EXPERIMENTAL BETA — FUNCTIONAL</p>
-          <h2 class="multiplayer-title" id="multiplayerTitle">THE NEXT BATTLE: ONLINE.</h2>
+          <p class="eyebrow" data-i18n="multi-eyebrow">EXPERIMENTAL BETA — FUNCTIONAL</p>
+          <h2 class="multiplayer-title" id="multiplayerTitle" data-i18n="multi-title">THE NEXT BATTLE: ONLINE.</h2>
 
           <div class="multiplayer-copy">
-            <p>
+            <p data-i18n="multi-p1">
               <strong>Online 1v1 multiplayer is now functional in initial testing.</strong> Players can
               connect using two separate devices and battle each other without requiring a direct
               Bluetooth connection — the original BIMA-X VS Friend mode relied on local Bluetooth, but
               this adaptation opens up internet-based play.
             </p>
-            <p>
+            <p data-i18n="multi-p2">
               The feature has successfully passed initial testing with no crashes observed during those
               tests. However, network lag is still present, and further optimization is needed to
               improve stability and responsiveness.
             </p>
-            <p>
+            <p data-i18n="multi-p3">
               This remains an experimental beta. The feasibility of the approach has been validated in
               practice, but public availability has not been confirmed.
             </p>
           </div>
 
-          <span class="experimental-badge">EXPERIMENTAL BETA / IN ACTIVE TESTING</span>
+          <span class="experimental-badge" data-i18n="multi-badge">EXPERIMENTAL BETA / IN ACTIVE TESTING</span>
 
           <div class="multiplayer-grid">
             <article class="concept">
-              <span class="concept-tag concept-tag--green">FUNCTIONAL IN TESTING</span>
-              <h3>ONLINE ROOMS</h3>
-              <p>Online 1v1 connections now work across two separate devices during initial testing.</p>
+              <span class="concept-tag concept-tag--green" data-i18n="tag-func">FUNCTIONAL IN TESTING</span>
+              <h3 data-i18n="concept-1-title">ONLINE ROOMS</h3>
+              <p data-i18n="concept-1-desc">Online 1v1 connections now work across two separate devices during initial testing.</p>
             </article>
             <article class="concept">
-              <span class="concept-tag concept-tag--green">FUNCTIONAL IN TESTING</span>
-              <h3>PLAYER VS PLAYER</h3>
-              <p>Basic online 1v1 battles are working. Network lag remains and is being optimized.</p>
+              <span class="concept-tag concept-tag--green" data-i18n="tag-func">FUNCTIONAL IN TESTING</span>
+              <h3 data-i18n="concept-2-title">PLAYER VS PLAYER</h3>
+              <p data-i18n="concept-2-desc">Basic online 1v1 battles are working. Network lag remains and is being optimized.</p>
             </article>
             <article class="concept">
-              <span class="concept-tag">EXPANDING</span>
-              <h3>MULTIPLAYER COMPATIBILITY</h3>
-              <p>
+              <span class="concept-tag" data-i18n="tag-exp">EXPANDING</span>
+              <h3 data-i18n="concept-3-title">MULTIPLAYER COMPATIBILITY</h3>
+              <p data-i18n="concept-3-desc">
                 Device requirements have been reduced through online play. Further improvements to
                 stability and responsiveness are ongoing.
               </p>
@@ -2876,10 +3029,10 @@
       <div class="container">
         <header class="section-head reveal">
           <div>
-            <p class="eyebrow">THE PROCESS</p>
-            <h2 id="journeyTitle">EVERY FIX HAS A STORY.</h2>
+            <p class="eyebrow" data-i18n="journey-eyebrow">THE PROCESS</p>
+            <h2 id="journeyTitle" data-i18n="journey-title">EVERY FIX HAS A STORY.</h2>
           </div>
-          <p>
+          <p data-i18n="journey-desc">
             A living record of what has been achieved and what is still being investigated.
             Phases are listed without invented dates; the work is documented as it happens.
           </p>
@@ -2888,33 +3041,33 @@
         <ol class="timeline reveal">
           <li class="timeline-item">
             <span class="timeline-phase">PHASE 01</span>
-            <h3 class="timeline-title">Satria Heroes Private Server</h3>
-            <span class="timeline-status status status--green">Operational</span>
+            <h3 class="timeline-title" data-i18n="time-1">Satria Heroes Private Server</h3>
+            <span class="timeline-status status status--green" data-i18n="status-operational">Operational</span>
           </li>
           <li class="timeline-item">
             <span class="timeline-phase">PHASE 02</span>
-            <h3 class="timeline-title">Satria Heroes Asset Recovery</h3>
-            <span class="timeline-status status status--amber">Ongoing</span>
+            <h3 class="timeline-title" data-i18n="time-2">Satria Heroes Asset Recovery</h3>
+            <span class="timeline-status status status--amber" data-i18n="status-ongoing">Ongoing</span>
           </li>
           <li class="timeline-item">
             <span class="timeline-phase">PHASE 03</span>
-            <h3 class="timeline-title">BIMA-X Required Game Assets</h3>
-            <span class="timeline-status status status--green">Obtained</span>
+            <h3 class="timeline-title" data-i18n="time-3">BIMA-X Required Game Assets</h3>
+            <span class="timeline-status status status--green" data-i18n="status-obtained">Obtained</span>
           </li>
           <li class="timeline-item">
             <span class="timeline-phase">PHASE 04</span>
-            <h3 class="timeline-title">BIMA-X Date Compatibility</h3>
-            <span class="timeline-status status status--green">Fixed</span>
+            <h3 class="timeline-title" data-i18n="time-4">BIMA-X Date Compatibility</h3>
+            <span class="timeline-status status status--green" data-i18n="status-fixed">Fixed</span>
           </li>
           <li class="timeline-item">
             <span class="timeline-phase">PHASE 05</span>
-            <h3 class="timeline-title">BIMA-X Character Model Graphics</h3>
-            <span class="timeline-status status status--green">Fixed</span>
+            <h3 class="timeline-title" data-i18n="time-5">BIMA-X Character Model Graphics</h3>
+            <span class="timeline-status status status--green" data-i18n="status-fixed">Fixed</span>
           </li>
           <li class="timeline-item">
             <span class="timeline-phase">PHASE 06</span>
-            <h3 class="timeline-title">BIMA-X Online 1v1 Multiplayer</h3>
-            <span class="timeline-status status status--purple">Functional / Testing</span>
+            <h3 class="timeline-title" data-i18n="time-6">BIMA-X Online 1v1 Multiplayer</h3>
+            <span class="timeline-status status status--purple" data-i18n="status-func-test">Functional / Testing</span>
           </li>
         </ol>
       </div>
@@ -2922,15 +3075,15 @@
 
     <section class="section philosophy" id="philosophy" aria-labelledby="philosophyTitle">
       <div class="container reveal">
-        <p class="eyebrow">HOW I WORK</p>
-        <h2 class="philosophy-title" id="philosophyTitle">CURIOSITY FIRST. PROMISES SECOND.</h2>
-        <p class="philosophy-quote">"This is an independent, evolving project."</p>
+        <p class="eyebrow" data-i18n="philo-eyebrow">HOW I WORK</p>
+        <h2 class="philosophy-title" id="philosophyTitle" data-i18n="philo-title">CURIOSITY FIRST. PROMISES SECOND.</h2>
+        <p class="philosophy-quote" data-i18n="philo-quote">"This is an independent, evolving project."</p>
         <div class="philosophy-copy">
-          <p>
+          <p data-i18n="philo-p1">
             Not every idea will become a working feature, and not every technical problem has an
             immediate solution.
           </p>
-          <p>
+          <p data-i18n="philo-p2">
             Development updates will distinguish completed work from experiments and future plans.
             Transparency matters more than exaggerated promises. If a feature is still being
             researched, it will be presented as experimental. If a fix is completed, its status will
@@ -2953,15 +3106,15 @@
 
       <div class="container">
         <div class="community-content reveal">
-          <p class="eyebrow">JOIN THE JOURNEY</p>
-          <h2 class="community-title" id="communityTitle">THE LEGACY IS BETTER TOGETHER.</h2>
+          <p class="eyebrow" data-i18n="comm-eyebrow">JOIN THE JOURNEY</p>
+          <h2 class="community-title" id="communityTitle" data-i18n="comm-title">THE LEGACY IS BETTER TOGETHER.</h2>
 
           <div class="community-copy">
-            <p>
+            <p data-i18n="comm-p1">
               Whether you grew up playing these games, recently rediscovered them, or are curious
               about the development process, you're welcome to follow the journey.
             </p>
-            <p>
+            <p data-i18n="comm-p2">
               Join fellow fans, share memories, discuss discoveries, and follow the latest project updates.
             </p>
           </div>
@@ -2969,13 +3122,13 @@
           <div class="community-actions">
             <a class="btn btn--gold" href="https://discord.gg/6whU7guX9v" target="_blank" rel="noopener noreferrer">
               <svg class="icon" aria-hidden="true"><use href="#icon-discord"></use></svg>
-              JOIN OUR DISCORD
+              <span data-i18n="btn-join-community">JOIN OUR DISCORD</span>
               <span class="sr-only">(opens in a new tab)</span>
             </a>
           </div>
 
           <p class="community-url">https://discord.gg/6whU7guX9v</p>
-          <p class="community-support">
+          <p class="community-support" data-i18n="comm-support">
             Meet the community. Follow the progress. Help keep the legacy alive.
           </p>
         </div>
@@ -2986,17 +3139,17 @@
     <section class="section" id="support" aria-labelledby="supportTitle">
       <div class="container">
         <div class="support-card reveal">
-          <p class="eyebrow" style="justify-content: center;">OPTIONAL SUPPORT</p>
-          <h2 class="support-title" id="supportTitle">SUPPORT HEROES ARCHIVE</h2>
-          <p class="support-desc">
+          <p class="eyebrow" style="justify-content: center;" data-i18n="support-eyebrow">OPTIONAL SUPPORT</p>
+          <h2 class="support-title" id="supportTitle" data-i18n="support-title">SUPPORT HEROES ARCHIVE</h2>
+          <p class="support-desc" data-i18n="support-desc">
             Enjoying the project? If you'd like to support its development, you can leave a voluntary donation. Every contribution is appreciated and helps support future improvements.
           </p>
           <a class="btn btn--gold" href="https://sociabuzz.com/kece8358/tribe" target="_blank" rel="noopener noreferrer" style="font-size: 0.75rem; padding: 1rem 2rem; min-height: 52px;">
             <svg class="icon" aria-hidden="true"><use href="#icon-coffee"></use></svg>
-            Support the Project
+            <span data-i18n="support-btn">Support the Project</span>
             <span class="sr-only">(opens in a new tab)</span>
           </a>
-          <p class="support-note">
+          <p class="support-note" data-i18n="support-note">
             Donations are completely voluntary and not required to access the archive, download games, or use any website features.
           </p>
         </div>
@@ -3006,23 +3159,23 @@
     <section class="section" id="disclaimer" aria-labelledby="disclaimerTitle">
       <div class="container disclaimer-grid">
         <div class="reveal">
-          <p class="eyebrow">A NOTE ON OWNERSHIP</p>
-          <h2 class="disclaimer-title" id="disclaimerTitle">INDEPENDENT BY DESIGN.</h2>
+          <p class="eyebrow" data-i18n="disc-eyebrow">A NOTE ON OWNERSHIP</p>
+          <h2 class="disclaimer-title" id="disclaimerTitle" data-i18n="disc-title">INDEPENDENT BY DESIGN.</h2>
           <div class="crimson-line" aria-hidden="true" style="margin-top: 1.8rem;"></div>
         </div>
 
         <div class="disclaimer-box reveal" style="--reveal-delay: 0.08s">
-          <span class="disclaimer-tag">UNOFFICIAL FAN PROJECT</span>
-          <p>
+          <span class="disclaimer-tag" data-i18n="disc-tag">UNOFFICIAL FAN PROJECT</span>
+          <p data-i18n="disc-p1">
             <strong>HEROES ARCHIVE</strong> is an independent, unofficial fan project created by
             <strong>ZenovX</strong>. It is not affiliated with, endorsed by, or sponsored by
             Latido Co., Ltd., CRAFTS &amp; MEISTER, Bandai Namco, or any other original rights holders.
           </p>
-          <p>
+          <p data-i18n="disc-p2">
             Satria Heroes, BIMA-X, their original characters, trademarks, game assets, and related
             intellectual property belong to their respective rights holders.
           </p>
-          <p>
+          <p data-i18n="disc-p3">
             This website documents independent fan activity and technical research. It does not
             claim ownership of the original games or imply authorization from their creators.
             Fan-made status does not automatically grant permission to use copyrighted material.
@@ -3035,24 +3188,24 @@
   <!-- TERMS OF SERVICE PAGE -->
   <main id="page-terms" class="legal-page section section--alt" hidden>
     <div class="container legal-container">
-      <a href="#home" class="btn btn--outline btn--small" style="margin-bottom: 2rem;">&larr; Back to Home</a>
+      <a href="#home" class="btn btn--outline btn--small" style="margin-bottom: 2rem;" data-i18n="back-home">&larr; Back to Home</a>
       
-      <p class="eyebrow">LEGAL INFORMATION</p>
-      <h1 class="legal-title">TERMS OF SERVICE</h1>
+      <p class="eyebrow" data-i18n="legal-info">LEGAL INFORMATION</p>
+      <h1 class="legal-title" data-i18n="terms-title">TERMS OF SERVICE</h1>
       <p class="legal-updated" id="terms-updated">Last Updated: Pending Confirmation</p>
 
       <div class="legal-toc">
-        <h3>TABLE OF CONTENTS</h3>
+        <h3 data-i18n="toc">TABLE OF CONTENTS</h3>
         <ul>
-          <li><a href="#terms-intro">1. Introduction and Acceptance</a></li>
-          <li><a href="#terms-use">2. Acceptable Use</a></li>
-          <li><a href="#terms-ip">3. Intellectual Property</a></li>
-          <li><a href="#terms-disclaimer">4. Fan-Project Disclaimer</a></li>
-          <li><a href="#terms-links">5. Third-Party Links</a></li>
-          <li><a href="#terms-availability">6. Website Availability</a></li>
-          <li><a href="#terms-liability">7. Limitation of Liability</a></li>
-          <li><a href="#terms-changes">8. Changes to These Terms</a></li>
-          <li><a href="#terms-contact">9. Contact Information</a></li>
+          <li><a href="#terms-intro" data-i18n="t1">1. Introduction and Acceptance</a></li>
+          <li><a href="#terms-use" data-i18n="t2">2. Acceptable Use</a></li>
+          <li><a href="#terms-ip" data-i18n="t3">3. Intellectual Property</a></li>
+          <li><a href="#terms-disclaimer" data-i18n="t4">4. Fan-Project Disclaimer</a></li>
+          <li><a href="#terms-links" data-i18n="t5">5. Third-Party Links</a></li>
+          <li><a href="#terms-availability" data-i18n="t6">6. Website Availability</a></li>
+          <li><a href="#terms-liability" data-i18n="t7">7. Limitation of Liability</a></li>
+          <li><a href="#terms-changes" data-i18n="t8">8. Changes to These Terms</a></li>
+          <li><a href="#terms-contact" data-i18n="t9">9. Contact Information</a></li>
         </ul>
       </div>
 
@@ -3108,7 +3261,7 @@
 
         <section id="terms-contact">
           <h2>9. Contact Information</h2>
-          <p>If you have any questions about these Terms, please contact us via our community Discord or at: <span class="legal-placeholder">nefsxxzanjay@gmail.com</span>.</p>
+          <p>If you have any questions about these Terms, please contact us via our community Discord or at: <span class="legal-placeholder">[INSERT CONTACT EMAIL]</span>.</p>
         </section>
       </div>
     </div>
@@ -3117,23 +3270,23 @@
   <!-- PRIVACY POLICY PAGE -->
   <main id="page-privacy" class="legal-page section section--alt" hidden>
     <div class="container legal-container">
-      <a href="#home" class="btn btn--outline btn--small" style="margin-bottom: 2rem;">&larr; Back to Home</a>
+      <a href="#home" class="btn btn--outline btn--small" style="margin-bottom: 2rem;" data-i18n="back-home">&larr; Back to Home</a>
       
-      <p class="eyebrow">LEGAL INFORMATION</p>
-      <h1 class="legal-title">PRIVACY POLICY</h1>
+      <p class="eyebrow" data-i18n="legal-info">LEGAL INFORMATION</p>
+      <h1 class="legal-title" data-i18n="privacy-title">PRIVACY POLICY</h1>
       <p class="legal-updated" id="privacy-updated">Last Updated: Pending Confirmation</p>
 
       <div class="legal-toc">
-        <h3>TABLE OF CONTENTS</h3>
+        <h3 data-i18n="toc">TABLE OF CONTENTS</h3>
         <ul>
-          <li><a href="#privacy-collect">1. Information We Collect</a></li>
-          <li><a href="#privacy-cookies">2. Cookies and Tracking</a></li>
-          <li><a href="#privacy-use">3. How We Use Information</a></li>
-          <li><a href="#privacy-sharing">4. Data Sharing and Third-Party Services</a></li>
-          <li><a href="#privacy-retention">5. Data Retention and Security</a></li>
-          <li><a href="#privacy-rights">6. Your Privacy Rights</a></li>
-          <li><a href="#privacy-updates">7. Policy Updates</a></li>
-          <li><a href="#privacy-contact">8. Contact Information</a></li>
+          <li><a href="#privacy-collect" data-i18n="p1">1. Information We Collect</a></li>
+          <li><a href="#privacy-cookies" data-i18n="p2">2. Cookies and Tracking</a></li>
+          <li><a href="#privacy-use" data-i18n="p3">3. How We Use Information</a></li>
+          <li><a href="#privacy-sharing" data-i18n="p4">4. Data Sharing and Third-Party Services</a></li>
+          <li><a href="#privacy-retention" data-i18n="p5">5. Data Retention and Security</a></li>
+          <li><a href="#privacy-rights" data-i18n="p6">6. Your Privacy Rights</a></li>
+          <li><a href="#privacy-updates" data-i18n="p7">7. Policy Updates</a></li>
+          <li><a href="#privacy-contact" data-i18n="p8">8. Contact Information</a></li>
         </ul>
       </div>
 
@@ -3143,7 +3296,7 @@
           <p>HEROES ARCHIVE is a static informational website. We do not have user accounts, login systems, or contact forms on this Site that collect personal information directly.</p>
           <ul>
             <li><strong>Form Submissions:</strong> We do not have any web forms that collect personal data.</li>
-            <li><strong>Technical Information:</strong> Our web hosting provider (e.g., Vercel) may automatically collect standard server log data, including your IP address, browser type, operating system, and access times, for security and operational purposes. <span class="legal-placeholder">[OWNER: VERIFY HOSTING PROVIDER'S SPECIFIC LOGGING POLICIES]</span></li>
+            <li><strong>Technical Information:</strong> Our web hosting provider (Vercel) automatically collects standard server log data, including your IP address, browser type, operating system, and access times, for security and operational purposes.</li>
           </ul>
         </section>
 
@@ -3184,7 +3337,7 @@
 
         <section id="privacy-contact">
           <h2>8. Contact Information</h2>
-          <p>If you have any questions about this Privacy Policy, please contact us via our community Discord or at: <span class="legal-placeholder">nefsxxzanjay@gmail.com</span>.</p>
+          <p>If you have any questions about this Privacy Policy, please contact us via our community Discord or at: <span class="legal-placeholder">[INSERT CONTACT EMAIL]</span>.</p>
         </section>
       </div>
     </div>
@@ -3198,31 +3351,31 @@
             <span class="brand-mark" aria-hidden="true">HA</span>
             <span class="brand-text"><span>HEROES</span><span>ARCHIVE</span></span>
           </a>
-          <p>An independent fan project by ZenovX.</p>
-          <p class="footer-tagline">THE LEGACY LIVES ON.</p>
+          <p data-i18n="footer-desc">An independent fan project by ZenovX.</p>
+          <p class="footer-tagline" data-i18n="footer-tag">THE LEGACY LIVES ON.</p>
         </div>
 
         <nav class="footer-nav" aria-label="Footer navigation">
-          <a class="footer-link" href="#home">Home</a>
-          <a class="footer-link" href="#about">About</a>
-          <a class="footer-link" href="#projects">Projects</a>
-          <a class="footer-link" href="#creators">Original Creators</a>
-          <a class="footer-link" href="#development">Development</a>
-          <a class="footer-link" href="#community">Community</a>
-          <a class="footer-link" href="https://discord.gg/6whU7guX9v" target="_blank" rel="noopener noreferrer">Discord</a>
+          <a class="footer-link" href="#home" data-i18n="nav-home">Home</a>
+          <a class="footer-link" href="#about" data-i18n="nav-about">About</a>
+          <a class="footer-link" href="#projects" data-i18n="nav-projects">Projects</a>
+          <a class="footer-link" href="#creators" data-i18n="nav-creators">Original Creators</a>
+          <a class="footer-link" href="#development" data-i18n="nav-development">Development</a>
+          <a class="footer-link" href="#community" data-i18n="nav-community">Community</a>
+          <a class="footer-link" href="https://discord.gg/6whU7guX9v" target="_blank" rel="noopener noreferrer" data-i18n="footer-discord">Discord</a>
           <!-- LEGAL LINKS -->
-          <a class="footer-link" href="#/terms">Terms of Service</a>
-          <a class="footer-link" href="#/privacy">Privacy Policy</a>
-          <a class="footer-link" href="https://discord.gg/6whU7guX9v" target="_blank" rel="noopener noreferrer">Contact</a>
+          <a class="footer-link" href="#/terms" data-i18n="nav-terms">Terms of Service</a>
+          <a class="footer-link" href="#/privacy" data-i18n="nav-privacy">Privacy Policy</a>
+          <a class="footer-link" href="https://discord.gg/6whU7guX9v" target="_blank" rel="noopener noreferrer" data-i18n="footer-contact">Contact</a>
           <!-- SUPPORT LINK -->
-          <a class="footer-link" href="https://sociabuzz.com/kece8358/tribe" target="_blank" rel="noopener noreferrer" style="color: var(--gold);">Support the Project</a>
+          <a class="footer-link" href="https://sociabuzz.com/kece8358/tribe" target="_blank" rel="noopener noreferrer" style="color: var(--gold);" data-i18n="nav-support">Support the Project</a>
         </nav>
       </div>
 
       <div class="footer-bottom">
         <div>
-          <p>&copy; <span id="year">2025</span> HEROES ARCHIVE. Independent fan project by ZenovX.</p>
-          <p class="footer-credit">
+          <p>&copy; <span id="year">2025</span> HEROES ARCHIVE. <span data-i18n="footer-indep">Independent fan project by ZenovX.</span></p>
+          <p class="footer-credit" data-i18n="footer-credit">
             Promotional artwork is used for informational, non-commercial fan-archive purposes.
             All rights remain with the respective rights holders. This archive is not an official
             website or game release.
@@ -3230,7 +3383,7 @@
         </div>
         <a class="footer-back-top" href="#home">
           <svg class="icon" aria-hidden="true"><use href="#icon-arrow-up"></use></svg>
-          Back to top
+          <span data-i18n="footer-top">Back to top</span>
         </a>
       </div>
     </div>
@@ -3244,23 +3397,23 @@
         <svg class="icon" aria-hidden="true"><use href="#icon-close"></use></svg>
       </button>
 
-      <p class="modal-eyebrow">DOWNLOAD NOTICE · <span id="downloadProjectName">SATRIA HEROES</span></p>
-      <h3 class="modal-title" id="downloadModalTitle">FREE TO PLAY.<br>HELP KEEP IT ONLINE.</h3>
+      <p class="modal-eyebrow"><span data-i18n="modal-notice">DOWNLOAD NOTICE</span> · <span id="downloadProjectName">SATRIA HEROES</span></p>
+      <h3 class="modal-title" id="downloadModalTitle" data-i18n="modal-title">FREE TO PLAY.<br>HELP KEEP IT ONLINE.</h3>
 
       <div class="modal-body" id="downloadModalDesc">
-        <p>
+        <p data-i18n="modal-desc1">
           These games are free to download. Before downloading, you'll need to pass through a
           Safelinku shortlink first. Revenue generated through the shortlink helps me cover server
           hosting and maintenance costs so I can continue working on these projects independently.
         </p>
-        <p>
+        <p data-i18n="modal-desc2">
           You don't need to purchase the games or pay a subscription. Completing the shortlink is
           a way to support the project while accessing the download.
         </p>
       </div>
 
       <div class="modal-flow" aria-label="Download flow">
-        <span class="flow-step">FREE DOWNLOAD</span>
+        <span class="flow-step" data-i18n="modal-free">FREE DOWNLOAD</span>
         <span class="flow-arrow">→</span>
         <strong>SAFELINKU</strong>
         <span class="flow-arrow">→</span>
@@ -3268,19 +3421,19 @@
       </div>
 
       <div class="modal-actions">
-        <button class="btn btn--gold" id="downloadContinue" type="button">
+        <button class="btn btn--gold" id="downloadContinue" type="button" data-i18n="modal-continue">
           CONTINUE TO SAFELINKU
         </button>
-        <button class="btn btn--outline" id="downloadCancel" type="button">
+        <button class="btn btn--outline" id="downloadCancel" type="button" data-i18n="modal-cancel">
           CANCEL
         </button>
       </div>
 
-      <div class="modal-coming" id="downloadComing" role="status">
+      <div class="modal-coming" id="downloadComing" role="status" data-i18n="modal-coming">
         Download link coming soon — this project's Safelinku link has not yet been published.
       </div>
 
-      <span class="modal-support">Free download · Shortlink support helps cover server costs</span>
+      <span class="modal-support" data-i18n="modal-support">Free download · Shortlink support helps cover server costs</span>
     </div>
   </div>
 
@@ -3463,8 +3616,8 @@
     (function () {
       'use strict';
 
-      var BGM_URL = 'https://cdn.discordapp.com/attachments/1455029046638415998/1561336229142724729/Satria_Heroes_Mobile_Game_OST_-_Main_Menu_Theme_1.mp3?ex=6adb412d&is=6ad9efad&hm=89c7c86a52bb397a79dafb62e1cf7e597566170d4b793837e2045f05ea524250&';
-      var CLICK_URL = 'https://cdn.discordapp.com/attachments/1455029046638415998/1561336295911985212/sys_001_se.mp3?ex=6adb413d&is=6ad9efbd&hm=e88d055cf79082c158e4916ee98a40f454ddbfeea2ffae0310fcdc5101703f8f&';
+      var BGM_URL = 'https://cdn.discordapp.com/attachments/1455029046638415998/1561336229142724729/Satria_Heroes_Mobile_Game_OST_-_Main_Menu_Theme_1.mp3?ex=6add3b6d&is=6adbe9ed&hm=e9e2e5090c4ed4a62f56fbb7aade111988adceccd2e3b785af58d49f62e34bf0&';
+      var CLICK_URL = 'https://cdn.discordapp.com/attachments/1455029046638415998/1561336295911985212/sys_001_se.mp3?ex=6add3b7d&is=6adbe9fd&hm=38b412f7e8d0e11cb3a2b906c78dc510e511c4ddc6174120e843a0b7338b36dc&';
 
       var toggle = document.getElementById('audioToggle');
       var label = document.getElementById('audioLabel');
@@ -3823,7 +3976,6 @@
   <script>
     /* ============================================================
        LEGAL PAGES ROUTER
-       Handles navigation to #/terms and #/privacy without a reload.
        ============================================================ */
     (function () {
       'use strict';
@@ -3834,7 +3986,6 @@
 
       if (!mainPage || !termsPage || !privacyPage) return;
 
-      // Set current date for "Last Updated"
       var today = new Date();
       var dateString = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
       document.getElementById('terms-updated').textContent = 'Last Updated: ' + dateString;
@@ -3842,30 +3993,119 @@
 
       function handleRoute() {
         var hash = window.location.hash;
-
         if (hash === '#/terms') {
-          mainPage.hidden = true;
-          privacyPage.hidden = true;
-          termsPage.hidden = false;
-          window.scrollTo(0, 0);
+          mainPage.hidden = true; privacyPage.hidden = true;
+          termsPage.hidden = false; window.scrollTo(0, 0);
         } else if (hash === '#/privacy') {
-          mainPage.hidden = true;
-          termsPage.hidden = true;
-          privacyPage.hidden = false;
-          window.scrollTo(0, 0);
+          mainPage.hidden = true; termsPage.hidden = true;
+          privacyPage.hidden = false; window.scrollTo(0, 0);
         } else {
-          // Default to main page (let native anchor scrolling handle sections)
-          termsPage.hidden = true;
-          privacyPage.hidden = true;
+          termsPage.hidden = true; privacyPage.hidden = true;
           mainPage.hidden = false;
         }
       }
-
-      // Listen for hash changes
       window.addEventListener('hashchange', handleRoute);
-
-      // Initialize on load
       handleRoute();
+    })();
+  </script>
+
+  <script>
+    /* ============================================================
+       LANGUAGE SWITCHER (EN / ID)
+       ============================================================ */
+    const translations = {
+      en: {
+        "nav-home": "Home", "nav-about": "About", "nav-projects": "Projects", "nav-creators": "Original Creators", "nav-development": "Development", "nav-community": "Community", "nav-support": "Support", "nav-terms": "Terms of Service", "nav-privacy": "Privacy Policy",
+        "btn-join-discord": "JOIN DISCORD",
+        "hero-eyebrow": "INDEPENDENT FAN PROJECT", "hero-title-1": "THE", "hero-title-2": "LEGACY", "hero-title-3": "LIVES ON.", "hero-sub": "Two tokusatsu experiences. One independent journey to preserve their legacy.", "btn-explore": "EXPLORE THE PROJECTS", "btn-join": "JOIN THE COMMUNITY", "hero-scroll": "SCROLL TO EXPLORE",
+        "about-eyebrow": "BEHIND THE ARCHIVE", "about-title": "NOT A COMPANY.<br>JUST A FAN WITH A VISION.", "about-role": "INDEPENDENT DEVELOPER", "about-lead": "Hi, I'm ZenovX — an independent developer and fan of Satria Heroes and BIMA-X.", "about-p1": "These projects grew from a desire to revisit classic games that deserve to be remembered. What began as curiosity became a personal journey of technical exploration, troubleshooting, restoration research, and community building.", "about-p2": "I'm working independently, learning through experimentation, and documenting progress as I go. Every discovery, fix, and experiment is part of that journey.", "about-p3": "This website is where I share the projects, explain what I'm working on, and connect with people who remember these games or want to see what happens next.",
+        "reason-eyebrow": "THE REASON", "reason-title": "SOME LEGACIES DESERVE ANOTHER CHANCE.", "reason-p1": "Satria Heroes and BIMA-X are part of the memories of their fans. As time passes, older games can become harder to access because of compatibility issues, missing resources, and outdated technical systems.", "reason-p2": "These projects explore ways to revisit those experiences, investigate technical problems, and keep the community connected to the games.", "reason-p3": "The goal is to learn, restore what is feasible, document discoveries, and celebrate the experiences that made these games memorable — while respecting the original creators and their intellectual property.",
+        "projects-eyebrow": "THE ARCHIVE", "projects-title": "CHOOSE YOUR UNIVERSE.", "projects-desc": "Two independent restoration efforts, documented in the open. Each project has its own challenges, its own progress, and its own place in the archive.",
+        "proj1-label": "PROJECT 01 — SATRIA HEROES", "proj1-desc": "An independent fan project exploring the restoration and preservation of the classic Satria Heroes game experience.", "proj1-badge": "ASSET RECOVERY IN PROGRESS", "proj1-status1": "Private Server — Operational", "proj1-status2": "Game Assets — Some Assets Missing", "proj1-status3": "Asset Recovery — In Progress", "proj1-status4": "Public Release — Not Available", "proj1-btn": "EXPLORE SATRIA HEROES", "proj1-note": "The private server is operational for research and testing. It is not a public release.",
+        "proj2-label": "PROJECT 02 — BIMA-X", "proj2-desc": "An independent fan project focused on restoring the classic BIMA-X experience and researching potential technical improvements.", "proj2-badge": "EXPERIMENTAL BETA — ONLINE 1v1 LIVE", "proj2-status1": "Game Assets — Obtained", "proj2-status2": "Date Compatibility — Fixed", "proj2-status3": "Character Model Graphics — Fixed", "proj2-status4": "Online 1v1 Multiplayer — Functional in Testing", "proj2-btn": "EXPLORE BIMA-X", "proj2-note": "Online 1v1 multiplayer is functional in initial testing. Network lag is still being optimized.",
+        "satria-detail-eyebrow": "PROJECT 01 / DETAILED RECORD", "satria-detail-lede": "An independent fan project exploring the restoration and preservation of the classic Satria Heroes game experience.", "satria-detail-body": "The private server is operational, but this is not a public release. Asset recovery remains in progress, and some game assets are still missing. The work continues carefully, documenting each discovery and limitation as it appears.", "status-snapshot": "STATUS SNAPSHOT", "status-private": "Private Server", "status-operational": "Operational", "status-assets": "Game Assets", "status-missing": "Some Assets Missing", "status-recovery": "Asset Recovery", "status-progress": "In Progress", "status-public": "Public Release", "status-not-avail": "Not Available", "satria-detail-note": "The private server is maintained for research and testing. It is not a public release, and no public availability date is currently announced.",
+        "video-evidence": "VIDEO EVIDENCE", "dev-footage": "DEVELOPMENT FOOTAGE.", "video-desc-satria": "Two recorded clips documenting the Satria Heroes project's current state.", "video-soon": "VIDEO COMING SOON", "video-pub": "Footage will be published here when available.", "video-01-private": "01 — PRIVATE SERVER", "video-01-desc": "Recorded session from the Satria Heroes private server.", "video-02-recovery": "02 — ASSET RECOVERY", "video-02-desc": "Preview of recovered assets and in-game visuals.",
+        "download-free": "FREE DOWNLOAD", "download-title": "FREE TO PLAY. HELP KEEP IT ONLINE.", "download-desc1": "These games are free to download. Before downloading, you'll need to pass through a Safelinku shortlink first. Revenue generated through the shortlink helps me cover server hosting and maintenance costs so I can continue working on these projects independently.", "download-desc2": "You don't need to purchase the games or pay a subscription. Completing the shortlink is a way to support the project while accessing the download.", "btn-download": "DOWNLOAD GAME", "download-support": "Free download · Shortlink support helps cover server costs",
+        "bima-detail-eyebrow": "PROJECT 02 / DETAILED RECORD", "bima-detail-lede": "An independent fan project focused on restoring the classic BIMA-X experience and researching potential technical improvements.", "bima-detail-body": "Required game assets have been obtained and date compatibility is fixed. Character model graphics have been repaired to their intended quality, and online 1v1 multiplayer is now functional in initial testing across two separate devices.", "update-tag": "MAJOR PROGRESS UPDATE", "update-title": "CHARACTER GRAPHICS FIXED.<br>ONLINE 1v1 NOW FUNCTIONAL.", "update-p1": "<strong>Character graphics fixed.</strong> The issue that caused character models to appear pixelated, blurry, or unusually low-resolution has been resolved. Character visuals can now return to their intended quality. If the issue persists, clearing the game's cache may help.", "update-p2": "<strong>Online 1v1 multiplayer implemented.</strong> Players can now connect using two separate devices and battle each other without requiring a direct Bluetooth connection. The feature passed initial testing with no crashes observed, though network lag is still present and further optimization is needed to improve stability and responsiveness.", "status-snapshot-beta": "STATUS SNAPSHOT — EXPERIMENTAL BETA", "status-obtained": "Obtained", "status-date": "Date Compatibility", "status-fixed": "Fixed", "status-graphics": "Character Model Graphics", "status-multiplayer": "Online 1v1 Multiplayer", "status-functional": "Functional in Testing", "status-network": "Network Performance", "status-optimizing": "Optimizing", "status-not-confirmed": "Not Yet Confirmed", "bima-detail-note": "This is an experimental beta. Online multiplayer has passed initial testing but remains under active optimization, and public availability has not yet been confirmed.", "proof-progress": "PROOF OF PROGRESS.", "video-desc-bima": "Two evidence cards documenting BIMA-X's current state — a before/after character graphics comparison and online 1v1 gameplay.", "label-before": "BEFORE", "label-after": "AFTER", "video-graphics": "01 — CHARACTER GRAPHICS", "video-graphics-desc": "Before / after comparison of the character model graphics fix.", "video-online": "02 — ONLINE 1v1", "video-online-desc": "Recorded online 1v1 battle between two separate devices.",
+        "faq-title": "FREQUENTLY ASKED QUESTIONS", "faq-q1": "Does BIMA-X work on Android 16?", "faq-a1": "Android 16 compatibility has not been fully tested yet. BIMA-X has been confirmed to work on Android 15. An update will be shared once further testing is completed.", "faq-q2": "Does BIMA-X contain any viruses or malware?", "faq-a2": "BIMA-X is not intended to contain any viruses or malware. However, no software can be guaranteed to be completely risk-free without independent security testing. For your safety, download the game only from the official source and scan the APK with a trusted security tool before installing it.", "faq-q3": "Can I play 1v1 using a mobile hotspot or Wi-Fi?", "faq-a3": "It should be possible! BIMA-X has a room list feature, so you can try connecting through Wi-Fi or a mobile hotspot. However, connection stability may vary depending on your network.", "faq-q4": "Can I play BIMA-X offline?", "faq-a4": "Yes! BIMA-X supports offline gameplay. However, online features such as 1v1 multiplayer require a network connection.",
+        "creators-eyebrow": "THE CREATORS BEHIND THE LEGACY", "creators-title": "BEHIND THE ORIGINAL EXPERIENCES.", "creators-desc": "Recognizing the developers and publishers associated with these games. These credits are presented for informational attribution, not as an endorsement of this archive.", "game": "GAME", "role-dev": "Developer", "role-credit": "Listed Credit", "role-pub": "Publisher", "credit-note1": "Developer of the Satria Heroes mobile game, subject to verification against reliable game listings and original credits.", "credit-note2": "Developer and publisher credits for the BIMA-X mobile game, subject to verification against reliable game listings and original credits.", "verify-note": "Credits remain subject to verification against original game materials", "credits-disclaimer": "Company names and development credits are provided for informational attribution. The original games and associated intellectual property remain the property of their respective rights holders. HEROES ARCHIVE is an independent fan project and is not affiliated with, endorsed by, or sponsored by these companies.",
+        "vision-eyebrow": "WHAT DRIVES THE WORK", "vision-title": "PRESERVE. RESTORE. CONNECT.", "vision-desc": "Three principles guide every experiment, fix, and update. They keep the work honest and the archive focused on what matters.", "vision-1-title": "PRESERVE", "vision-1-desc": "Explore and document classic game experiences while respecting their original creators.", "vision-2-title": "RESTORE", "vision-2-desc": "Investigate compatibility issues, missing resources, and technical problems where feasible.", "vision-3-title": "CONNECT", "vision-3-desc": "Build a community where fans can share memories, discoveries, feedback, and development updates.",
+        "dev-eyebrow": "CURRENT PROGRESS", "dev-title": "WORK IN PROGRESS.<br>ALWAYS HONEST.", "dev-desc": "A transparent snapshot of where each project stands. Status entries are updated as research continues, and unfinished work is never presented as complete.", "status-some-missing": "Some Missing", "leg-green": "Completed / Operational", "leg-amber": "In Progress", "leg-red": "Blocked / Unavailable", "leg-purple": "Experimental Research", "dev-note": "Development status reflects current progress and may change as research continues.",
+        "multi-eyebrow": "EXPERIMENTAL BETA — FUNCTIONAL", "multi-title": "THE NEXT BATTLE: ONLINE.", "multi-p1": "<strong>Online 1v1 multiplayer is now functional in initial testing.</strong> Players can connect using two separate devices and battle each other without requiring a direct Bluetooth connection — the original BIMA-X VS Friend mode relied on local Bluetooth, but this adaptation opens up internet-based play.", "multi-p2": "The feature has successfully passed initial testing with no crashes observed during those tests. However, network lag is still present, and further optimization is needed to improve stability and responsiveness.", "multi-p3": "This remains an experimental beta. The feasibility of the approach has been validated in practice, but public availability has not been confirmed.", "multi-badge": "EXPERIMENTAL BETA / IN ACTIVE TESTING", "tag-func": "FUNCTIONAL IN TESTING", "concept-1-title": "ONLINE ROOMS", "concept-1-desc": "Online 1v1 connections now work across two separate devices during initial testing.", "concept-2-title": "PLAYER VS PLAYER", "concept-2-desc": "Basic online 1v1 battles are working. Network lag remains and is being optimized.", "tag-exp": "EXPANDING", "concept-3-title": "MULTIPLAYER COMPATIBILITY", "concept-3-desc": "Device requirements have been reduced through online play. Further improvements to stability and responsiveness are ongoing.",
+        "journey-eyebrow": "THE PROCESS", "journey-title": "EVERY FIX HAS A STORY.", "journey-desc": "A living record of what has been achieved and what is still being investigated. Phases are listed without invented dates; the work is documented as it happens.", "time-1": "Satria Heroes Private Server", "status-ongoing": "Ongoing", "time-2": "Satria Heroes Asset Recovery", "time-3": "BIMA-X Required Game Assets", "time-4": "BIMA-X Date Compatibility", "time-5": "BIMA-X Character Model Graphics", "time-6": "BIMA-X Online 1v1 Multiplayer", "status-func-test": "Functional / Testing",
+        "philo-eyebrow": "HOW I WORK", "philo-title": "CURIOSITY FIRST. PROMISES SECOND.", "philo-quote": "\"This is an independent, evolving project.\"", "philo-p1": "Not every idea will become a working feature, and not every technical problem has an immediate solution.", "philo-p2": "Development updates will distinguish completed work from experiments and future plans. Transparency matters more than exaggerated promises. If a feature is still being researched, it will be presented as experimental. If a fix is completed, its status will be updated accordingly.",
+        "comm-eyebrow": "JOIN THE JOURNEY", "comm-title": "THE LEGACY IS BETTER TOGETHER.", "comm-p1": "Whether you grew up playing these games, recently rediscovered them, or are curious about the development process, you're welcome to follow the journey.", "comm-p2": "Join fellow fans, share memories, discuss discoveries, and follow the latest project updates.", "btn-join-community": "JOIN OUR DISCORD", "comm-support": "Meet the community. Follow the progress. Help keep the legacy alive.",
+        "support-eyebrow": "OPTIONAL SUPPORT", "support-title": "SUPPORT HEROES ARCHIVE", "support-desc": "Enjoying the project? If you'd like to support its development, you can leave a voluntary donation. Every contribution is appreciated and helps support future improvements.", "support-btn": "Support the Project", "support-note": "Donations are completely voluntary and not required to access the archive, download games, or use any website features.",
+        "disc-eyebrow": "A NOTE ON OWNERSHIP", "disc-title": "INDEPENDENT BY DESIGN.", "disc-tag": "UNOFFICIAL FAN PROJECT", "disc-p1": "<strong>HEROES ARCHIVE</strong> is an independent, unofficial fan project created by <strong>ZenovX</strong>. It is not affiliated with, endorsed by, or sponsored by Latido Co., Ltd., CRAFTS & MEISTER, Bandai Namco, or any other original rights holders.", "disc-p2": "Satria Heroes, BIMA-X, their original characters, trademarks, game assets, and related intellectual property belong to their respective rights holders.", "disc-p3": "This website documents independent fan activity and technical research. It does not claim ownership of the original games or imply authorization from their creators. Fan-made status does not automatically grant permission to use copyrighted material.",
+        "footer-desc": "An independent fan project by ZenovX.", "footer-tag": "THE LEGACY LIVES ON.", "footer-discord": "Discord", "footer-contact": "Contact", "footer-indep": "Independent fan project by ZenovX.", "footer-credit": "Promotional artwork is used for informational, non-commercial fan-archive purposes. All rights remain with the respective rights holders. This archive is not an official website or game release.", "footer-top": "Back to top",
+        "back-home": "&larr; Back to Home", "legal-info": "LEGAL INFORMATION", "terms-title": "TERMS OF SERVICE", "privacy-title": "PRIVACY POLICY", "toc": "TABLE OF CONTENTS",
+        "t1": "1. Introduction and Acceptance", "t2": "2. Acceptable Use", "t3": "3. Intellectual Property", "t4": "4. Fan-Project Disclaimer", "t5": "5. Third-Party Links", "t6": "6. Website Availability", "t7": "7. Limitation of Liability", "t8": "8. Changes to These Terms", "t9": "9. Contact Information",
+        "p1": "1. Information We Collect", "p2": "2. Cookies and Tracking", "p3": "3. How We Use Information", "p4": "4. Data Sharing and Third-Party Services", "p5": "5. Data Retention and Security", "p6": "6. Your Privacy Rights", "p7": "7. Policy Updates", "p8": "8. Contact Information",
+        "modal-notice": "DOWNLOAD NOTICE", "modal-title": "FREE TO PLAY.<br>HELP KEEP IT ONLINE.", "modal-desc1": "These games are free to download. Before downloading, you'll need to pass through a Safelinku shortlink first. Revenue generated through the shortlink helps me cover server hosting and maintenance costs so I can continue working on these projects independently.", "modal-desc2": "You don't need to purchase the games or pay a subscription. Completing the shortlink is a way to support the project while accessing the download.", "modal-free": "FREE DOWNLOAD", "modal-continue": "CONTINUE TO SAFELINKU", "modal-cancel": "CANCEL", "modal-coming": "Download link coming soon — this project's Safelinku link has not yet been published.", "modal-support": "Free download · Shortlink support helps cover server costs", "mobile-foot-desc": "Meet the community. Follow the progress. Help keep the legacy alive."
+      },
+      id: {
+        "nav-home": "Beranda", "nav-about": "Tentang", "nav-projects": "Proyek", "nav-creators": "Kreator Asli", "nav-development": "Pengembangan", "nav-community": "Komunitas", "nav-support": "Dukung", "nav-terms": "Syarat & Ketentuan", "nav-privacy": "Kebijakan Privasi",
+        "btn-join-discord": "GABUNG DISCORD",
+        "hero-eyebrow": "PROYEK FAN INDEPENDEN", "hero-title-1": "WARISAN", "hero-title-2": "TETAP", "hero-title-3": "HIDUP.", "hero-sub": "Dua pengalaman tokusatsu. Satu perjalanan independen untuk melestarikan warisannya.", "btn-explore": "JELAJAHI PROYEK", "btn-join": "GABUNG KOMUNITAS", "hero-scroll": "GULIR UNTUK JELAJAHI",
+        "about-eyebrow": "DI BALIK ARSIP", "about-title": "BUKAN PERUSAHAAN.<br>HANYA FANS DENGAN VISI.", "about-role": "PENGEMBANG INDEPENDEN", "about-lead": "Hai, saya ZenovX — pengembang independen dan penggemar Satria Heroes dan BIMA-X.", "about-p1": "Proyek ini tumbuh dari keinginan untuk mengunjungi kembali game klasik yang layak dikenang. Apa yang dimulai dari rasa penasaran menjadi perjalanan pribadi dalam eksplorasi teknis, pemecahan masalah, riset restorasi, dan pembangunan komunitas.", "about-p2": "Saya bekerja secara independen, belajar melalui eksperimen, dan mendokumentasikan kemajuan seiring waktu. Setiap penemuan, perbaikan, dan eksperimen adalah bagian dari perjalanan itu.", "about-p3": "Situs web ini adalah tempat saya berbagi proyek, menjelaskan apa yang sedang saya kerjakan, dan terhubung dengan orang-orang yang mengingat game ini atau ingin melihat apa yang terjadi selanjutnya.",
+        "reason-eyebrow": "ALASANNYA", "reason-title": "BEBERAPA WARISAN LAYAK MENDAPATKAN KESEMPATAN KEDUA.", "reason-p1": "Satria Heroes dan BIMA-X adalah bagian dari kenangan para penggemarnya. Seiring berjalannya waktu, game lama bisa menjadi lebih sulit diakses karena masalah kompatibilitas, sumber daya yang hilang, dan sistem teknis yang usang.", "reason-p2": "Proyek ini mengeksplorasi cara untuk mengunjungi kembali pengalaman tersebut, menyelidiki masalah teknis, dan menjaga komunitas tetap terhubung dengan game.", "reason-p3": "Tujuannya adalah untuk belajar, memulihkan apa yang layak, mendokumentasikan penemuan, dan merayakan pengalaman yang membuat game ini tak terlupakan — sambil menghormati kreator asli dan kekayaan intelektual mereka.",
+        "projects-eyebrow": "ARSIP", "projects-title": "PILIH DUNIA ANDA.", "projects-desc": "Dua upaya restorasi independen, didokumentasikan secara terbuka. Setiap proyek memiliki tantangan, kemajuan, dan tempatnya sendiri di arsip.",
+        "proj1-label": "PROYEK 01 — SATRIA HEROES", "proj1-desc": "Proyek fan independen yang mengeksplorasi restorasi dan pelestarian pengalaman game Satria Heroes klasik.", "proj1-badge": "PEMULIHAN ASET DALAM PROSES", "proj1-status1": "Server Privat — Beroperasi", "proj1-status2": "Aset Game — Beberapa Aset Hilang", "proj1-status3": "Pemulihan Aset — Dalam Proses", "proj1-status4": "Rilis Publik — Tidak Tersedia", "proj1-btn": "JELAJAHI SATRIA HEROES", "proj1-note": "Server privat beroperasi untuk riset dan pengujian. Ini bukan rilis publik.",
+        "proj2-label": "PROYEK 02 — BIMA-X", "proj2-desc": "Proyek fan independen yang berfokus pada restorasi pengalaman BIMA-X klasik dan meneliti potensi peningkatan teknis.", "proj2-badge": "BETA EKSPERIMENTAL — ONLINE 1v1 AKTIF", "proj2-status1": "Aset Game — Diperoleh", "proj2-status2": "Kompatibilitas Tanggal — Diperbaiki", "proj2-status3": "Grafik Model Karakter — Diperbaiki", "proj2-status4": "Multiplayer Online 1v1 — Berfungsi dalam Pengujian", "proj2-btn": "JELAJAHI BIMA-X", "proj2-note": "Multiplayer online 1v1 berfungsi dalam pengujian awal. Lag jaringan masih dioptimalkan.",
+        "satria-detail-eyebrow": "PROYEK 01 / CATATAN RINCI", "satria-detail-lede": "Proyek fan independen yang mengeksplorasi restorasi dan pelestarian pengalaman game Satria Heroes klasik.", "satria-detail-body": "Server privat beroperasi, tetapi ini bukan rilis publik. Pemulihan aset masih dalam proses, dan beberapa aset game masih hilang. Pekerjaan berlanjut dengan hati-hati, mendokumentasikan setiap penemuan dan batasan saat muncul.", "status-snapshot": "SNAPSHOT STATUS", "status-private": "Server Privat", "status-operational": "Beroperasi", "status-assets": "Aset Game", "status-missing": "Beberapa Aset Hilang", "status-recovery": "Pemulihan Aset", "status-progress": "Dalam Proses", "status-public": "Rilis Publik", "status-not-avail": "Tidak Tersedia", "satria-detail-note": "Server privat dipelihara untuk riset dan pengujian. Ini bukan rilis publik, dan tanggal ketersediaan publik saat ini belum diumumkan.",
+        "video-evidence": "BUKTI VIDEO", "dev-footage": "REKAMAN PENGEMBANGAN.", "video-desc-satria": "Dua klip rekaman yang mendokumentasikan keadaan proyek Satria Heroes saat ini.", "video-soon": "VIDEO SEGERA HADIR", "video-pub": "Rekaman akan dipublikasikan di sini saat tersedia.", "video-01-private": "01 — SERVER PRIVAT", "video-01-desc": "Sesi rekaman dari server privat Satria Heroes.", "video-02-recovery": "02 — PEMULIHAN ASET", "video-02-desc": "Pratinjau aset yang dipulihkan dan visual dalam game.",
+        "download-free": "UNDUH GRATIS", "download-title": "GRATIS DIMAINKAN. BANTU TETAP ONLINE.", "download-desc1": "Game ini gratis diunduh. Sebelum mengunduh, Anda harus melewati tautan Safelinku terlebih dahulu. Pendapatan dari tautan membantu menutupi biaya hosting server dan pemeliharaan agar saya dapat terus mengerjakan proyek ini secara independen.", "download-desc2": "Anda tidak perlu membeli game atau membayar langganan. Menyelesaikan tautan adalah cara untuk mendukung proyek sekaligus mengakses unduhan.", "btn-download": "UNDUH GAME", "download-support": "Unduhan gratis · Dukungan tautan membantu menutupi biaya server",
+        "bima-detail-eyebrow": "PROYEK 02 / CATATAN RINCI", "bima-detail-lede": "Proyek fan independen yang berfokus pada restorasi pengalaman BIMA-X klasik dan meneliti potensi peningkatan teknis.", "bima-detail-body": "Aset game yang dibutuhkan telah diperoleh dan kompatibilitas tanggal telah diperbaiki. Grafik model karakter telah diperbaiki ke kualitas yang dimaksudkan, dan multiplayer online 1v1 sekarang berfungsi dalam pengujian awal di dua perangkat terpisah.", "update-tag": "PEMBARUAN KEMAJUAN BESAR", "update-title": "GRAFIK KARAKTER DIPERBAIKI.<br>ONLINE 1v1 SEKARANG BERFUNGSI.", "update-p1": "<strong>Grafik karakter diperbaiki.</strong> Masalah yang menyebabkan model karakter tampak berpiksel, buram, atau resolusi rendah telah diselesaikan. Visual karakter sekarang dapat kembali ke kualitas yang dimaksudkan. Jika masalah berlanjut, menghapus cache game dapat membantu.", "update-p2": "<strong>Multiplayer online 1v1 diterapkan.</strong> Pemain sekarang dapat terhubung menggunakan dua perangkat terpisah dan bertarung satu sama lain tanpa memerlukan koneksi Bluetooth langsung. Fitur ini lulus pengujian awal tanpa crash yang teramati, meskipun lag jaringan masih ada dan optimalisasi lebih lanjut diperlukan untuk meningkatkan stabilitas dan responsivitas.", "status-snapshot-beta": "SNAPSHOT STATUS — BETA EKSPERIMENTAL", "status-obtained": "Diperoleh", "status-date": "Kompatibilitas Tanggal", "status-fixed": "Diperbaiki", "status-graphics": "Grafik Model Karakter", "status-multiplayer": "Multiplayer Online 1v1", "status-functional": "Berfungsi dalam Pengujian", "status-network": "Performa Jaringan", "status-optimizing": "Mengoptimalkan", "status-not-confirmed": "Belum Dikonfirmasi", "bima-detail-note": "Ini adalah beta eksperimental. Multiplayer online telah lulus pengujian awal tetapi masih dalam optimalisasi aktif, dan ketersediaan publik belum dikonfirmasi.", "proof-progress": "BUKTI KEMAJUAN.", "video-desc-bima": "Dua kartu bukti yang mendokumentasikan keadaan BIMA-X saat ini — perbandingan grafik karakter sebelum/sesudah dan gameplay online 1v1.", "label-before": "SEBELUM", "label-after": "SESUDAH", "video-graphics": "01 — GRAFIK KARAKTER", "video-graphics-desc": "Perbandingan sebelum / sesudah perbaikan grafik model karakter.", "video-online": "02 — ONLINE 1v1", "video-online-desc": "Rekaman pertarungan online 1v1 antara dua perangkat terpisah.",
+        "faq-title": "PERTANYAAN YANG SERING DIAJUKAN (FAQ)", "faq-q1": "Apakah BIMA-X berjalan di Android 16?", "faq-a1": "Kompatibilitas Android 16 belum diuji sepenuhnya. BIMA-X telah dikonfirmasi berjalan di Android 15. Informasi terbaru akan dibagikan setelah pengujian lebih lanjut selesai.", "faq-q2": "Apakah BIMA-X mengandung virus atau malware?", "faq-a2": "BIMA-X tidak dimaksudkan untuk mengandung virus atau malware. Namun, keamanan perangkat lunak tidak dapat dijamin sepenuhnya tanpa pengujian keamanan independen. Demi keamanan, unduh game hanya dari sumber resmi dan pindai file APK menggunakan alat keamanan tepercaya sebelum menginstalnya.", "faq-q3": "Bisakah saya bermain 1v1 menggunakan hotspot seluler atau Wi-Fi?", "faq-a3": "Seharusnya bisa! BIMA-X memiliki fitur daftar room, sehingga Anda dapat mencoba bermain melalui Wi-Fi atau hotspot. Namun, kestabilan koneksi dapat berbeda-beda tergantung jaringan yang digunakan.", "faq-q4": "Bisakah saya bermain BIMA-X offline?", "faq-a4": "Ya! BIMA-X mendukung permainan offline. Namun, fitur online seperti multiplayer 1v1 memerlukan koneksi jaringan.",
+        "creators-eyebrow": "KREATOR DI BALIK WARISAN", "creators-title": "DI BALIK PENGALAMAN ASLI.", "creators-desc": "Mengakui pengembang dan penerbit yang terkait dengan game ini. Kredit ini disajikan untuk atribusi informasi, bukan sebagai dukungan dari arsip ini.", "game": "GAME", "role-dev": "Pengembang", "role-credit": "Kredit Tercatat", "role-pub": "Penerbit", "credit-note1": "Pengembang game mobile Satria Heroes, tunduk pada verifikasi terhadap daftar game dan kredit asli yang dapat diandalkan.", "credit-note2": "Kredit pengembang dan penerbit untuk game mobile BIMA-X, tunduk pada verifikasi terhadap daftar game dan kredit asli yang dapat diandalkan.", "verify-note": "Kredit tetap tunduk pada verifikasi terhadap materi game asli", "credits-disclaimer": "Nama perusahaan dan kredit pengembangan disediakan untuk atribusi informasi. Game asli dan kekayaan intelektual terkait tetap menjadi milik pemegang hak masing-masing. HEROES ARCHIVE adalah proyek fan independen dan tidak berafiliasi dengan, didukung oleh, atau disponsori oleh perusahaan-perusahaan ini.",
+        "vision-eyebrow": "APA YANG MENGGERAKKAN PEKERJAAN", "vision-title": "LESTARIKAN. PULIHKAN. HUBUNGKAN.", "vision-desc": "Tiga prinsip memandu setiap eksperimen, perbaikan, dan pembaruan. Mereka menjaga pekerjaan tetap jujur dan arsip fokus pada apa yang penting.", "vision-1-title": "LESTARIKAN", "vision-1-desc": "Jelajahi dan dokumentasikan pengalaman game klasik sambil menghormati kreator aslinya.", "vision-2-title": "PULIHKAN", "vision-2-desc": "Selidiki masalah kompatibilitas, sumber daya yang hilang, dan masalah teknis jika memungkinkan.", "vision-3-title": "HUBUNGKAN", "vision-3-desc": "Bangun komunitas di mana penggemar dapat berbagi kenangan, penemuan, umpan balik, dan pembaruan pengembangan.",
+        "dev-eyebrow": "KEMAJUAN SAAT INI", "dev-title": "SEDANG DIKERJAKAN.<br>SELALU JUJUR.", "dev-desc": "Snapshot transparan tentang posisi setiap proyek. Entri status diperbarui saat riset berlanjut, dan pekerjaan yang belum selesai tidak pernah disajikan sebagai selesai.", "status-some-missing": "Beberapa Hilang", "leg-green": "Selesai / Beroperasi", "leg-amber": "Dalam Proses", "leg-red": "Terhambat / Tidak Tersedia", "leg-purple": "Riset Eksperimental", "dev-note": "Status pengembangan mencerminkan kemajuan saat ini dan dapat berubah seiring berlanjutnya riset.",
+        "multi-eyebrow": "BETA EKSPERIMENTAL — BERFUNGSI", "multi-title": "PERTARUNGAN BERIKUTNYA: ONLINE.", "multi-p1": "<strong>Multiplayer online 1v1 sekarang berfungsi dalam pengujian awal.</strong> Pemain dapat terhubung menggunakan dua perangkat terpisah dan bertarung satu sama lain tanpa memerlukan koneksi Bluetooth langsung — mode BIMA-X VS Friend asli mengandalkan Bluetooth lokal, tetapi adaptasi ini membuka permainan berbasis internet.", "multi-p2": "Fitur ini telah berhasil melewati pengujian awal tanpa crash yang teramati selama pengujian tersebut. Namun, lag jaringan masih ada, dan optimalisasi lebih lanjut diperlukan untuk meningkatkan stabilitas dan responsivitas.", "multi-p3": "Ini tetap merupakan beta eksperimental. Kelayakan pendekatan telah divalidasi dalam praktik, tetapi ketersediaan publik belum dikonfirmasi.", "multi-badge": "BETA EKSPERIMENTAL / DALAM PENGUJIAN AKTIF", "tag-func": "BERFUNGSI DALAM PENGUJIAN", "concept-1-title": "RUANGAN ONLINE", "concept-1-desc": "Koneksi online 1v1 sekarang berfungsi di dua perangkat terpisah selama pengujian awal.", "concept-2-title": "PEMAIN VS PEMAIN", "concept-2-desc": "Pertarungan online 1v1 dasar berfungsi. Lag jaringan masih ada dan sedang dioptimalkan.", "tag-exp": "MEMPERLUAS", "concept-3-title": "KOMPATIBILITAS MULTIPLAYER", "concept-3-desc": "Persyaratan perangkat telah dikurangi melalui permainan online. Peningkatan lebih lanjut untuk stabilitas dan responsivitas sedang berlangsung.",
+        "journey-eyebrow": "PROSESNYA", "journey-title": "SETIAP PERBAIKAN PUNYA CERITA.", "journey-desc": "Catatan hidup tentang apa yang telah dicapai dan apa yang masih diselidiki. Fase dicantumkan tanpa tanggal yang diciptakan; pekerjaan didokumentasikan saat terjadi.", "time-1": "Server Privat Satria Heroes", "status-ongoing": "Berlangsung", "time-2": "Pemulihan Aset Satria Heroes", "time-3": "Aset Game yang Dibutuhkan BIMA-X", "time-4": "Kompatibilitas Tanggal BIMA-X", "time-5": "Grafik Model Karakter BIMA-X", "time-6": "Multiplayer Online 1v1 BIMA-X", "status-func-test": "Berfungsi / Pengujian",
+        "philo-eyebrow": "BAGAIMANA SAYA BEKERJA", "philo-title": "RASA INGIN TAHU DULU. JANJI KEDUA.", "philo-quote": "\"Ini adalah proyek independen yang terus berkembang.\"", "philo-p1": "Tidak setiap ide akan menjadi fitur yang berfungsi, dan tidak setiap masalah teknis memiliki solusi langsung.", "philo-p2": "Pembaruan pengembangan akan membedakan pekerjaan yang selesai dari eksperimen dan rencana masa depan. Transparansi lebih penting daripada janji yang berlebihan. Jika suatu fitur masih diteliti, itu akan disajikan sebagai eksperimental. Jika perbaikan selesai, statusnya akan diperbarui sesuai.",
+        "comm-eyebrow": "IKUTI PERJALANAN", "comm-title": "WARISAN LEBIH BAIK BERSAMA-SAMA.", "comm-p1": "Apakah Anda tumbuh besar memainkan game ini, baru-baru ini menemukannya kembali, atau penasaran dengan proses pengembangannya, Anda dipersilakan untuk mengikuti perjalanannya.", "comm-p2": "Bergabunglah dengan sesama penggemar, bagikan kenangan, diskusikan penemuan, dan ikuti pembaruan proyek terbaru.", "btn-join-community": "GABUNG DISCORD KAMI", "comm-support": "Temui komunitasnya. Ikuti kemajuannya. Bantu jaga warisan tetap hidup.",
+        "support-eyebrow": "DUKUNGAN OPSIONAL", "support-title": "DUKUNG HEROES ARCHIVE", "support-desc": "Menikmati proyeknya? Jika Anda ingin mendukung pengembangannya, Anda dapat memberikan donasi sukarela. Setiap kontribusi sangat dihargai dan membantu mendukung peningkatan di masa depan.", "support-btn": "Dukung Proyek Ini", "support-note": "Donasi sepenuhnya bersifat sukarela dan tidak diperlukan untuk mengakses arsip, mengunduh game, atau menggunakan fitur situs web apa pun.",
+        "disc-eyebrow": "CATATAN TENTANG KEPEMILIKAN", "disc-title": "INDEPENDEN SECARA DESAIN.", "disc-tag": "PROYEK FAN TIDAK RESMI", "disc-p1": "<strong>HEROES ARCHIVE</strong> adalah proyek fan independen dan tidak resmi yang dibuat oleh <strong>ZenovX</strong>. Ini tidak berafiliasi dengan, didukung oleh, atau disponsori oleh Latido Co., Ltd., CRAFTS & MEISTER, Bandai Namco, atau pemegang hak asli lainnya.", "disc-p2": "Satria Heroes, BIMA-X, karakter asli mereka, merek dagang, aset game, dan kekayaan intelektual terkait menjadi milik pemegang hak masing-masing.", "disc-p3": "Situs web ini mendokumentasikan aktivitas fan independen dan riset teknis. Ini tidak mengklaim kepemilikan atas game asli atau menyiratkan otorisasi dari pembuatnya. Status buatan penggemar tidak secara otomatis memberikan izin untuk menggunakan materi berhak cipta.",
+        "footer-desc": "Proyek fan independen oleh ZenovX.", "footer-tag": "WARISAN TETAP HIDUP.", "footer-discord": "Discord", "footer-contact": "Kontak", "footer-indep": "Proyek fan independen oleh ZenovX.", "footer-credit": "Gambar promosi digunakan untuk tujuan arsip fan non-komersial dan informasi. Semua hak tetap menjadi milik pemegang hak masing-masing. Arsip ini bukan situs web resmi atau rilis game.", "footer-top": "Kembali ke atas",
+        "back-home": "&larr; Kembali ke Beranda", "legal-info": "INFORMASI HUKUM", "terms-title": "SYARAT & KETENTUAN", "privacy-title": "KEBIJAKAN PRIVASI", "toc": "DAFTAR ISI",
+        "t1": "1. Pendahuluan dan Penerimaan", "t2": "2. Penggunaan yang Dapat Diterima", "t3": "3. Kekayaan Intelektual", "t4": "4. Penafian Proyek Fan", "t5": "5. Tautan Pihak Ketiga", "t6": "6. Ketersediaan Situs Web", "t7": "7. Batasan Tanggung Jawab", "t8": "8. Perubahan Ketentuan Ini", "t9": "9. Informasi Kontak",
+        "p1": "1. Informasi yang Kami Kumpulkan", "p2": "2. Cookie dan Pelacakan", "p3": "3. Bagaimana Kami Menggunakan Informasi", "p4": "4. Berbagi Data dan Layanan Pihak Ketiga", "p5": "5. Retensi dan Keamanan Data", "p6": "6. Hak Privasi Anda", "p7": "7. Pembaruan Kebijakan", "p8": "8. Informasi Kontak",
+        "modal-notice": "PEMBERITAHUAN UNDUHAN", "modal-title": "GRATIS DIMAINKAN.<br>BANTU TETAP ONLINE.", "modal-desc1": "Game ini gratis diunduh. Sebelum mengunduh, Anda harus melewati tautan Safelinku terlebih dahulu. Pendapatan dari tautan membantu menutupi biaya hosting server dan pemeliharaan agar saya dapat terus mengerjakan proyek ini secara independen.", "modal-desc2": "Anda tidak perlu membeli game atau membayar langganan. Menyelesaikan tautan adalah cara untuk mendukung proyek sekaligus mengakses unduhan.", "modal-free": "UNDUH GRATIS", "modal-continue": "LANJUTKAN KE SAFELINKU", "modal-cancel": "BATAL", "modal-coming": "Tautan unduhan segera hadir — tautan Safelinku proyek ini belum dipublikasikan.", "modal-support": "Unduhan gratis · Dukungan tautan membantu menutupi biaya server", "mobile-foot-desc": "Temui komunitasnya. Ikuti kemajuannya. Bantu jaga warisan tetap hidup."
+      }
+    };
+
+    (function() {
+      let currentLang = localStorage.getItem('heroes-lang') || 'en';
+      const langToggle = document.getElementById('langToggle');
+      const langEN = document.getElementById('langEN');
+      const langID = document.getElementById('langID');
+
+      function setLanguage(lang) {
+        currentLang = lang;
+        localStorage.setItem('heroes-lang', lang);
+        document.documentElement.lang = lang;
+
+        if (lang === 'en') {
+          langEN.classList.add('active');
+          langID.classList.remove('active');
+        } else {
+          langID.classList.add('active');
+          langEN.classList.remove('active');
+        }
+
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const key = el.getAttribute('data-i18n');
+          if (translations[lang] && translations[lang][key]) {
+            el.innerHTML = translations[lang][key];
+          }
+        });
+      }
+
+      langToggle.addEventListener('click', () => {
+        setLanguage(currentLang === 'en' ? 'id' : 'en');
+      });
+
+      setLanguage(currentLang);
     })();
   </script>
 </body>
