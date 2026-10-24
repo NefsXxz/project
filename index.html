@@ -381,37 +381,6 @@
     .mobile-nav a.mobile-nav-legal:hover { color: var(--bone); }
     .mobile-nav a.mobile-nav-legal span { font-size: 0.5rem; }
 
-    /* Styling for Mobile Language Button specifically */
-    .mobile-lang-container {
-      margin-top: 1.5rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--line);
-    }
-    .mobile-lang-toggle {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      width: 100%;
-      padding: 0.85rem;
-      background: transparent;
-      border: 1px solid var(--line-strong);
-      color: var(--muted);
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      transition: all 0.2s;
-    }
-    .mobile-lang-toggle span.active {
-      color: var(--gold);
-      font-weight: bold;
-    }
-    .mobile-lang-toggle:hover {
-      border-color: var(--gold);
-      color: var(--bone);
-    }
-
     .mobile-menu-foot { padding-top: 2rem; border-top: 1px solid var(--line); }
     .mobile-menu-foot p { color: var(--muted); font-size: 0.8rem; line-height: 1.6; }
     .mobile-menu-foot .btn { width: 100%; margin-bottom: 0.9rem; }
@@ -1932,8 +1901,14 @@
       .header-cta { width: 44px; min-height: 44px; padding: 0; }
       .header-cta .icon { width: 18px; height: 18px; }
       
-      /* FIX: Only hide the language switch in the HEADER, keep it in mobile menu */
-      .header-actions .lang-switch { display: none; }
+      /* Fix: Tampilkan tombol bahasa di header versi mobile */
+      .header-actions .lang-switch {
+        display: flex; 
+        padding: 0 0.5rem;
+        height: 40px;
+        font-size: 0.55rem;
+        margin-right: 0.1rem;
+      }
       
       .hero-inner { grid-template-columns: 1fr; }
       .hero-art { display: none; }
@@ -2196,10 +2171,11 @@
       </nav>
 
       <div class="header-actions">
-        <!-- Desktop Language Switcher -->
+        <!-- Language Switcher (Now visible on desktop AND mobile) -->
         <button class="lang-switch" id="langToggle" aria-label="Switch Language">
           <span id="langEN" class="active">EN</span> | <span id="langID">ID</span>
         </button>
+        
         <a class="btn btn--crimson btn--small header-cta" href="https://discord.gg/6whU7guX9v" target="_blank" rel="noopener noreferrer" aria-label="Join the HEROES ARCHIVE Discord community (opens in a new tab)">
           <svg class="icon" aria-hidden="true"><use href="#icon-discord"></use></svg>
           <span class="header-cta-text" data-i18n="btn-join-discord">JOIN DISCORD</span>
@@ -2225,13 +2201,6 @@
       <a href="https://sociabuzz.com/kece8358/tribe" target="_blank" rel="noopener noreferrer" class="mobile-nav-support"><span>07</span><span data-i18n="nav-support">Support</span></a>
       <a href="#/terms" class="mobile-nav-legal"><span>08</span><span data-i18n="nav-terms">Terms of Service</span></a>
       <a href="#/privacy" class="mobile-nav-legal"><span>09</span><span data-i18n="nav-privacy">Privacy Policy</span></a>
-      
-      <!-- FIXED: Mobile Language Toggle -->
-      <div class="mobile-lang-container">
-        <button class="mobile-lang-toggle" onclick="document.getElementById('langToggle').click()">
-          <span id="mobileLangEN" class="active">ENGLISH</span> | <span id="mobileLangID">INDONESIA</span>
-        </button>
-      </div>
     </nav>
     <div class="mobile-menu-foot">
       <a class="btn btn--gold" href="https://discord.gg/6whU7guX9v" target="_blank" rel="noopener noreferrer">
@@ -2749,7 +2718,7 @@
           </div>
 
           <!-- ============================================= -->
-          <!-- NEW FAQ SECTION FOR BIMA-X                    -->
+          <!-- FAQ SECTION FOR BIMA-X                        -->
           <!-- ============================================= -->
           <div class="faq-section">
             <h3 class="faq-heading" data-i18n="faq-title">FREQUENTLY ASKED QUESTIONS</h3>
@@ -4115,31 +4084,19 @@
       const langToggle = document.getElementById('langToggle');
       const langEN = document.getElementById('langEN');
       const langID = document.getElementById('langID');
-      
-      const mobileLangEN = document.getElementById('mobileLangEN');
-      const mobileLangID = document.getElementById('mobileLangID');
 
       function setLanguage(lang) {
         currentLang = lang;
         localStorage.setItem('heroes-lang', lang);
         document.documentElement.lang = lang;
 
-        // Update visual state for Desktop Toggle
+        // Update visual state
         if (lang === 'en') {
           if(langEN) langEN.classList.add('active');
           if(langID) langID.classList.remove('active');
         } else {
           if(langID) langID.classList.add('active');
           if(langEN) langEN.classList.remove('active');
-        }
-
-        // Update visual state for Mobile Toggle
-        if (lang === 'en') {
-          if(mobileLangEN) mobileLangEN.classList.add('active');
-          if(mobileLangID) mobileLangID.classList.remove('active');
-        } else {
-          if(mobileLangID) mobileLangID.classList.add('active');
-          if(mobileLangEN) mobileLangEN.classList.remove('active');
         }
 
         // Translate text
