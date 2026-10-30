@@ -1198,9 +1198,7 @@
       text-transform: uppercase;
     }
 
-    /* ============================================================
-       FAQ SECTION
-       ============================================================ */
+    /* FAQ SECTION */
     .faq-section {
       margin-top: 3rem;
       border-top: 1px solid var(--line);
@@ -1233,7 +1231,7 @@
       gap: 1rem;
       padding: 1.1rem 1.25rem;
       cursor: pointer;
-      list-style: none; /* Hide default arrow */
+      list-style: none;
       color: var(--bone);
       font-size: 0.95rem;
       font-weight: 500;
@@ -1241,12 +1239,8 @@
       transition: color 0.2s ease;
     }
     .faq-question::-webkit-details-marker { display: none; }
-    .faq-question:hover {
-      color: var(--gold);
-    }
-    .faq-item[open] .faq-question {
-      color: var(--gold);
-    }
+    .faq-question:hover { color: var(--gold); }
+    .faq-item[open] .faq-question { color: var(--gold); }
     .faq-icon {
       flex: none;
       width: 18px;
@@ -1254,9 +1248,7 @@
       color: currentColor;
       transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
     }
-    .faq-item[open] .faq-icon {
-      transform: rotate(180deg);
-    }
+    .faq-item[open] .faq-icon { transform: rotate(180deg); }
     .faq-answer {
       padding: 0 1.25rem 1.25rem 1.25rem;
       color: var(--muted);
@@ -1269,9 +1261,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ============================================================
-       SUPPORT SECTION
-       ============================================================ */
+    /* SUPPORT SECTION */
     .support-card {
       text-align: center;
       padding: clamp(2rem, 6vw, 4rem);
@@ -1312,9 +1302,7 @@
       text-transform: uppercase;
     }
 
-    /* ============================================================
-       VIDEO PROOF + MEDIA COMPARE
-       ============================================================ */
+    /* VIDEO PROOF + MEDIA COMPARE */
     .video-proof { margin-top: 2rem; }
     .video-proof-header { margin-bottom: 1.2rem; }
     .video-proof-header h3 {
@@ -1335,7 +1323,6 @@
       margin-top: 1.2rem;
     }
     .video-card { margin: 0; min-width: 0; }
-
     .video-frame {
       position: relative;
       aspect-ratio: 16 / 9;
@@ -1345,7 +1332,6 @@
       transition: border-color 0.3s ease;
     }
     .video-frame:hover { border-color: rgba(228, 184, 92, 0.55); }
-
     .video-frame iframe, .video-frame video {
       position: absolute;
       inset: 0;
@@ -1355,7 +1341,6 @@
       display: block;
     }
     .video-frame video { object-fit: contain; background: #000; }
-
     .video-placeholder {
       position: absolute;
       inset: 0;
@@ -1401,7 +1386,6 @@
       line-height: 1.55;
       color: rgba(161, 161, 170, 0.9);
     }
-
     .video-caption {
       padding: 0.85rem 0.15rem 0;
       display: flex;
@@ -1421,7 +1405,6 @@
       font-size: 0.82rem;
       line-height: 1.6;
     }
-
     .media-compare {
       position: relative;
       aspect-ratio: 16 / 9;
@@ -1478,7 +1461,6 @@
       border-color: var(--gold);
       color: var(--gold);
     }
-
     .image-lightbox {
       position: fixed;
       inset: 0;
@@ -1648,7 +1630,6 @@
     }
     .modal-close:hover { color: var(--gold); border-color: var(--gold); }
     .modal-close .icon { width: 16px; height: 16px; }
-
     .modal-eyebrow {
       display: flex; align-items: center; gap: 0.6rem;
       color: var(--gold);
@@ -1661,7 +1642,6 @@
       content: ""; width: 24px; height: 1px;
       background: var(--gold); flex: none;
     }
-
     .modal-title {
       margin: 0.85rem 0 1rem;
       font-size: clamp(1.9rem, 4vw, 2.7rem);
@@ -1674,7 +1654,6 @@
       line-height: 1.75;
     }
     .modal-body p + p { margin-top: 0.9rem; }
-
     .modal-flow {
       display: flex; align-items: center;
       gap: 0.7rem;
@@ -1703,14 +1682,12 @@
       content: ""; width: 5px; height: 5px;
       background: currentColor; flex: none;
     }
-
     .modal-actions {
       display: flex; flex-wrap: wrap;
       gap: 0.65rem;
       margin-top: 1.4rem;
     }
     .modal-actions .btn { flex: 1 1 auto; min-width: 170px; }
-
     .modal-support {
       display: block;
       margin-top: 1.1rem;
@@ -1722,7 +1699,6 @@
       text-transform: uppercase;
     }
     .modal-support::before { content: "· "; color: var(--gold); }
-
     .modal-coming {
       display: none;
       margin-top: 0.9rem;
@@ -1737,7 +1713,6 @@
       text-transform: uppercase;
     }
     .modal-coming.is-visible { display: block; }
-
     @keyframes modalFade { from { opacity: 0; } to { opacity: 1; } }
     @keyframes modalIn {
       from { opacity: 0; transform: translateY(20px) scale(0.98); }
@@ -1778,7 +1753,6 @@
       transition: color 0.25s ease;
     }
     .footer-link:hover { color: var(--gold); }
-
     .footer-bottom {
       display: flex; flex-wrap: wrap;
       align-items: flex-start; justify-content: space-between;
@@ -1900,8 +1874,6 @@
       .header-cta .header-cta-text { display: none; }
       .header-cta { width: 44px; min-height: 44px; padding: 0; }
       .header-cta .icon { width: 18px; height: 18px; }
-      
-      /* Fix: Tampilkan tombol bahasa di header versi mobile */
       .header-actions .lang-switch {
         display: flex; 
         padding: 0 0.5rem;
@@ -1909,7 +1881,6 @@
         font-size: 0.55rem;
         margin-right: 0.1rem;
       }
-      
       .hero-inner { grid-template-columns: 1fr; }
       .hero-art { display: none; }
       .hero-media img {
@@ -1993,6 +1964,8 @@
       .footer-nav { gap: 0.7rem 1rem; }
       .download-block { padding: 1.25rem 1.25rem 1.25rem 1.4rem; }
       .update-banner { padding: 1.25rem 1.25rem 1.25rem 1.4rem; }
+      .thanks-block { padding: 1.25rem 1.25rem 1.25rem 1.4rem; }
+      .thanks-value { max-width: none; text-align: left; }
     }
 
     @media (max-width: 420px) {
@@ -2017,9 +1990,7 @@
       .hero-media img { transform: none !important; }
     }
 
-    /* ============================================================
-       LEGAL PAGES (TERMS & PRIVACY)
-       ============================================================ */
+    /* LEGAL PAGES */
     .legal-page {
       min-height: calc(100vh - var(--header-h) - 100px);
       padding-top: calc(var(--header-h) + 4rem);
@@ -2061,7 +2032,6 @@
       transition: color 0.2s;
     }
     .legal-toc a:hover { color: var(--gold); }
-    
     .legal-content h2 {
       font-size: 1.8rem;
       margin: 2.5rem 0 1rem;
@@ -2104,6 +2074,99 @@
       font-family: var(--font-mono);
       font-size: 0.75rem;
       border-radius: 2px;
+    }
+
+    /* SPECIAL THANKS BLOCK (SATRIA HEROES) */
+    .thanks-block {
+      position: relative;
+      margin-top: 2rem;
+      padding: 1.5rem 1.5rem 1.5rem 1.7rem;
+      border: 1px solid var(--line-strong);
+      background: linear-gradient(180deg, rgba(228, 184, 92, 0.07) 0%, rgba(11, 13, 18, 0.45) 100%);
+    }
+    .thanks-block::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--gold), var(--crimson));
+    }
+    .thanks-tag {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      margin-bottom: 0.9rem;
+      padding: 0.36rem 0.62rem;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: var(--font-mono);
+      font-size: 0.54rem; font-weight: 500;
+      letter-spacing: 0.14em; line-height: 1.4;
+      text-transform: uppercase;
+    }
+    .thanks-tag::before {
+      content: ""; width: 6px; height: 6px;
+      background: currentColor; flex: none;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    .thanks-title {
+      margin: 0 0 0.95rem;
+      font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+      line-height: 1;
+    }
+    .thanks-block p {
+      max-width: 60ch;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.75;
+    }
+    .thanks-block p + p { margin-top: 0.7rem; }
+    .thanks-block strong { color: var(--bone); font-weight: 500; }
+    .thanks-subtitle {
+      margin: 1.6rem 0 0.7rem;
+      color: var(--gold);
+      font-family: var(--font-mono);
+      font-size: 0.58rem; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase;
+    }
+    .thanks-value {
+      flex: none; max-width: 28ch;
+      color: var(--bone);
+      font-size: 0.85rem; line-height: 1.6;
+      text-align: right;
+    }
+    .thanks-timeline {
+      margin: 0; padding: 0; list-style: none;
+      display: grid; gap: 0.9rem;
+    }
+    .thanks-timeline li { display: flex; gap: 1rem; align-items: flex-start; }
+    .thanks-timeline li > div { min-width: 0; }
+    .thanks-timeline li > div > span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.85rem; line-height: 1.6;
+    }
+    .thanks-timeline .thanks-year {
+      flex: none; padding-top: 0.15rem;
+      color: var(--gold);
+      font-family: var(--font-mono);
+      font-size: 0.62rem; font-weight: 500;
+      letter-spacing: 0.1em;
+    }
+    .thanks-timeline strong {
+      display: block;
+      margin-bottom: 0.2rem;
+      color: var(--bone);
+      font-family: var(--font-mono);
+      font-size: 0.58rem; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .thanks-quote {
+      margin-top: 1.4rem !important;
+      padding-top: 1.1rem;
+      border-top: 1px solid var(--line);
+      color: var(--gold) !important;
+      font-family: var(--font-display);
+      font-size: 1.35rem; letter-spacing: 0.06em;
+      text-transform: uppercase;
     }
   </style>
 </head>
@@ -2171,7 +2234,6 @@
       </nav>
 
       <div class="header-actions">
-        <!-- Language Switcher (Now visible on desktop AND mobile) -->
         <button class="lang-switch" id="langToggle" aria-label="Switch Language">
           <span id="langEN" class="active">EN</span> | <span id="langID">ID</span>
         </button>
@@ -2196,8 +2258,6 @@
       <a href="#creators" data-nav-link="creators"><span>04</span><span data-i18n="nav-creators">Original Creators</span></a>
       <a href="#development" data-nav-link="development"><span>05</span><span data-i18n="nav-development">Development</span></a>
       <a href="#community" data-nav-link="community"><span>06</span><span data-i18n="nav-community">Community</span></a>
-      
-      <!-- Support & Legal Links -->
       <a href="https://sociabuzz.com/kece8358/tribe" target="_blank" rel="noopener noreferrer" class="mobile-nav-support"><span>07</span><span data-i18n="nav-support">Support</span></a>
       <a href="#/terms" class="mobile-nav-legal"><span>08</span><span data-i18n="nav-terms">Terms of Service</span></a>
       <a href="#/privacy" class="mobile-nav-legal"><span>09</span><span data-i18n="nav-privacy">Privacy Policy</span></a>
@@ -2216,7 +2276,6 @@
     <div class="noscript-note">JavaScript is required for the mobile navigation menu, audio features, and the download flow. All section links remain available in the footer.</div>
   </noscript>
 
-  <!-- MAIN CONTENT (HOME) -->
   <main id="main">
     <section class="hero" id="home" data-nav-section>
       <div class="hero-media" aria-hidden="true">
@@ -2557,6 +2616,98 @@
             </div>
           </div>
 
+          <!-- SPECIAL THANKS — SATRIA HEROES -->
+          <div class="thanks-block">
+            <span class="thanks-tag" data-i18n="thanks-tag">SPECIAL THANKS — SATRIA HEROES</span>
+            <h3 class="thanks-title" data-i18n="thanks-title">A PIECE OF HISTORY RESTORED.</h3>
+
+            <p data-i18n="thanks-p1">
+              The Satria Heroes restoration would not have come this far without help from the community.
+            </p>
+            <p data-i18n="thanks-p2">
+              We want to give special thanks to <strong>tehkotak's (gatau4309)</strong>, who helped find and
+              recover the nearly complete Satria Heroes game data files.
+            </p>
+            <p data-i18n="thanks-p3">
+              The asset files were obtained through a friend who had kept them since Satria Heroes was
+              still running in 2022, before the official server was shut down.
+            </p>
+            <p data-i18n="thanks-p4">
+              Thanks to that help, the Satria Heroes restoration — which had previously stalled — could
+              finally continue.
+            </p>
+
+            <h4 class="thanks-subtitle" data-i18n="thanks-ack-title">ACKNOWLEDGEMENT</h4>
+            <ul class="status-list">
+              <li class="status-row">
+                <span class="status-key" data-i18n="thanks-ack-1-key">Contributor</span>
+                <span class="thanks-value">tehkotak's</span>
+              </li>
+              <li class="status-row">
+                <span class="status-key" data-i18n="thanks-ack-2-key">Also known as</span>
+                <span class="thanks-value">gatau4309</span>
+              </li>
+              <li class="status-row">
+                <span class="status-key" data-i18n="thanks-ack-3-key">Contribution</span>
+                <span class="thanks-value" data-i18n="thanks-ack-3-val">Helped find and recover Satria Heroes asset data.</span>
+              </li>
+              <li class="status-row">
+                <span class="status-key" data-i18n="thanks-ack-4-key">Source</span>
+                <span class="thanks-value" data-i18n="thanks-ack-4-val">An asset archive still kept by their friend since the game was running in 2022.</span>
+              </li>
+            </ul>
+
+            <h4 class="thanks-subtitle" data-i18n="thanks-timeline-title">RESTORATION TIMELINE</h4>
+            <ul class="thanks-timeline">
+              <li>
+                <span class="thanks-year">2022</span>
+                <div>
+                  <strong data-i18n="thanks-tl-1-title">ASSETS PRESERVED</strong>
+                  <span data-i18n="thanks-tl-1-desc">Game assets were still stored by one of the players while the official server was still running.</span>
+                </div>
+              </li>
+              <li>
+                <span class="thanks-year">2026</span>
+                <div>
+                  <strong data-i18n="thanks-tl-2-title">RESTORATION PROJECT</strong>
+                  <span data-i18n="thanks-tl-2-desc">The game data was rediscovered and the Satria Heroes restoration process continued.</span>
+                </div>
+              </li>
+            </ul>
+
+            <p data-i18n="thanks-p5">
+              Thank you for helping bring back a part of Satria Heroes history. This contribution is an
+              important part of this restoration project's journey.
+            </p>
+            <p class="thanks-quote" data-i18n="thanks-quote">Some memories deserve to be restored.</p>
+          </div>
+
+          <!-- TUTORIAL SAFELINKU — SATRIA HEROES -->
+          <div class="video-proof">
+            <div class="video-proof-header">
+              <p class="eyebrow" data-i18n="tutorial-eyebrow">VIDEO TUTORIAL</p>
+              <h3 data-i18n="tutorial-title-satria">HOW TO COMPLETE SAFELINKU</h3>
+              <p data-i18n="tutorial-desc-satria">Step-by-step guide on how to pass the Safelinku shortlink to access the Satria Heroes download.</p>
+            </div>
+            <div class="video-grid" style="grid-template-columns: 1fr;">
+              <figure class="video-card">
+                <div class="video-frame"
+                     data-video-src=""
+                     data-video-title="Safelinku Tutorial — How to access Satria Heroes download">
+                  <div class="video-placeholder">
+                    <svg class="icon" aria-hidden="true"><use href="#icon-play"></use></svg>
+                    <strong data-i18n="video-soon">VIDEO COMING SOON</strong>
+                    <span data-i18n="video-pub">Footage will be published here when available.</span>
+                  </div>
+                </div>
+                <figcaption class="video-caption">
+                  <strong data-i18n="tutorial-caption">SAFELINKU TUTORIAL</strong>
+                  <span data-i18n="tutorial-caption-desc-satria">Watch how to complete the shortlink process to reach the Satria Heroes download page.</span>
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+
           <div class="download-block" data-download-block="satria-heroes">
             <span class="download-label" data-i18n="download-free">FREE DOWNLOAD</span>
             <h3 data-i18n="download-title">FREE TO PLAY. HELP KEEP IT ONLINE.</h3>
@@ -2603,7 +2754,7 @@
         </div>
 
         <div class="detail-copy reveal" style="--reveal-delay: 0.08s">
-          <p class="eyebrow" data-i18n="bima-detail-eyebrow">PROJECT 02 / DETAILED RECORD</p>
+                    <p class="eyebrow" data-i18n="bima-detail-eyebrow">PROJECT 02 / DETAILED RECORD</p>
           <h2 class="detail-title" id="bimaxDetailTitle">BIMA-X</h2>
           <p class="detail-lede" data-i18n="bima-detail-lede">
             An independent fan project focused on restoring the classic BIMA-X experience and
@@ -2717,13 +2868,9 @@
             </div>
           </div>
 
-          <!-- ============================================= -->
-          <!-- FAQ SECTION FOR BIMA-X                        -->
-          <!-- ============================================= -->
           <div class="faq-section">
             <h3 class="faq-heading" data-i18n="faq-title">FREQUENTLY ASKED QUESTIONS</h3>
             <div class="faq-accordion">
-              
               <details class="faq-item">
                 <summary class="faq-question">
                   <span data-i18n="faq-q1">Does BIMA-X work on Android 16?</span>
@@ -2733,7 +2880,6 @@
                   Android 16 compatibility has not been fully tested yet. BIMA-X has been confirmed to work on Android 15. An update will be shared once further testing is completed.
                 </div>
               </details>
-
               <details class="faq-item">
                 <summary class="faq-question">
                   <span data-i18n="faq-q2">Does BIMA-X contain any viruses or malware?</span>
@@ -2743,7 +2889,6 @@
                   BIMA-X is not intended to contain any viruses or malware. However, no software can be guaranteed to be completely risk-free without independent security testing. For your safety, download the game only from the official source and scan the APK with a trusted security tool before installing it.
                 </div>
               </details>
-
               <details class="faq-item">
                 <summary class="faq-question">
                   <span data-i18n="faq-q3">Can I play 1v1 using a mobile hotspot or Wi-Fi?</span>
@@ -2753,7 +2898,6 @@
                   It should be possible! BIMA-X has a room list feature, so you can try connecting through Wi-Fi or a mobile hotspot. However, connection stability may vary depending on your network.
                 </div>
               </details>
-
               <details class="faq-item">
                 <summary class="faq-question">
                   <span data-i18n="faq-q4">Can I play BIMA-X offline?</span>
@@ -2763,14 +2907,9 @@
                   Yes! BIMA-X supports offline gameplay. However, online features such as 1v1 multiplayer require a network connection.
                 </div>
               </details>
-
             </div>
           </div>
-          <!-- ============================================= -->
 
-          <!-- ============================================= -->
-          <!-- TUTORIAL SAFELINKU BIMA-X                     -->
-          <!-- ============================================= -->
           <div class="video-proof">
             <div class="video-proof-header">
               <p class="eyebrow" data-i18n="tutorial-eyebrow">VIDEO TUTORIAL</p>
@@ -2795,7 +2934,6 @@
               </figure>
             </div>
           </div>
-          <!-- ============================================= -->
 
           <div class="download-block" data-download-block="bima-x">
             <span class="download-label" data-i18n="download-free">FREE DOWNLOAD</span>
@@ -3168,7 +3306,6 @@
       </div>
     </section>
 
-    <!-- SUPPORT THE PROJECT SECTION -->
     <section class="section" id="support" aria-labelledby="supportTitle">
       <div class="container">
         <div class="support-card reveal">
@@ -3218,7 +3355,6 @@
     </section>
   </main>
 
-  <!-- TERMS OF SERVICE PAGE -->
   <main id="page-terms" class="legal-page section section--alt" hidden>
     <div class="container legal-container">
       <a href="#home" class="btn btn--outline btn--small" style="margin-bottom: 2rem;" data-i18n="back-home">&larr; Back to Home</a>
@@ -3247,7 +3383,6 @@
           <h2>1. Introduction and Acceptance</h2>
           <p>Welcome to HEROES ARCHIVE. These Terms of Service ("Terms") govern your access to and use of the HEROES ARCHIVE website (the "Site"). By accessing or using the Site, you agree to be bound by these Terms. If you do not agree to these Terms, please do not use the Site.</p>
         </section>
-
         <section id="terms-use">
           <h2>2. Acceptable Use</h2>
           <p>You agree to use the Site only for lawful purposes and in accordance with these Terms. You agree not to:</p>
@@ -3258,40 +3393,33 @@
             <li>Impersonate or attempt to impersonate ZenovX, HEROES ARCHIVE, or any other person or entity.</li>
           </ul>
         </section>
-
         <section id="terms-ip">
           <h2>3. Intellectual Property and Ownership</h2>
           <p>The Site and its original content, features, and functionality (including but not limited to text, design, graphics, and the arrangement thereof) are owned by ZenovX and are protected by international copyright, trademark, and other intellectual property laws.</p>
           <p>However, HEROES ARCHIVE does not claim ownership of any third-party characters, trademarks, game assets, logos, or copyrighted materials featured on this Site. All original game assets, characters, and related intellectual property belong to their respective rights holders.</p>
         </section>
-
         <section id="terms-disclaimer">
           <h2>4. Fan-Project Disclaimer</h2>
           <p><strong>HEROES ARCHIVE is an independent fan project.</strong> It is not an official website, game release, or authorized partnership. It is not officially affiliated with, endorsed by, or sponsored by the owners of the BIMA-X or Satria Heroes franchises, including but not limited to Latido Co., Ltd., CRAFTS &amp; MEISTER, or Bandai Namco.</p>
           <p>The Site is provided for informational and research purposes only. We do not claim to own or hold any rights to the original games.</p>
         </section>
-
         <section id="terms-links">
           <h2>5. Third-Party Links and External Resources</h2>
           <p>The Site may contain links to third-party websites or services that are not owned or controlled by HEROES ARCHIVE, such as Discord or YouTube. We have no control over, and assume no responsibility for, the content, privacy policies, or practices of any third-party websites or services.</p>
           <p>You acknowledge and agree that HEROES ARCHIVE shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with the use of or reliance on any such content, goods, or services available on or through any such websites or services.</p>
         </section>
-
         <section id="terms-availability">
           <h2>6. Website Availability and Service Changes</h2>
           <p>We reserve the right to withdraw or amend this Site, and any service or material we provide on the Site, in our sole discretion without notice. We will not be liable if for any reason all or any part of the Site is unavailable at any time or for any period.</p>
         </section>
-
         <section id="terms-liability">
           <h2>7. Limitation of Liability</h2>
           <p>In no event shall HEROES ARCHIVE or ZenovX be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your access to or use of or inability to access or use the Site.</p>
         </section>
-
         <section id="terms-changes">
           <h2>8. Changes to These Terms</h2>
           <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. It is your responsibility to check these Terms periodically for changes. Your continued use of the Site following the posting of any changes to these Terms constitutes acceptance of those changes.</p>
         </section>
-
         <section id="terms-contact">
           <h2>9. Contact Information</h2>
           <p>If you have any questions about these Terms, please contact us via our community Discord or at: <span class="legal-placeholder">nefsxxzanjay@gmail.com</span>.</p>
@@ -3300,7 +3428,6 @@
     </div>
   </main>
 
-  <!-- PRIVACY POLICY PAGE -->
   <main id="page-privacy" class="legal-page section section--alt" hidden>
     <div class="container legal-container">
       <a href="#home" class="btn btn--outline btn--small" style="margin-bottom: 2rem;" data-i18n="back-home">&larr; Back to Home</a>
@@ -3332,7 +3459,6 @@
             <li><strong>Technical Information:</strong> Our web hosting provider (Vercel) automatically collects standard server log data, including your IP address, browser type, operating system, and access times, for security and operational purposes.</li>
           </ul>
         </section>
-
         <section id="privacy-cookies">
           <h2>2. Cookies and Tracking</h2>
           <p>We do not use analytics providers (like Google Analytics) or set tracking cookies on this Site.</p>
@@ -3342,32 +3468,26 @@
             <li><strong>External Links:</strong> Clicking the Discord invite link or the donation link will take you to external platforms (Discord, Sociabuzz), which have their own privacy policies and cookies.</li>
           </ul>
         </section>
-
         <section id="privacy-use">
           <h2>3. How Information Is Used</h2>
           <p>Any technical data collected by our hosting provider is used solely to ensure the stability, security, and performance of the website. We do not sell, rent, or trade your personal information.</p>
         </section>
-
         <section id="privacy-sharing">
           <h2>4. Data Sharing and Third-Party Services</h2>
           <p>We do not share your data with third parties except as necessary through our hosting infrastructure (Vercel). Your use of third-party services (like Discord, YouTube, or Sociabuzz) is governed by their respective privacy policies.</p>
         </section>
-
         <section id="privacy-retention">
           <h2>5. Data Retention and Security</h2>
           <p>Any server logs collected by our hosting provider are retained according to their standard retention policies for security purposes. The Site is served over HTTPS to encrypt data in transit.</p>
         </section>
-
         <section id="privacy-rights">
           <h2>6. User Privacy Rights</h2>
           <p>Because we do not collect personal data directly, there is no personal profile to access, modify, or delete. If you have concerns about the technical data (like IP addresses) logged by our hosting provider, you may contact us.</p>
         </section>
-
         <section id="privacy-updates">
           <h2>7. Policy Updates</h2>
           <p>We may update this Privacy Policy from time to time. We will post the new policy on this page and update the "Last Updated" date.</p>
         </section>
-
         <section id="privacy-contact">
           <h2>8. Contact Information</h2>
           <p>If you have any questions about this Privacy Policy, please contact us via our community Discord or at: <span class="legal-placeholder">nefsxxzanjay@gmail.com</span>.</p>
@@ -3396,11 +3516,9 @@
           <a class="footer-link" href="#development" data-i18n="nav-development">Development</a>
           <a class="footer-link" href="#community" data-i18n="nav-community">Community</a>
           <a class="footer-link" href="https://discord.gg/6whU7guX9v" target="_blank" rel="noopener noreferrer" data-i18n="footer-discord">Discord</a>
-          <!-- LEGAL LINKS -->
           <a class="footer-link" href="#/terms" data-i18n="nav-terms">Terms of Service</a>
           <a class="footer-link" href="#/privacy" data-i18n="nav-privacy">Privacy Policy</a>
           <a class="footer-link" href="https://discord.gg/6whU7guX9v" target="_blank" rel="noopener noreferrer" data-i18n="footer-contact">Contact</a>
-          <!-- SUPPORT LINK -->
           <a class="footer-link" href="https://sociabuzz.com/kece8358/tribe" target="_blank" rel="noopener noreferrer" style="color: var(--gold);" data-i18n="nav-support">Support the Project</a>
         </nav>
       </div>
@@ -3422,7 +3540,6 @@
     </div>
   </footer>
 
-  <!-- DOWNLOAD MODAL -->
   <div class="modal" id="downloadModal" role="dialog" aria-modal="true" aria-labelledby="downloadModalTitle" aria-describedby="downloadModalDesc" hidden>
     <div class="modal-backdrop" data-modal-close></div>
     <div class="modal-panel">
@@ -3470,7 +3587,6 @@
     </div>
   </div>
 
-  <!-- IMAGE LIGHTBOX (FULL SCREEN) -->
   <div class="image-lightbox" id="imageLightbox" aria-hidden="true">
     <button class="image-lightbox-close" id="lightboxClose" type="button" aria-label="Close enlarged image">
       <svg class="icon" aria-hidden="true"><use href="#icon-close"></use></svg>
@@ -3491,7 +3607,6 @@
   <script>
     (function () {
       'use strict';
-
       var header = document.getElementById('siteHeader');
       var progress = document.getElementById('scrollProgress');
       var heroAmbient = document.getElementById('heroAmbient');
@@ -3645,22 +3760,16 @@
   </script>
 
   <script>
-    /* AUDIO ENGINE */
     (function () {
       'use strict';
-
       var BGM_URL = 'https://cdn.discordapp.com/attachments/1455029046638415998/1561336229142724729/Satria_Heroes_Mobile_Game_OST_-_Main_Menu_Theme_1.mp3?ex=6add3b6d&is=6adbe9ed&hm=e9e2e5090c4ed4a62f56fbb7aade111988adceccd2e3b785af58d49f62e34bf0&';
       var CLICK_URL = 'https://cdn.discordapp.com/attachments/1455029046638415998/1561336295911985212/sys_001_se.mp3?ex=6add3b7d&is=6adbe9fd&hm=38b412f7e8d0e11cb3a2b906c78dc510e511c4ddc6174120e843a0b7338b36dc&';
-
       var toggle = document.getElementById('audioToggle');
       var label = document.getElementById('audioLabel');
-
       var bgm = new Audio();
       bgm.src = BGM_URL; bgm.loop = true; bgm.preload = 'auto'; bgm.volume = 0;
-
       var clickSfx = new Audio();
       clickSfx.src = CLICK_URL; clickSfx.preload = 'auto'; clickSfx.volume = 0.6;
-
       var enabled = false;
       var fadeTimer = null;
 
@@ -3676,7 +3785,6 @@
           } else { bgm.volume = v; }
         }, 40);
       }
-
       function updateUI() {
         if (!toggle) return;
         toggle.setAttribute('aria-pressed', enabled ? 'true' : 'false');
@@ -3685,16 +3793,10 @@
           : 'Enable background music and interface sounds');
         if (label) label.textContent = enabled ? 'SOUND ON' : 'SOUND OFF';
       }
-
       function playClick() {
         if (!enabled) return;
-        try {
-          clickSfx.currentTime = 0;
-          var p = clickSfx.play();
-          if (p && p.catch) p.catch(function () {});
-        } catch (err) {}
+        try { clickSfx.currentTime = 0; var p = clickSfx.play(); if (p && p.catch) p.catch(function () {}); } catch (err) {}
       }
-
       function setEnabled(on) {
         if (on) {
           var playPromise = bgm.play();
@@ -3711,16 +3813,13 @@
           updateUI();
         }
       }
-
       if (toggle) toggle.addEventListener('click', function () { setEnabled(!enabled); });
-
       document.addEventListener('click', function (event) {
         var el = event.target.closest('a, button');
         if (!el) return;
         if (el === toggle) return;
         playClick();
       }, true);
-
       document.addEventListener('visibilitychange', function () {
         if (document.hidden) {
           if (enabled && !bgm.paused) { bgm.pause(); bgm.dataset.wasPlaying = '1'; }
@@ -3735,30 +3834,17 @@
   </script>
 
   <script>
-    /* DOWNLOAD SYSTEM — SAFELINKU → MEDIAFIRE */
     var DOWNLOAD_CONFIG = {
       masterSwitch: true,
       projects: {
-        'satria-heroes': {
-          name: 'Satria Heroes',
-          enabled: true,
-          safelink: '',
-          mediafire: ''
-        },
-        'bima-x': {
-          name: 'BIMA-X',
-          enabled: true,
-          safelink: 'https://sfl.gl/1UcfAKr4',
-          mediafire: ''
-        }
+        'satria-heroes': { name: 'Satria Heroes', enabled: true, safelink: '', mediafire: '' },
+        'bima-x': { name: 'BIMA-X', enabled: true, safelink: 'https://sfl.gl/1UcfAKr4', mediafire: '' }
       }
     };
 
     (function () {
       'use strict';
-
       var CONFIG = DOWNLOAD_CONFIG;
-
       function getProjectState(key) {
         var p = CONFIG.projects[key];
         if (!p) return 'unknown';
@@ -3767,7 +3853,6 @@
         if (!p.safelink) return 'coming';
         return 'active';
       }
-
       function applyDownloadStates() {
         var blocks = document.querySelectorAll('[data-download-block]');
         blocks.forEach(function (block) {
@@ -3776,7 +3861,6 @@
           var btnText = btn ? btn.querySelector('.btn-text') : null;
           var support = block.querySelector('[data-download-support]');
           var state = getProjectState(key);
-
           if (state === 'maintenance') {
             block.classList.add('is-maintenance');
             if (btn) {
@@ -3810,10 +3894,8 @@
           }
         });
       }
-
       var modal = document.getElementById('downloadModal');
       if (!modal) return;
-
       var projectName = document.getElementById('downloadProjectName');
       var continueBtn = document.getElementById('downloadContinue');
       var closeBtn = document.getElementById('downloadClose');
@@ -3822,21 +3904,16 @@
       var triggers = document.querySelectorAll('[data-download]');
       var currentKey = null;
       var lastFocus = null;
-
       function focusable() {
         return Array.prototype.slice.call(modal.querySelectorAll('a[href], button:not([disabled])'));
       }
-
       function openModal(key) {
         var state = getProjectState(key);
         if (state === 'maintenance' || state === 'unknown') return;
-
         currentKey = key;
         lastFocus = document.activeElement;
-
         var cfg = CONFIG.projects[key];
         if (projectName) projectName.textContent = cfg.name.toUpperCase();
-
         if (state === 'coming') {
           continueBtn.disabled = true;
           continueBtn.textContent = 'DOWNLOAD LINK COMING SOON';
@@ -3846,14 +3923,10 @@
           continueBtn.textContent = 'CONTINUE TO SAFELINKU';
           if (coming) coming.classList.remove('is-visible');
         }
-
         modal.hidden = false;
         document.body.classList.add('modal-open');
-        window.requestAnimationFrame(function () {
-          (closeBtn || continueBtn).focus();
-        });
+        window.requestAnimationFrame(function () { (closeBtn || continueBtn).focus(); });
       }
-
       function closeModal() {
         if (modal.hidden) return;
         modal.hidden = true;
@@ -3861,7 +3934,6 @@
         currentKey = null;
         if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
       }
-
       function handleContinue() {
         if (!currentKey) return;
         var state = getProjectState(currentKey);
@@ -3874,20 +3946,14 @@
         } catch (err) {}
         closeModal();
       }
-
       triggers.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          openModal(btn.getAttribute('data-download'));
-        });
+        btn.addEventListener('click', function () { openModal(btn.getAttribute('data-download')); });
       });
-
       if (continueBtn) continueBtn.addEventListener('click', handleContinue);
       if (closeBtn) closeBtn.addEventListener('click', closeModal);
       if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
-
       var backdrop = modal.querySelector('[data-modal-close]');
       if (backdrop) backdrop.addEventListener('click', closeModal);
-
       document.addEventListener('keydown', function (e) {
         if (modal.hidden) return;
         if (e.key === 'Escape') { closeModal(); return; }
@@ -3895,29 +3961,21 @@
         var f = focusable();
         if (!f.length) return;
         var first = f[0], last = f[f.length - 1];
-        if (e.shiftKey && document.activeElement === first) {
-          e.preventDefault(); last.focus();
-        } else if (!e.shiftKey && document.activeElement === last) {
-          e.preventDefault(); first.focus();
-        }
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
       });
-
       applyDownloadStates();
     })();
   </script>
 
   <script>
-    /* VIDEO PROOF */
     (function () {
       'use strict';
-
       var frames = document.querySelectorAll('[data-video-src]');
       frames.forEach(function (frame) {
         var raw = (frame.getAttribute('data-video-src') || '').trim();
         if (!raw) return;
-
         var title = frame.getAttribute('data-video-title') || 'Project development footage';
-
         var ytMatch = raw.match(/(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/)|youtu\.be\/)([A-Za-z0-9_-]{6,20})/);
         if (ytMatch) {
           var iframe = document.createElement('iframe');
@@ -3931,7 +3989,6 @@
           frame.appendChild(iframe);
           return;
         }
-
         var video = document.createElement('video');
         video.src = raw;
         video.controls = true;
@@ -3939,7 +3996,6 @@
         video.playsInline = true;
         video.setAttribute('playsinline', '');
         video.setAttribute('aria-label', title);
-
         video.addEventListener('error', function () {
           frame.innerHTML =
             '<div class="video-placeholder">' +
@@ -3947,7 +4003,6 @@
               '<span>Footage could not be loaded. The link may be broken or blocked.</span>' +
             '</div>';
         });
-
         frame.innerHTML = '';
         frame.appendChild(video);
       });
@@ -3955,75 +4010,50 @@
   </script>
 
   <script>
-    /* LIGHTBOX LOGIC */
     (function () {
       'use strict';
-
       var compareBlock = document.querySelector('.media-compare');
       var lightbox = document.getElementById('imageLightbox');
       var btnClose = document.getElementById('lightboxClose');
       var imgBefore = document.getElementById('lightboxImgBefore');
       var imgAfter = document.getElementById('lightboxImgAfter');
-
       if (!compareBlock || !lightbox) return;
-
       compareBlock.addEventListener('click', function () {
         var srcBefore = compareBlock.querySelector('.media-compare-half:nth-child(1) img').src;
         var srcAfter = compareBlock.querySelector('.media-compare-half:nth-child(2) img').src;
-
         if (!srcBefore && !srcAfter) return;
-
         imgBefore.src = srcBefore || '';
         imgAfter.src = srcAfter || '';
-        
         imgBefore.style.display = srcBefore ? 'block' : 'none';
         imgAfter.style.display = srcAfter ? 'block' : 'none';
-
         lightbox.classList.add('is-open');
         lightbox.setAttribute('aria-hidden', 'false');
         document.body.classList.add('modal-open');
       });
-
       function closeLightbox() {
         lightbox.classList.remove('is-open');
         lightbox.setAttribute('aria-hidden', 'true');
         document.body.classList.remove('modal-open');
       }
-
       btnClose.addEventListener('click', closeLightbox);
-      
-      lightbox.addEventListener('click', function (e) {
-        if (e.target === lightbox) {
-          closeLightbox();
-        }
-      });
-
+      lightbox.addEventListener('click', function (e) { if (e.target === lightbox) closeLightbox(); });
       document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && lightbox.classList.contains('is-open')) {
-          closeLightbox();
-        }
+        if (e.key === 'Escape' && lightbox.classList.contains('is-open')) closeLightbox();
       });
     })();
   </script>
 
   <script>
-    /* ============================================================
-       LEGAL PAGES ROUTER
-       ============================================================ */
     (function () {
       'use strict';
-
       var mainPage = document.getElementById('main');
       var termsPage = document.getElementById('page-terms');
       var privacyPage = document.getElementById('page-privacy');
-
       if (!mainPage || !termsPage || !privacyPage) return;
-
       var today = new Date();
       var dateString = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
       document.getElementById('terms-updated').textContent = 'Last Updated: ' + dateString;
       document.getElementById('privacy-updated').textContent = 'Last Updated: ' + dateString;
-
       function handleRoute() {
         var hash = window.location.hash;
         if (hash === '#/terms') {
@@ -4043,9 +4073,6 @@
   </script>
 
   <script>
-    /* ============================================================
-       LANGUAGE SWITCHER (EN / ID)
-       ============================================================ */
     const translations = {
       en: {
         "nav-home": "Home", "nav-about": "About", "nav-projects": "Projects", "nav-creators": "Original Creators", "nav-development": "Development", "nav-community": "Community", "nav-support": "Support", "nav-terms": "Terms of Service", "nav-privacy": "Privacy Policy",
@@ -4062,6 +4089,7 @@
         "bima-detail-eyebrow": "PROJECT 02 / DETAILED RECORD", "bima-detail-lede": "An independent fan project focused on restoring the classic BIMA-X experience and researching potential technical improvements.", "bima-detail-body": "Required game assets have been obtained and date compatibility is fixed. Character model graphics have been repaired to their intended quality, and online 1v1 multiplayer is now functional in initial testing across two separate devices.", "update-tag": "MAJOR PROGRESS UPDATE", "update-title": "CHARACTER GRAPHICS FIXED.<br>ONLINE 1v1 NOW FUNCTIONAL.", "update-p1": "<strong>Character graphics fixed.</strong> The issue that caused character models to appear pixelated, blurry, or unusually low-resolution has been resolved. Character visuals can now return to their intended quality. If the issue persists, clearing the game's cache may help.", "update-p2": "<strong>Online 1v1 multiplayer implemented.</strong> Players can now connect using two separate devices and battle each other without requiring a direct Bluetooth connection. The feature passed initial testing with no crashes observed, though network lag is still present and further optimization is needed to improve stability and responsiveness.", "status-snapshot-beta": "STATUS SNAPSHOT — EXPERIMENTAL BETA", "status-obtained": "Obtained", "status-date": "Date Compatibility", "status-fixed": "Fixed", "status-graphics": "Character Model Graphics", "status-multiplayer": "Online 1v1 Multiplayer", "status-functional": "Functional in Testing", "status-network": "Network Performance", "status-optimizing": "Optimizing", "status-not-confirmed": "Not Yet Confirmed", "bima-detail-note": "This is an experimental beta. Online multiplayer has passed initial testing but remains under active optimization, and public availability has not yet been confirmed.", "proof-progress": "PROOF OF PROGRESS.", "video-desc-bima": "Two evidence cards documenting BIMA-X's current state — a before/after character graphics comparison and online 1v1 gameplay.", "label-before": "BEFORE", "label-after": "AFTER", "video-graphics": "01 — CHARACTER GRAPHICS", "video-graphics-desc": "Before / after comparison of the character model graphics fix.", "video-online": "02 — ONLINE 1v1", "video-online-desc": "Recorded online 1v1 battle between two separate devices.",
         "faq-title": "FREQUENTLY ASKED QUESTIONS", "faq-q1": "Does BIMA-X work on Android 16?", "faq-a1": "Android 16 compatibility has not been fully tested yet. BIMA-X has been confirmed to work on Android 15. An update will be shared once further testing is completed.", "faq-q2": "Does BIMA-X contain any viruses or malware?", "faq-a2": "BIMA-X is not intended to contain any viruses or malware. However, no software can be guaranteed to be completely risk-free without independent security testing. For your safety, download the game only from the official source and scan the APK with a trusted security tool before installing it.", "faq-q3": "Can I play 1v1 using a mobile hotspot or Wi-Fi?", "faq-a3": "It should be possible! BIMA-X has a room list feature, so you can try connecting through Wi-Fi or a mobile hotspot. However, connection stability may vary depending on your network.", "faq-q4": "Can I play BIMA-X offline?", "faq-a4": "Yes! BIMA-X supports offline gameplay. However, online features such as 1v1 multiplayer require a network connection.",
         "tutorial-eyebrow": "VIDEO TUTORIAL", "tutorial-title": "HOW TO COMPLETE SAFELINKU", "tutorial-desc": "Step-by-step guide on how to pass the Safelinku shortlink to access the BIMA-X download.", "tutorial-caption": "SAFELINKU TUTORIAL", "tutorial-caption-desc": "Watch how to complete the shortlink process to reach the download page.",
+        "tutorial-title-satria": "HOW TO COMPLETE SAFELINKU", "tutorial-desc-satria": "Step-by-step guide on how to pass the Safelinku shortlink to access the Satria Heroes download.", "tutorial-caption-desc-satria": "Watch how to complete the shortlink process to reach the Satria Heroes download page.",
         "creators-eyebrow": "THE CREATORS BEHIND THE LEGACY", "creators-title": "BEHIND THE ORIGINAL EXPERIENCES.", "creators-desc": "Recognizing the developers and publishers associated with these games. These credits are presented for informational attribution, not as an endorsement of this archive.", "game": "GAME", "role-dev": "Developer", "role-credit": "Listed Credit", "role-pub": "Publisher", "credit-note1": "Developer of the Satria Heroes mobile game, subject to verification against reliable game listings and original credits.", "credit-note2": "Developer and publisher credits for the BIMA-X mobile game, subject to verification against reliable game listings and original credits.", "verify-note": "Credits remain subject to verification against original game materials", "credits-disclaimer": "Company names and development credits are provided for informational attribution. The original games and associated intellectual property remain the property of their respective rights holders. HEROES ARCHIVE is an independent fan project and is not affiliated with, endorsed by, or sponsored by these companies.",
         "vision-eyebrow": "WHAT DRIVES THE WORK", "vision-title": "PRESERVE. RESTORE. CONNECT.", "vision-desc": "Three principles guide every experiment, fix, and update. They keep the work honest and the archive focused on what matters.", "vision-1-title": "PRESERVE", "vision-1-desc": "Explore and document classic game experiences while respecting their original creators.", "vision-2-title": "RESTORE", "vision-2-desc": "Investigate compatibility issues, missing resources, and technical problems where feasible.", "vision-3-title": "CONNECT", "vision-3-desc": "Build a community where fans can share memories, discoveries, feedback, and development updates.",
         "dev-eyebrow": "CURRENT PROGRESS", "dev-title": "WORK IN PROGRESS.<br>ALWAYS HONEST.", "dev-desc": "A transparent snapshot of where each project stands. Status entries are updated as research continues, and unfinished work is never presented as complete.", "status-some-missing": "Some Missing", "leg-green": "Completed / Operational", "leg-amber": "In Progress", "leg-red": "Blocked / Unavailable", "leg-purple": "Experimental Research", "dev-note": "Development status reflects current progress and may change as research continues.",
@@ -4075,7 +4103,8 @@
         "back-home": "&larr; Back to Home", "legal-info": "LEGAL INFORMATION", "terms-title": "TERMS OF SERVICE", "privacy-title": "PRIVACY POLICY", "toc": "TABLE OF CONTENTS",
         "t1": "1. Introduction and Acceptance", "t2": "2. Acceptable Use", "t3": "3. Intellectual Property", "t4": "4. Fan-Project Disclaimer", "t5": "5. Third-Party Links", "t6": "6. Website Availability", "t7": "7. Limitation of Liability", "t8": "8. Changes to These Terms", "t9": "9. Contact Information",
         "p1": "1. Information We Collect", "p2": "2. Cookies and Tracking", "p3": "3. How We Use Information", "p4": "4. Data Sharing and Third-Party Services", "p5": "5. Data Retention and Security", "p6": "6. Your Privacy Rights", "p7": "7. Policy Updates", "p8": "8. Contact Information",
-        "modal-notice": "DOWNLOAD NOTICE", "modal-title": "FREE TO PLAY.<br>HELP KEEP IT ONLINE.", "modal-desc1": "These games are free to download. Before downloading, you'll need to pass through a Safelinku shortlink first. Revenue generated through the shortlink helps me cover server hosting and maintenance costs so I can continue working on these projects independently.", "modal-desc2": "You don't need to purchase the games or pay a subscription. Completing the shortlink is a way to support the project while accessing the download.", "modal-free": "FREE DOWNLOAD", "modal-continue": "CONTINUE TO SAFELINKU", "modal-cancel": "CANCEL", "modal-coming": "Download link coming soon — this project's Safelinku link has not yet been published.", "modal-support": "Free download · Shortlink support helps cover server costs", "mobile-foot-desc": "Meet the community. Follow the progress. Help keep the legacy alive."
+        "modal-notice": "DOWNLOAD NOTICE", "modal-title": "FREE TO PLAY.<br>HELP KEEP IT ONLINE.", "modal-desc1": "These games are free to download. Before downloading, you'll need to pass through a Safelinku shortlink first. Revenue generated through the shortlink helps me cover server hosting and maintenance costs so I can continue working on these projects independently.", "modal-desc2": "You don't need to purchase the games or pay a subscription. Completing the shortlink is a way to support the project while accessing the download.", "modal-free": "FREE DOWNLOAD", "modal-continue": "CONTINUE TO SAFELINKU", "modal-cancel": "CANCEL", "modal-coming": "Download link coming soon — this project's Safelinku link has not yet been published.", "modal-support": "Free download · Shortlink support helps cover server costs", "mobile-foot-desc": "Meet the community. Follow the progress. Help keep the legacy alive.",
+        "thanks-tag": "SPECIAL THANKS — SATRIA HEROES", "thanks-title": "A PIECE OF HISTORY RESTORED.", "thanks-p1": "The Satria Heroes restoration would not have come this far without help from the community.", "thanks-p2": "We want to give special thanks to <strong>tehkotak's (gatau4309)</strong>, who helped find and recover the nearly complete Satria Heroes game data files.", "thanks-p3": "The asset files were obtained through a friend who had kept them since Satria Heroes was still running in 2022, before the official server was shut down.", "thanks-p4": "Thanks to that help, the Satria Heroes restoration — which had previously stalled — could finally continue.", "thanks-ack-title": "ACKNOWLEDGEMENT", "thanks-ack-1-key": "Contributor", "thanks-ack-2-key": "Also known as", "thanks-ack-3-key": "Contribution", "thanks-ack-3-val": "Helped find and recover Satria Heroes asset data.", "thanks-ack-4-key": "Source", "thanks-ack-4-val": "An asset archive still kept by their friend since the game was running in 2022.", "thanks-timeline-title": "RESTORATION TIMELINE", "thanks-tl-1-title": "ASSETS PRESERVED", "thanks-tl-1-desc": "Game assets were still stored by one of the players while the official server was still running.", "thanks-tl-2-title": "RESTORATION PROJECT", "thanks-tl-2-desc": "The game data was rediscovered and the Satria Heroes restoration process continued.", "thanks-p5": "Thank you for helping bring back a part of Satria Heroes history. This contribution is an important part of this restoration project's journey.", "thanks-quote": "Some memories deserve to be restored."
       },
       id: {
         "nav-home": "Beranda", "nav-about": "Tentang", "nav-projects": "Proyek", "nav-creators": "Kreator Asli", "nav-development": "Pengembangan", "nav-community": "Komunitas", "nav-support": "Dukung", "nav-terms": "Syarat & Ketentuan", "nav-privacy": "Kebijakan Privasi",
@@ -4092,6 +4121,7 @@
         "bima-detail-eyebrow": "PROYEK 02 / CATATAN RINCI", "bima-detail-lede": "Proyek fan independen yang berfokus pada restorasi pengalaman BIMA-X klasik dan meneliti potensi peningkatan teknis.", "bima-detail-body": "Aset game yang dibutuhkan telah diperoleh dan kompatibilitas tanggal telah diperbaiki. Grafik model karakter telah diperbaiki ke kualitas yang dimaksudkan, dan multiplayer online 1v1 sekarang berfungsi dalam pengujian awal di dua perangkat terpisah.", "update-tag": "PEMBARUAN KEMAJUAN BESAR", "update-title": "GRAFIK KARAKTER DIPERBAIKI.<br>ONLINE 1v1 SEKARANG BERFUNGSI.", "update-p1": "<strong>Grafik karakter diperbaiki.</strong> Masalah yang menyebabkan model karakter tampak berpiksel, buram, atau resolusi rendah telah diselesaikan. Visual karakter sekarang dapat kembali ke kualitas yang dimaksudkan. Jika masalah berlanjut, menghapus cache game dapat membantu.", "update-p2": "<strong>Multiplayer online 1v1 diterapkan.</strong> Pemain sekarang dapat terhubung menggunakan dua perangkat terpisah dan bertarung satu sama lain tanpa memerlukan koneksi Bluetooth langsung. Fitur ini lulus pengujian awal tanpa crash yang teramati, meskipun lag jaringan masih ada dan optimalisasi lebih lanjut diperlukan untuk meningkatkan stabilitas dan responsivitas.", "status-snapshot-beta": "SNAPSHOT STATUS — BETA EKSPERIMENTAL", "status-obtained": "Diperoleh", "status-date": "Kompatibilitas Tanggal", "status-fixed": "Diperbaiki", "status-graphics": "Grafik Model Karakter", "status-multiplayer": "Multiplayer Online 1v1", "status-functional": "Berfungsi dalam Pengujian", "status-network": "Performa Jaringan", "status-optimizing": "Mengoptimalkan", "status-not-confirmed": "Belum Dikonfirmasi", "bima-detail-note": "Ini adalah beta eksperimental. Multiplayer online telah lulus pengujian awal tetapi masih dalam optimalisasi aktif, dan ketersediaan publik belum dikonfirmasi.", "proof-progress": "BUKTI KEMAJUAN.", "video-desc-bima": "Dua kartu bukti yang mendokumentasikan keadaan BIMA-X saat ini — perbandingan grafik karakter sebelum/sesudah dan gameplay online 1v1.", "label-before": "SEBELUM", "label-after": "SESUDAH", "video-graphics": "01 — GRAFIK KARAKTER", "video-graphics-desc": "Perbandingan sebelum / sesudah perbaikan grafik model karakter.", "video-online": "02 — ONLINE 1v1", "video-online-desc": "Rekaman pertarungan online 1v1 antara dua perangkat terpisah.",
         "faq-title": "PERTANYAAN YANG SERING DIAJUKAN (FAQ)", "faq-q1": "Apakah BIMA-X berjalan di Android 16?", "faq-a1": "Kompatibilitas Android 16 belum diuji sepenuhnya. BIMA-X telah dikonfirmasi berjalan di Android 15. Informasi terbaru akan dibagikan setelah pengujian lebih lanjut selesai.", "faq-q2": "Apakah BIMA-X mengandung virus atau malware?", "faq-a2": "BIMA-X tidak dimaksudkan untuk mengandung virus atau malware. Namun, keamanan perangkat lunak tidak dapat dijamin sepenuhnya tanpa pengujian keamanan independen. Demi keamanan, unduh game hanya dari sumber resmi dan pindai file APK menggunakan alat keamanan tepercaya sebelum menginstalnya.", "faq-q3": "Bisakah saya bermain 1v1 menggunakan hotspot seluler atau Wi-Fi?", "faq-a3": "Seharusnya bisa! BIMA-X memiliki fitur daftar room, sehingga Anda dapat mencoba bermain melalui Wi-Fi atau hotspot. Namun, kestabilan koneksi dapat berbeda-beda tergantung jaringan yang digunakan.", "faq-q4": "Bisakah saya bermain BIMA-X offline?", "faq-a4": "Ya! BIMA-X mendukung permainan offline. Namun, fitur online seperti multiplayer 1v1 memerlukan koneksi jaringan.",
         "tutorial-eyebrow": "VIDEO TUTORIAL", "tutorial-title": "CARA LEWATI SAFELINKU", "tutorial-desc": "Panduan langkah demi langkah tentang cara melewati tautan Safelinku untuk mengakses unduhan BIMA-X.", "tutorial-caption": "TUTORIAL SAFELINKU", "tutorial-caption-desc": "Tonton cara menyelesaikan proses tautan untuk mencapai halaman unduhan.",
+        "tutorial-title-satria": "CARA LEWATI SAFELINKU", "tutorial-desc-satria": "Panduan langkah demi langkah tentang cara melewati tautan Safelinku untuk mengakses unduhan Satria Heroes.", "tutorial-caption-desc-satria": "Tonton cara menyelesaikan proses tautan untuk mencapai halaman unduhan Satria Heroes.",
         "creators-eyebrow": "KREATOR DI BALIK WARISAN", "creators-title": "DI BALIK PENGALAMAN ASLI.", "creators-desc": "Mengakui pengembang dan penerbit yang terkait dengan game ini. Kredit ini disajikan untuk atribusi informasi, bukan sebagai dukungan dari arsip ini.", "game": "GAME", "role-dev": "Pengembang", "role-credit": "Kredit Tercatat", "role-pub": "Penerbit", "credit-note1": "Pengembang game mobile Satria Heroes, tunduk pada verifikasi terhadap daftar game dan kredit asli yang dapat diandalkan.", "credit-note2": "Kredit pengembang dan penerbit untuk game mobile BIMA-X, tunduk pada verifikasi terhadap daftar game dan kredit asli yang dapat diandalkan.", "verify-note": "Kredit tetap tunduk pada verifikasi terhadap materi game asli", "credits-disclaimer": "Nama perusahaan dan kredit pengembangan disediakan untuk atribusi informasi. Game asli dan kekayaan intelektual terkait tetap menjadi milik pemegang hak masing-masing. HEROES ARCHIVE adalah proyek fan independen dan tidak berafiliasi dengan, didukung oleh, atau disponsori oleh perusahaan-perusahaan ini.",
         "vision-eyebrow": "APA YANG MENGGERAKKAN PEKERJAAN", "vision-title": "LESTARIKAN. PULIHKAN. HUBUNGKAN.", "vision-desc": "Tiga prinsip memandu setiap eksperimen, perbaikan, dan pembaruan. Mereka menjaga pekerjaan tetap jujur dan arsip fokus pada apa yang penting.", "vision-1-title": "LESTARIKAN", "vision-1-desc": "Jelajahi dan dokumentasikan pengalaman game klasik sambil menghormati kreator aslinya.", "vision-2-title": "PULIHKAN", "vision-2-desc": "Selidiki masalah kompatibilitas, sumber daya yang hilang, dan masalah teknis jika memungkinkan.", "vision-3-title": "HUBUNGKAN", "vision-3-desc": "Bangun komunitas di mana penggemar dapat berbagi kenangan, penemuan, umpan balik, dan pembaruan pengembangan.",
         "dev-eyebrow": "KEMAJUAN SAAT INI", "dev-title": "SEDANG DIKERJAKAN.<br>SELALU JUJUR.", "dev-desc": "Snapshot transparan tentang posisi setiap proyek. Entri status diperbarui saat riset berlanjut, dan pekerjaan yang belum selesai tidak pernah disajikan sebagai selesai.", "status-some-missing": "Beberapa Hilang", "leg-green": "Selesai / Beroperasi", "leg-amber": "Dalam Proses", "leg-red": "Terhambat / Tidak Tersedia", "leg-purple": "Riset Eksperimental", "dev-note": "Status pengembangan mencerminkan kemajuan saat ini dan dapat berubah seiring berlanjutnya riset.",
@@ -4105,13 +4135,13 @@
         "back-home": "&larr; Kembali ke Beranda", "legal-info": "INFORMASI HUKUM", "terms-title": "SYARAT & KETENTUAN", "privacy-title": "KEBIJAKAN PRIVASI", "toc": "DAFTAR ISI",
         "t1": "1. Pendahuluan dan Penerimaan", "t2": "2. Penggunaan yang Dapat Diterima", "t3": "3. Kekayaan Intelektual", "t4": "4. Penafian Proyek Fan", "t5": "5. Tautan Pihak Ketiga", "t6": "6. Ketersediaan Situs Web", "t7": "7. Batasan Tanggung Jawab", "t8": "8. Perubahan Ketentuan Ini", "t9": "9. Informasi Kontak",
         "p1": "1. Informasi yang Kami Kumpulkan", "p2": "2. Cookie dan Pelacakan", "p3": "3. Bagaimana Kami Menggunakan Informasi", "p4": "4. Berbagi Data dan Layanan Pihak Ketiga", "p5": "5. Retensi dan Keamanan Data", "p6": "6. Hak Privasi Anda", "p7": "7. Pembaruan Kebijakan", "p8": "8. Informasi Kontak",
-        "modal-notice": "PEMBERITAHUAN UNDUHAN", "modal-title": "GRATIS DIMAINKAN.<br>BANTU TETAP ONLINE.", "modal-desc1": "Game ini gratis diunduh. Sebelum mengunduh, Anda harus melewati tautan Safelinku terlebih dahulu. Pendapatan dari tautan membantu menutupi biaya hosting server dan pemeliharaan agar saya dapat terus mengerjakan proyek ini secara independen.", "modal-desc2": "Anda tidak perlu membeli game atau membayar langganan. Menyelesaikan tautan adalah cara untuk mendukung proyek sekaligus mengakses unduhan.", "modal-free": "UNDUH GRATIS", "modal-continue": "LANJUTKAN KE SAFELINKU", "modal-cancel": "BATAL", "modal-coming": "Tautan unduhan segera hadir — tautan Safelinku proyek ini belum dipublikasikan.", "modal-support": "Unduhan gratis · Dukungan tautan membantu menutupi biaya server", "mobile-foot-desc": "Temui komunitasnya. Ikuti kemajuannya. Bantu jaga warisan tetap hidup."
+        "modal-notice": "PEMBERITAHUAN UNDUHAN", "modal-title": "GRATIS DIMAINKAN.<br>BANTU TETAP ONLINE.", "modal-desc1": "Game ini gratis diunduh. Sebelum mengunduh, Anda harus melewati tautan Safelinku terlebih dahulu. Pendapatan dari tautan membantu menutupi biaya hosting server dan pemeliharaan agar saya dapat terus mengerjakan proyek ini secara independen.", "modal-desc2": "Anda tidak perlu membeli game atau membayar langganan. Menyelesaikan tautan adalah cara untuk mendukung proyek sekaligus mengakses unduhan.", "modal-free": "UNDUH GRATIS", "modal-continue": "LANJUTKAN KE SAFELINKU", "modal-cancel": "BATAL", "modal-coming": "Tautan unduhan segera hadir — tautan Safelinku proyek ini belum dipublikasikan.", "modal-support": "Unduhan gratis · Dukungan tautan membantu menutupi biaya server", "mobile-foot-desc": "Temui komunitasnya. Ikuti kemajuannya. Bantu jaga warisan tetap hidup.",
+        "thanks-tag": "UCAPAN TERIMA KASIH — SATRIA HEROES", "thanks-title": "SEPOTONG SEJARAH YANG DIPULIHKAN.", "thanks-p1": "Pemulihan Satria Heroes tidak akan berjalan sejauh ini tanpa bantuan dari komunitas.", "thanks-p2": "Kami ingin mengucapkan terima kasih khusus kepada <strong>tehkotak's (gatau4309)</strong> yang telah membantu menemukan dan mendapatkan kembali file data game Satria Heroes yang hampir lengkap.", "thanks-p3": "File aset tersebut berhasil diperoleh melalui seorang teman yang masih menyimpannya sejak Satria Heroes masih beroperasi pada tahun 2022, sebelum server resminya ditutup.", "thanks-p4": "Berkat bantuan tersebut, proses pemulihan Satria Heroes yang sebelumnya terhambat akhirnya bisa dilanjutkan.", "thanks-ack-title": "PENGHARGAAN", "thanks-ack-1-key": "Kontributor", "thanks-ack-2-key": "Juga dikenal sebagai", "thanks-ack-3-key": "Kontribusi", "thanks-ack-3-val": "Membantu menemukan dan memperoleh kembali data aset Satria Heroes.", "thanks-ack-4-key": "Sumber", "thanks-ack-4-val": "Arsip aset yang masih disimpan oleh temannya sejak game masih beroperasi pada 2022.", "thanks-timeline-title": "LINIMASA PEMULIHAN", "thanks-tl-1-title": "ASET TERSIMPAN", "thanks-tl-1-desc": "Aset game masih tersimpan oleh salah satu pemain sejak server resmi masih beroperasi.", "thanks-tl-2-title": "PROYEK RESTORASI", "thanks-tl-2-desc": "Data game berhasil ditemukan kembali dan proses restorasi Satria Heroes dilanjutkan.", "thanks-p5": "Terima kasih telah membantu mengembalikan sebagian dari sejarah Satria Heroes. Kontribusi ini menjadi bagian penting dalam perjalanan proyek restorasi ini.", "thanks-quote": "Beberapa kenangan layak untuk dipulihkan."
       }
     };
 
     (function() {
       let currentLang = localStorage.getItem('heroes-lang') || 'en';
-      
       const langToggle = document.getElementById('langToggle');
       const langEN = document.getElementById('langEN');
       const langID = document.getElementById('langID');
@@ -4120,8 +4150,6 @@
         currentLang = lang;
         localStorage.setItem('heroes-lang', lang);
         document.documentElement.lang = lang;
-
-        // Update visual state
         if (lang === 'en') {
           if(langEN) langEN.classList.add('active');
           if(langID) langID.classList.remove('active');
@@ -4129,8 +4157,6 @@
           if(langID) langID.classList.add('active');
           if(langEN) langEN.classList.remove('active');
         }
-
-        // Translate text
         document.querySelectorAll('[data-i18n]').forEach(el => {
           const key = el.getAttribute('data-i18n');
           if (translations[lang] && translations[lang][key]) {
@@ -4144,8 +4170,6 @@
           setLanguage(currentLang === 'en' ? 'id' : 'en');
         });
       }
-
-      // Initialize
       setLanguage(currentLang);
     })();
   </script>
