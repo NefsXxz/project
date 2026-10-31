@@ -2172,10 +2172,218 @@
       font-size: 1.35rem; letter-spacing: 0.06em;
       text-transform: uppercase;
     }
+        /* ============================================================
+       THEME TOGGLE BUTTON
+       ============================================================ */
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border: 1px solid var(--line-strong);
+      border-radius: 1px;
+      background: transparent;
+      color: var(--muted);
+      transition: color 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+    }
+    .theme-toggle:hover {
+      color: var(--gold);
+      border-color: var(--gold);
+    }
+    .theme-toggle .icon { width: 18px; height: 18px; }
+    .theme-toggle .icon-sun { display: inline-block; }
+    .theme-toggle .icon-moon { display: none; }
+    [data-theme="light"] .theme-toggle .icon-sun { display: none; }
+    [data-theme="light"] .theme-toggle .icon-moon { display: inline-block; }
+
+    /* ============================================================
+       LIGHT THEME — override CSS variables
+       ============================================================ */
+    [data-theme="light"] {
+      --ink: #F4F4F6;
+      --ink-2: #ECECEF;
+      --ink-3: #E0E0E5;
+      --crimson: #B3253A;
+      --crimson-bright: #C9253E;
+      --crimson-deep: #FBE4E8;
+      --gold: #A8802A;
+      --gold-soft: #C99F45;
+      --bone: #18181B;
+      --muted: #52525B;
+      --line: rgba(168, 128, 42, 0.25);
+      --line-strong: rgba(168, 128, 42, 0.48);
+      --white-line: rgba(0, 0, 0, 0.08);
+      --green: #2E8A54;
+      --amber: #B88018;
+      --red: #C73A3A;
+      --purple: #7C5CD6;
+    }
+
+    /* Header */
+    [data-theme="light"] .site-header.is-scrolled {
+      background: rgba(244, 244, 246, 0.96);
+      border-bottom-color: var(--line);
+    }
+
+    [data-theme="light"] .mobile-menu {
+      background:
+        radial-gradient(700px 500px at 90% 10%, rgba(179, 37, 58, 0.08), transparent 65%),
+        var(--ink);
+    }
+
+    /* Hero */
+    [data-theme="light"] .hero-shade {
+      background:
+        linear-gradient(90deg, rgba(244, 244, 246, 0.99) 0%, rgba(244, 244, 246, 0.97) 40%, rgba(244, 244, 246, 0.88) 70%, rgba(244, 244, 246, 0.97) 100%),
+        linear-gradient(0deg, var(--ink) 0%, transparent 38%);
+    }
+    [data-theme="light"] .hero-media img {
+      filter: saturate(0.7) contrast(1) brightness(0.9) opacity(0.55);
+    }
+    [data-theme="light"] .hero::after {
+      background: radial-gradient(58% 72% at 82% 38%, rgba(179, 37, 58, 0.08), transparent 68%);
+    }
+    [data-theme="light"] .hero-title {
+      text-shadow: 0 14px 44px rgba(0, 0, 0, 0.06);
+    }
+    [data-theme="light"] .poster-frame {
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.15), 0 0 90px rgba(179, 37, 58, 0.08);
+    }
+    [data-theme="light"] .poster-caption strong {
+      color: #E4B85C;
+    }
+    [data-theme="light"] .poster-caption {
+      background: linear-gradient(transparent, rgba(11, 13, 18, 0.94));
+      color: rgba(244, 244, 245, 0.78);
+    }
+    [data-theme="light"] .project-index {
+      -webkit-text-stroke: 1px rgba(168, 128, 42, 0.4);
+    }
+    [data-theme="light"] .vision-number {
+      -webkit-text-stroke: 1px rgba(168, 128, 42, 0.6);
+    }
+
+    /* Sections with dark gradients */
+    [data-theme="light"] .section--crimson {
+      background:
+        radial-gradient(950px 520px at 86% 8%, rgba(179, 37, 58, 0.10), transparent 64%),
+        linear-gradient(180deg, #F4F4F6 0%, #F8EBEE 20%, #FBDFE4 100%);
+    }
+    [data-theme="light"] .multiplayer {
+      background:
+        radial-gradient(1000px 600px at 82% 16%, rgba(179, 37, 58, 0.14), transparent 62%),
+        linear-gradient(180deg, #F4F4F6 0%, #FBDFE4 100%);
+    }
+    [data-theme="light"] .multiplayer-media::after {
+      background: linear-gradient(90deg, #F8EBEE 0%, rgba(248, 235, 238, 0.82) 26%, rgba(248, 235, 238, 0.16) 100%);
+    }
+    [data-theme="light"] .community-overlay {
+      background:
+        linear-gradient(90deg, rgba(244, 244, 246, 0.97) 0%, rgba(244, 244, 246, 0.88) 42%, rgba(179, 37, 58, 0.15) 100%),
+        linear-gradient(0deg, rgba(244, 244, 246, 0.9) 0%, transparent 40%);
+    }
+    [data-theme="light"] .community-media img {
+      filter: saturate(0.85) contrast(1.02) brightness(0.85);
+    }
+    [data-theme="light"] .community-copy,
+    [data-theme="light"] .multiplayer-copy,
+    [data-theme="light"] .concept p {
+      color: rgba(24, 24, 27, 0.72);
+    }
+    [data-theme="light"] .concept {
+      border-top-color: rgba(168, 128, 42, 0.28);
+    }
+
+    /* Modal */
+    [data-theme="light"] .modal-panel {
+      background:
+        radial-gradient(500px 260px at 100% 0%, rgba(179, 37, 58, 0.06), transparent 65%),
+        linear-gradient(180deg, #FFFFFF 0%, #FAF2F4 100%);
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.25);
+    }
+    [data-theme="light"] .modal-backdrop {
+      background: rgba(24, 24, 27, 0.5);
+    }
+
+    /* Audio toggle */
+    [data-theme="light"] .audio-toggle {
+      background: rgba(255, 255, 255, 0.95);
+    }
+    [data-theme="light"] .audio-toggle[aria-pressed="true"] {
+      background: rgba(179, 37, 58, 0.08);
+    }
+
+    /* Footer */
+    [data-theme="light"] .site-footer {
+      background: #E6E6EA;
+      border-top-color: var(--crimson);
+    }
+
+    /* Video placeholder / media fallback */
+    [data-theme="light"] .video-placeholder {
+      background:
+        repeating-linear-gradient(
+          45deg,
+          rgba(236, 236, 239, 0.95) 0,
+          rgba(236, 236, 239, 0.95) 12px,
+          rgba(224, 224, 229, 0.95) 12px,
+          rgba(224, 224, 229, 0.95) 24px
+        );
+    }
+    [data-theme="light"] .video-placeholder span {
+      color: rgba(82, 82, 91, 0.9);
+    }
+    [data-theme="light"] .media-fallback {
+      background: linear-gradient(145deg, #ECECEF 0%, #FBE4E8 100%);
+    }
+
+    /* Panels */
+    [data-theme="light"] .status-panel,
+    [data-theme="light"] .disclaimer-box,
+    [data-theme="light"] .legal-toc,
+    [data-theme="light"] .faq-item {
+      background: rgba(255, 255, 255, 0.7);
+    }
+    [data-theme="light"] .faq-item[open] {
+      background: rgba(255, 255, 255, 0.95);
+    }
+    [data-theme="light"] .support-card {
+      background: linear-gradient(180deg, rgba(168, 128, 42, 0.06) 0%, rgba(255, 255, 255, 0.7) 100%);
+    }
+    [data-theme="light"] .update-banner {
+      background: linear-gradient(180deg, rgba(168, 128, 42, 0.09) 0%, rgba(255, 255, 255, 0.6) 100%);
+    }
+    [data-theme="light"] .update-banner--green {
+      background: linear-gradient(180deg, rgba(46, 138, 84, 0.09) 0%, rgba(255, 255, 255, 0.6) 100%);
+    }
+    [data-theme="light"] .thanks-block {
+      background: linear-gradient(180deg, rgba(168, 128, 42, 0.08) 0%, rgba(255, 255, 255, 0.6) 100%);
+    }
+    [data-theme="light"] .download-block {
+      background: linear-gradient(180deg, rgba(179, 37, 58, 0.06) 0%, rgba(255, 255, 255, 0.6) 100%);
+    }
+
+    /* Image lightbox stays dark for contrast */
+    [data-theme="light"] .image-lightbox {
+      background: rgba(11, 13, 18, 0.95);
+    }
   </style>
 </head>
 
 <body>
+  <body>
+  <script>
+    (function(){
+      try {
+        var stored = localStorage.getItem('heroes-theme');
+        var theme = stored || (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch(e){}
+    })();
+  </script>
+  <a class="skip-link" href="#main">Skip to content</a>
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
@@ -2219,6 +2427,13 @@
     <symbol id="icon-chevron-down" viewBox="0 0 24 24">
       <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </symbol>
+        <symbol id="icon-sun" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="icon-moon" viewBox="0 0 24 24">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
   </svg>
 
   <header class="site-header" id="siteHeader">
@@ -2240,6 +2455,10 @@
       <div class="header-actions">
         <button class="lang-switch" id="langToggle" aria-label="Switch Language">
           <span id="langEN" class="active">EN</span> | <span id="langID">ID</span>
+        </button>
+                <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to light mode">
+          <svg class="icon icon-sun" aria-hidden="true"><use href="#icon-sun"></use></svg>
+          <svg class="icon icon-moon" aria-hidden="true"><use href="#icon-moon"></use></svg>
         </button>
         
         <a class="btn btn--gold btn--small header-cta" href="https://sociabuzz.com/kece8358/tribe" target="_blank" rel="noopener noreferrer" aria-label="Support HEROES ARCHIVE (opens in a new tab)">
@@ -3902,6 +4121,34 @@
         });
       }
       setLanguage(currentLang);
+    })();
+  </script>
+      <script>
+    (function () {
+      'use strict';
+      var STORAGE_KEY = 'heroes-theme';
+      var root = document.documentElement;
+      var toggle = document.getElementById('themeToggle');
+      var media = window.matchMedia('(prefers-color-scheme: light)');
+      var theme = localStorage.getItem(STORAGE_KEY) || (media.matches ? 'light' : 'dark');
+
+      function applyTheme(t) {
+        root.setAttribute('data-theme', t);
+        if (toggle) {
+          toggle.setAttribute('aria-pressed', t === 'light' ? 'true' : 'false');
+          toggle.setAttribute('aria-label', t === 'light' ? 'Switch to dark mode' : 'Switch to light mode');
+        }
+      }
+
+      applyTheme(theme);
+
+      if (toggle) {
+        toggle.addEventListener('click', function () {
+          theme = theme === 'dark' ? 'light' : 'dark';
+          localStorage.setItem(STORAGE_KEY, theme);
+          applyTheme(theme);
+        });
+      }
     })();
   </script>
 </body>
