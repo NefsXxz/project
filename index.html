@@ -3777,11 +3777,26 @@
       var dateString = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
       document.getElementById('terms-updated').textContent = 'Last Updated: ' + dateString;
       document.getElementById('privacy-updated').textContent = 'Last Updated: ' + dateString;
-      function handleRoute() {
+            function handleRoute() {
         var hash = window.location.hash;
-        if (hash === '#/terms') { mainPage.hidden = true; privacyPage.hidden = true; termsPage.hidden = false; window.scrollTo(0, 0); }
-        else if (hash === '#/privacy') { mainPage.hidden = true; termsPage.hidden = true; privacyPage.hidden = false; window.scrollTo(0, 0); }
-        else { termsPage.hidden = true; privacyPage.hidden = true; mainPage.hidden = false; }
+        if (hash === '#/terms') {
+          mainPage.hidden = true; privacyPage.hidden = true;
+          termsPage.hidden = false; window.scrollTo(0, 0);
+        } else if (hash === '#/privacy') {
+          mainPage.hidden = true; termsPage.hidden = true;
+          privacyPage.hidden = false; window.scrollTo(0, 0);
+        } else if (hash.indexOf('#terms-') === 0) {
+          // anchor di dalam Terms — biarkan di halaman Terms, jangan pindah
+          mainPage.hidden = true; privacyPage.hidden = true;
+          termsPage.hidden = false;
+        } else if (hash.indexOf('#privacy-') === 0) {
+          // anchor di dalam Privacy — biarkan di halaman Privacy
+          mainPage.hidden = true; termsPage.hidden = true;
+          privacyPage.hidden = false;
+        } else {
+          termsPage.hidden = true; privacyPage.hidden = true;
+          mainPage.hidden = false;
+        }
       }
       window.addEventListener('hashchange', handleRoute);
       handleRoute();
