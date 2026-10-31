@@ -791,10 +791,7 @@
     }
     .update-banner--green { border-color: rgba(107, 191, 138, 0.34); }
     .update-banner--green::before { background: var(--green); }
-    .update-banner--green .update-tag {
-      border-color: var(--green);
-      color: var(--green);
-    }
+    .update-banner--green .update-tag { border-color: var(--green); color: var(--green); }
     .update-banner--green .update-tag::before { background: var(--green); }
     .update-tag {
       display: inline-flex;
@@ -2245,6 +2242,11 @@
           <span id="langEN" class="active">EN</span> | <span id="langID">ID</span>
         </button>
         
+        <a class="btn btn--gold btn--small header-cta" href="https://sociabuzz.com/kece8358/tribe" target="_blank" rel="noopener noreferrer" aria-label="Support HEROES ARCHIVE (opens in a new tab)">
+          <svg class="icon" aria-hidden="true"><use href="#icon-coffee"></use></svg>
+          <span class="header-cta-text" data-i18n="btn-support">SUPPORT</span>
+        </a>
+        
         <a class="btn btn--crimson btn--small header-cta" href="https://discord.gg/6whU7guX9v" target="_blank" rel="noopener noreferrer" aria-label="Join the HEROES ARCHIVE Discord community (opens in a new tab)">
           <svg class="icon" aria-hidden="true"><use href="#icon-discord"></use></svg>
           <span class="header-cta-text" data-i18n="btn-join-discord">JOIN DISCORD</span>
@@ -2643,7 +2645,7 @@
             <h3 class="thanks-title" data-i18n="thanks-title">A PIECE OF HISTORY RESTORED.</h3>
 
             <p data-i18n="thanks-p1">
-              The Satria Heroes restoration would not come this far without help from the community.
+              The Satria Heroes restoration would not have come this far without help from the community.
             </p>
             <p data-i18n="thanks-p2">
               We want to give special thanks to <strong>tehkotak's (gatau4309)</strong>, who helped find and
@@ -2750,9 +2752,7 @@
           </div>
         </div>
       </div>
-    </section>
-
-    <section class="section section--alt" id="bima-x" data-nav-section data-nav-target="projects" aria-labelledby="bimaxDetailTitle">
+        <section class="section section--alt" id="bima-x" data-nav-section data-nav-target="projects" aria-labelledby="bimaxDetailTitle">
       <div class="container project-detail project-detail--reverse">
         <div class="detail-media reveal">
           <figure class="media-frame detail-frame">
@@ -3792,7 +3792,7 @@
     const translations = {
       en: {
         "nav-home": "Home", "nav-about": "About", "nav-projects": "Projects", "nav-creators": "Original Creators", "nav-development": "Development", "nav-community": "Community", "nav-support": "Support", "nav-terms": "Terms of Service", "nav-privacy": "Privacy Policy",
-        "btn-join-discord": "JOIN DISCORD",
+        "btn-join-discord": "JOIN DISCORD", "btn-support": "SUPPORT",
         "hero-eyebrow": "INDEPENDENT FAN PROJECT", "hero-title-1": "THE", "hero-title-2": "LEGACY", "hero-title-3": "LIVES ON.", "hero-sub": "Two tokusatsu experiences. One independent journey to preserve their legacy.", "btn-explore": "EXPLORE THE PROJECTS", "btn-join": "JOIN THE COMMUNITY", "hero-scroll": "SCROLL TO EXPLORE",
         "about-eyebrow": "BEHIND THE ARCHIVE", "about-title": "NOT A COMPANY.<br>JUST A FAN WITH A VISION.", "about-role": "INDEPENDENT DEVELOPER", "about-lead": "Hi, I'm ZenovX — an independent developer and fan of Satria Heroes and BIMA-X.", "about-p1": "These projects grew from a desire to revisit classic games that deserve to be remembered. What began as curiosity became a personal journey of technical exploration, troubleshooting, restoration research, and community building.", "about-p2": "I'm working independently, learning through experimentation, and documenting progress as I go. Every discovery, fix, and experiment is part of that journey.", "about-p3": "This website is where I share the projects, explain what I'm working on, and connect with people who remember these games or want to see what happens next.",
         "reason-eyebrow": "THE REASON", "reason-title": "SOME LEGACIES DESERVE ANOTHER CHANCE.", "reason-p1": "Satria Heroes and BIMA-X are part of the memories of their fans. As time passes, older games can become harder to access because of compatibility issues, missing resources, and outdated technical systems.", "reason-p2": "These projects explore ways to revisit those experiences, investigate technical problems, and keep the community connected to the games.", "reason-p3": "The goal is to learn, restore what is feasible, document discoveries, and celebrate the experiences that made these games memorable — while respecting the original creators and their intellectual property.",
@@ -3825,7 +3825,7 @@
       },
       id: {
         "nav-home": "Beranda", "nav-about": "Tentang", "nav-projects": "Proyek", "nav-creators": "Kreator Asli", "nav-development": "Pengembangan", "nav-community": "Komunitas", "nav-support": "Dukung", "nav-terms": "Syarat & Ketentuan", "nav-privacy": "Kebijakan Privasi",
-        "btn-join-discord": "GABUNG DISCORD",
+        "btn-join-discord": "GABUNG DISCORD", "btn-support": "DUKUNG",
         "hero-eyebrow": "PROYEK FAN INDEPENDEN", "hero-title-1": "WARISAN", "hero-title-2": "TETAP", "hero-title-3": "HIDUP.", "hero-sub": "Dua pengalaman tokusatsu. Satu perjalanan independen untuk melestarikan warisannya.", "btn-explore": "JELAJAHI PROYEK", "btn-join": "GABUNG KOMUNITAS", "hero-scroll": "GULIR UNTUK JELAJAHI",
         "about-eyebrow": "DI BALIK ARSIP", "about-title": "BUKAN PERUSAHAAN.<br>HANYA FANS DENGAN VISI.", "about-role": "PENGEMBANG INDEPENDEN", "about-lead": "Hai, saya ZenovX — pengembang independen dan penggemar Satria Heroes dan BIMA-X.", "about-p1": "Proyek ini tumbuh dari keinginan untuk mengunjungi kembali game klasik yang layak dikenang. Apa yang dimulai dari rasa penasaran menjadi perjalanan pribadi dalam eksplorasi teknis, pemecahan masalah, riset restorasi, dan pembangunan komunitas.", "about-p2": "Saya bekerja secara independen, belajar melalui eksperimen, dan mendokumentasikan kemajuan seiring waktu. Setiap penemuan, perbaikan, dan eksperimen adalah bagian dari perjalanan itu.", "about-p3": "Situs web ini adalah tempat saya berbagi proyek, menjelaskan apa yang sedang saya kerjakan, dan terhubung dengan orang-orang yang mengingat game ini atau ingin melihat apa yang terjadi selanjutnya.",
         "reason-eyebrow": "ALASANNYA", "reason-title": "BEBERAPA WARISAN LAYAK MENDAPATKAN KESEMPATAN KEDUA.", "reason-p1": "Satria Heroes dan BIMA-X adalah bagian dari kenangan para penggemarnya. Seiring berjalannya waktu, game lama bisa menjadi lebih sulit diakses karena masalah kompatibilitas, sumber daya yang hilang, dan sistem teknis yang usang.", "reason-p2": "Proyek ini mengeksplorasi cara untuk mengunjungi kembali pengalaman tersebut, menyelidiki masalah teknis, dan menjaga komunitas tetap terhubung dengan game.", "reason-p3": "Tujuannya adalah untuk belajar, memulihkan apa yang layak, mendokumentasikan penemuan, dan merayakan pengalaman yang membuat game ini tak terlupakan — sambil menghormati kreator asli dan kekayaan intelektual mereka.",
