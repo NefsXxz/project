@@ -2171,6 +2171,65 @@
       font-family: var(--font-display);
       font-size: 1.35rem; letter-spacing: 0.06em;
       text-transform: uppercase;
+          /* --- DISCORD LIVE STATS WIDGET --- */
+    .discord-widget-panel {
+      display: inline-flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+      padding: 0.8rem 1.5rem;
+      background: rgba(11, 13, 18, 0.6);
+      border: 1px solid var(--line-strong);
+      border-radius: 2px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .discord-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .discord-stat-value {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      line-height: 1;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+    }
+
+    .discord-stat-label {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .discord-stat-divider {
+      width: 1px;
+      height: 30px;
+      background: var(--line);
+    }
+
+    /* Animasi titik hijau untuk online */
+    .online-pulse {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background-color: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 0 0 rgba(107, 191, 138, 0.7);
+      animation: pulse-green 2s infinite;
+    }
+
+    @keyframes pulse-green {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(107, 191, 138, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(107, 191, 138, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(107, 191, 138, 0); }
+    }
     }
   </style>
 </head>
@@ -3208,12 +3267,30 @@
             <p data-i18n="comm-p1">Whether you grew up playing these games, recently rediscovered them, or are curious about the development process, you're welcome to follow the journey.</p>
             <p data-i18n="comm-p2">Join fellow fans, share memories, discuss discoveries, and follow the latest project updates.</p>
           </div>
-          <div class="community-actions">
+                    <div class="community-actions">
             <a class="btn btn--gold" href="https://discord.gg/6whU7guX9v" target="_blank" rel="noopener noreferrer">
               <svg class="icon" aria-hidden="true"><use href="#icon-discord"></use></svg>
               <span data-i18n="btn-join-community">JOIN OUR DISCORD</span>
             </a>
           </div>
+          
+          <!-- TAMBAHKAN KODE INI DI SINI -->
+          <div class="discord-widget-panel" id="discordWidgetPanel" style="display: none;">
+            <div class="discord-stat">
+              <span class="discord-stat-value" id="discordTotalMembers">---</span>
+              <span class="discord-stat-label">Total Members</span>
+            </div>
+            <div class="discord-stat-divider"></div>
+            <div class="discord-stat">
+              <span class="discord-stat-value" style="display: flex; align-items: center; gap: 6px;">
+                <span class="online-pulse"></span>
+                <span id="discordOnlineMembers">---</span>
+              </span>
+              <span class="discord-stat-label">Online Now</span>
+            </div>
+          </div>
+          <!-- SAMPAI SINI -->
+
           <p class="community-url">https://discord.gg/6whU7guX9v</p>
           <p class="community-support" data-i18n="comm-support">Meet the community. Follow the progress. Help keep the legacy alive.</p>
         </div>
@@ -3888,6 +3965,46 @@
       }
       setLanguage(currentLang);
     })();
+  </script>
+    <script>
+    // Fungsi Fetch Data Discord dari Serverless Vercel
+    async function loadDiscordStats() {
+      try {
+        // Memanggil fungsi /api/discord-stats yang udah kita buat
+        const response = await fetch('/api/discord-stats');
+        if (!response.ok) throw new Error('Network response was not ok');
+        
+        const data = await response.json();
+        
+        // Format angka biar ada titiknya (misal: 1.250)
+        const formatNumber = (num) => new Intl.NumberFormat('en-US').format(num);
+
+        // Update DOM
+        const totalEl = document.getElementById('discordTotalMembers');
+        const onlineEl = document.getElementById('discordOnlineMembers');
+        const panelEl = document.getElementById('discordWidgetPanel');
+
+        if (totalEl && onlineEl && panelEl) {
+          totalEl.textContent = formatNumber(data.totalMembers);
+          onlineEl.textContent = formatNumber(data.onlineMembers);
+          
+          // Munculkan panelnya dengan animasi halus
+          panelEl.style.display = 'inline-flex';
+          panelEl.style.opacity = '0';
+          panelEl.style.transition = 'opacity 0.5s ease';
+          
+          requestAnimationFrame(() => {
+            panelEl.style.opacity = '1';
+          });
+        }
+      } catch (error) {
+        console.error('Gagal load statistik Discord:', error);
+        // Panel bakal tetap display: none kalau error (biar ga jelek)
+      }
+    }
+
+    // Jalankan saat halaman siap
+    document.addEventListener('DOMContentLoaded', loadDiscordStats);
   </script>
 </body>
 </html>
