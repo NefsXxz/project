@@ -3811,7 +3811,7 @@
     })();
   </script>
 
-  <!-- JAVASCRIPT UNTUK WIDGET DISCORD -->
+  <!-- JAVASCRIPT UNTUK WIDGET DISCORD (AUTO-UPDATE) -->
   <script>
     async function loadDiscordStats() {
       try {
@@ -3829,20 +3829,26 @@
           totalEl.textContent = formatNumber(data.totalMembers);
           onlineEl.textContent = formatNumber(data.onlineMembers);
           
-          panelEl.style.display = 'inline-flex';
-          panelEl.style.opacity = '0';
-          panelEl.style.transition = 'opacity 0.5s ease';
-          
-          requestAnimationFrame(() => {
-            panelEl.style.opacity = '1';
-          });
+          // Cuma animasi munculin di awal load aja
+          if (panelEl.style.display === 'none') {
+            panelEl.style.display = 'inline-flex';
+            panelEl.style.opacity = '0';
+            panelEl.style.transition = 'opacity 0.5s ease';
+            requestAnimationFrame(() => {
+              panelEl.style.opacity = '1';
+            });
+          }
         }
       } catch (error) {
         console.error('Gagal load statistik Discord:', error);
       }
     }
 
+    // 1. Jalankan saat halaman pertama kali dibuka
     document.addEventListener('DOMContentLoaded', loadDiscordStats);
+
+    // 2. Jalankan otomatis setiap 60 detik (1 menit)
+    setInterval(loadDiscordStats, 60000); 
   </script>
 
   <script>
