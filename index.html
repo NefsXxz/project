@@ -2174,7 +2174,6 @@
     }
   </style>
 </head>
-
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
@@ -2522,8 +2521,7 @@
         </div>
       </div>
     </section>
-
-    <section class="section" id="satria-heroes" data-nav-section data-nav-target="projects" aria-labelledby="satriaDetailTitle">
+        <section class="section" id="satria-heroes" data-nav-section data-nav-target="projects" aria-labelledby="satriaDetailTitle">
       <div class="container project-detail">
         <div class="detail-media reveal">
           <figure class="media-frame detail-frame">
@@ -2730,6 +2728,7 @@
             </div>
           </div>
 
+          <!-- ⭐ DOWNLOAD BLOCK DENGAN 3 TOMBOL ⭐ -->
           <div class="download-block" data-download-block="satria-heroes">
             <span class="download-label" data-i18n="download-free">FREE DOWNLOAD</span>
             <h3 data-i18n="download-title">FREE TO PLAY. HELP KEEP IT ONLINE.</h3>
@@ -2743,15 +2742,25 @@
               a way to support the project while accessing the download.
             </p>
             <div class="download-actions">
-              <button class="btn btn--gold" type="button" data-download="satria-heroes">
+              <button class="btn btn--gold" type="button" data-download="satria-heroes" data-variant="online">
                 <svg class="icon" aria-hidden="true"><use href="#icon-download"></use></svg>
-                <span class="btn-text" data-i18n="btn-download">DOWNLOAD GAME</span>
+                <span class="btn-text" data-i18n="btn-download-online">DOWNLOAD ONLINE</span>
+              </button>
+              <button class="btn btn--gold" type="button" data-download="satria-heroes" data-variant="offline-grinding">
+                <svg class="icon" aria-hidden="true"><use href="#icon-download"></use></svg>
+                <span class="btn-text" data-i18n="btn-download-offline-grinding">OFFLINE GRINDING</span>
+              </button>
+              <button class="btn btn--gold" type="button" data-download="satria-heroes" data-variant="offline-unlock">
+                <svg class="icon" aria-hidden="true"><use href="#icon-download"></use></svg>
+                <span class="btn-text" data-i18n="btn-download-offline-unlock">OFFLINE UNLOCK</span>
               </button>
             </div>
+            <span class="download-support" data-i18n="download-variants-note">Online: live play · Offline Grinding: classic progression · Offline Unlock: all content unlocked</span>
             <span class="download-support" data-download-support data-i18n="download-support">Free download · Shortlink support helps cover server costs</span>
           </div>
         </div>
       </div>
+    </section>
         <section class="section section--alt" id="bima-x" data-nav-section data-nav-target="projects" aria-labelledby="bimaxDetailTitle">
       <div class="container project-detail project-detail--reverse">
         <div class="detail-media reveal">
@@ -3135,8 +3144,7 @@
         </div>
       </div>
     </section>
-
-    <section class="section section--alt" id="journey" aria-labelledby="journeyTitle">
+        <section class="section section--alt" id="journey" aria-labelledby="journeyTitle">
       <div class="container">
         <header class="section-head reveal">
           <div>
@@ -3617,54 +3625,116 @@
     })();
   </script>
 
+  <!-- ⭐ SCRIPT DOWNLOAD — DIPERBARUI DENGAN MULTI-VARIANT ⭐ -->
   <script>
     var DOWNLOAD_CONFIG = {
       masterSwitch: true,
       projects: {
-        'satria-heroes': { name: 'Satria Heroes', enabled: true, safelink: 'https://sfl.gl/FuiP', mediafire: '' },
+        'satria-heroes': {
+          name: 'Satria Heroes',
+          enabled: true,
+          variants: {
+            'online':           { label: 'Online',           safelink: 'https://sfl.gl/PUc5lUc' },
+            'offline-grinding': { label: 'Offline Grinding', safelink: 'https://sfl.gl/lwru9q5' },
+            'offline-unlock':   { label: 'Offline Unlock',   safelink: 'https://sfl.gl/GRrD' }
+          }
+        },
         'bima-x': { name: 'BIMA-X', enabled: true, safelink: 'https://sfl.gl/1UcfAKr4', mediafire: '' }
       }
     };
     (function () {
       'use strict';
       var CONFIG = DOWNLOAD_CONFIG;
+
+      function t(key, fallback) {
+        var lang = (typeof localStorage !== 'undefined' && localStorage.getItem('heroes-lang')) || 'en';
+        try {
+          if (typeof translations !== 'undefined' && translations[lang] && translations[lang][key]) {
+            return translations[lang][key];
+          }
+        } catch (e) {}
+        return fallback;
+      }
+
       function getProjectState(key) {
         var p = CONFIG.projects[key];
         if (!p) return 'unknown';
         if (!CONFIG.masterSwitch) return 'maintenance';
         if (!p.enabled) return 'maintenance';
+        if (p.variants) {
+          var hasAny = Object.keys(p.variants).some(function (k) {
+            return p.variants[k] && p.variants[k].safelink;
+          });
+          return hasAny ? 'active' : 'coming';
+        }
         if (!p.safelink) return 'coming';
         return 'active';
       }
+
       function applyDownloadStates() {
         var blocks = document.querySelectorAll('[data-download-block]');
         blocks.forEach(function (block) {
           var key = block.getAttribute('data-download-block');
-          var btn = block.querySelector('[data-download]');
-          var btnText = btn ? btn.querySelector('.btn-text') : null;
+          var cfg = CONFIG.projects[key];
+          if (!cfg) return;
+          var buttons = Array.prototype.slice.call(block.querySelectorAll('[data-download]'));
           var support = block.querySelector('[data-download-support]');
-          var state = getProjectState(key);
-          if (state === 'maintenance') {
+          var projectState = getProjectState(key);
+
+          if (projectState === 'maintenance') {
             block.classList.add('is-maintenance');
-            if (btn) {
-              btn.disabled = true; btn.setAttribute('aria-disabled', 'true');
-              btn.classList.remove('btn--gold'); btn.classList.add('btn--maintenance');
-              var icon = btn.querySelector('svg use'); if (icon) icon.setAttribute('href', '#icon-wrench');
+            buttons.forEach(function (btn) {
+              btn.disabled = true;
+              btn.setAttribute('aria-disabled', 'true');
+              btn.classList.remove('btn--gold');
+              btn.classList.add('btn--maintenance');
+              var icon = btn.querySelector('svg use');
+              if (icon) icon.setAttribute('href', '#icon-wrench');
+              var btnText = btn.querySelector('.btn-text');
               if (btnText) btnText.textContent = 'DOWNLOAD UNDER MAINTENANCE';
+            });
+            if (support) {
+              support.textContent = 'Download link is being repaired · Please check back soon';
+              support.classList.add('is-maintenance');
             }
-            if (support) { support.textContent = 'Download link is being repaired · Please check back soon'; support.classList.add('is-maintenance'); }
-          } else {
-            block.classList.remove('is-maintenance');
-            if (btn) {
-              btn.disabled = false; btn.removeAttribute('aria-disabled');
-              btn.classList.remove('btn--maintenance'); btn.classList.add('btn--gold');
-              var icon = btn.querySelector('svg use'); if (icon) icon.setAttribute('href', '#icon-download');
-              if (btnText) btnText.textContent = 'DOWNLOAD GAME';
+            return;
+          }
+
+          block.classList.remove('is-maintenance');
+          buttons.forEach(function (btn) {
+            var variantKey = btn.getAttribute('data-variant');
+            var hasLink;
+            if (variantKey) {
+              hasLink = !!(cfg.variants && cfg.variants[variantKey] && cfg.variants[variantKey].safelink);
+            } else {
+              hasLink = !!cfg.safelink;
             }
-            if (support) { support.textContent = 'Free download · Shortlink support helps cover server costs'; support.classList.remove('is-maintenance'); }
+            if (hasLink) {
+              btn.disabled = false;
+              btn.removeAttribute('aria-disabled');
+              btn.classList.remove('btn--maintenance');
+              btn.classList.add('btn--gold');
+              var icon = btn.querySelector('svg use');
+              if (icon) icon.setAttribute('href', '#icon-download');
+            } else {
+              btn.disabled = true;
+              btn.setAttribute('aria-disabled', 'true');
+              btn.classList.remove('btn--gold');
+              btn.classList.add('btn--maintenance');
+              var icon2 = btn.querySelector('svg use');
+              if (icon2) icon2.setAttribute('href', '#icon-wrench');
+              var btnText = btn.querySelector('.btn-text');
+              if (btnText) btnText.textContent = 'COMING SOON';
+            }
+          });
+
+          if (support) {
+            support.textContent = 'Free download · Shortlink support helps cover server costs';
+            support.classList.remove('is-maintenance');
           }
         });
       }
+
       var modal = document.getElementById('downloadModal');
       if (!modal) return;
       var projectName = document.getElementById('downloadProjectName');
@@ -3674,46 +3744,92 @@
       var coming = document.getElementById('downloadComing');
       var triggers = document.querySelectorAll('[data-download]');
       var currentKey = null;
+      var currentVariant = null;
       var lastFocus = null;
-      function focusable() { return Array.prototype.slice.call(modal.querySelectorAll('a[href], button:not([disabled])')); }
-      function openModal(key) {
+
+      function focusable() {
+        return Array.prototype.slice.call(modal.querySelectorAll('a[href], button:not([disabled])'));
+      }
+
+      function openModal(key, variant) {
         var state = getProjectState(key);
         if (state === 'maintenance' || state === 'unknown') return;
-        currentKey = key; lastFocus = document.activeElement;
+
+        currentKey = key;
+        currentVariant = variant || null;
+        lastFocus = document.activeElement;
+
         var cfg = CONFIG.projects[key];
-        if (projectName) projectName.textContent = cfg.name.toUpperCase();
-        if (state === 'coming') {
-          continueBtn.disabled = true; continueBtn.textContent = 'DOWNLOAD LINK COMING SOON';
+        var displayName = cfg.name.toUpperCase();
+        var safelink = null;
+
+        if (variant && cfg.variants && cfg.variants[variant]) {
+          displayName += ' — ' + cfg.variants[variant].label.toUpperCase();
+          safelink = cfg.variants[variant].safelink;
+        } else {
+          safelink = cfg.safelink;
+        }
+
+        if (projectName) projectName.textContent = displayName;
+
+        if (!safelink) {
+          continueBtn.disabled = true;
+          continueBtn.textContent = t('modal-coming-btn', 'DOWNLOAD LINK COMING SOON');
           if (coming) coming.classList.add('is-visible');
         } else {
-          continueBtn.disabled = false; continueBtn.textContent = 'CONTINUE TO SAFELINKU';
+          continueBtn.disabled = false;
+          continueBtn.textContent = t('modal-continue', 'CONTINUE TO SAFELINKU');
           if (coming) coming.classList.remove('is-visible');
         }
-        modal.hidden = false; document.body.classList.add('modal-open');
-        window.requestAnimationFrame(function () { (closeBtn || continueBtn).focus(); });
+
+        modal.hidden = false;
+        document.body.classList.add('modal-open');
+        window.requestAnimationFrame(function () {
+          (closeBtn || continueBtn).focus();
+        });
       }
+
       function closeModal() {
         if (modal.hidden) return;
-        modal.hidden = true; document.body.classList.remove('modal-open'); currentKey = null;
+        modal.hidden = true;
+        document.body.classList.remove('modal-open');
+        currentKey = null;
+        currentVariant = null;
         if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
       }
+
       function handleContinue() {
         if (!currentKey) return;
         var state = getProjectState(currentKey);
         if (state !== 'active') return;
         var cfg = CONFIG.projects[currentKey];
-        if (!cfg || !cfg.safelink) return;
-        try { var win = window.open(cfg.safelink, '_blank', 'noopener,noreferrer'); if (win) win.opener = null; } catch (err) {}
+        if (!cfg) return;
+        var url;
+        if (currentVariant && cfg.variants && cfg.variants[currentVariant]) {
+          url = cfg.variants[currentVariant].safelink;
+        } else {
+          url = cfg.safelink;
+        }
+        if (!url) return;
+        try {
+          var win = window.open(url, '_blank', 'noopener,noreferrer');
+          if (win) win.opener = null;
+        } catch (err) {}
         closeModal();
       }
+
       triggers.forEach(function (btn) {
-        btn.addEventListener('click', function () { openModal(btn.getAttribute('data-download')); });
+        btn.addEventListener('click', function () {
+          openModal(btn.getAttribute('data-download'), btn.getAttribute('data-variant'));
+        });
       });
+
       if (continueBtn) continueBtn.addEventListener('click', handleContinue);
       if (closeBtn) closeBtn.addEventListener('click', closeModal);
       if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
       var backdrop = modal.querySelector('[data-modal-close]');
       if (backdrop) backdrop.addEventListener('click', closeModal);
+
       document.addEventListener('keydown', function (e) {
         if (modal.hidden) return;
         if (e.key === 'Escape') { closeModal(); return; }
@@ -3724,6 +3840,7 @@
         if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
         else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
       });
+
       applyDownloadStates();
     })();
   </script>
@@ -3829,7 +3946,6 @@
           totalEl.textContent = formatNumber(data.totalMembers);
           onlineEl.textContent = formatNumber(data.onlineMembers);
           
-          // Cuma animasi munculin di awal load aja
           if (panelEl.style.display === 'none') {
             panelEl.style.display = 'inline-flex';
             panelEl.style.opacity = '0';
@@ -3844,13 +3960,11 @@
       }
     }
 
-    // 1. Jalankan saat halaman pertama kali dibuka
     document.addEventListener('DOMContentLoaded', loadDiscordStats);
-
-    // 2. Jalankan otomatis setiap 60 detik (1 menit)
     setInterval(loadDiscordStats, 60000); 
   </script>
 
+  <!-- ⭐ SCRIPT I18N — DENGAN KEY BARU UNTUK 3 TOMBOL DOWNLOAD ⭐ -->
   <script>
     const translations = {
       en: {
@@ -3865,7 +3979,7 @@
         "satria-detail-eyebrow": "PROJECT 01 / DETAILED RECORD", "satria-detail-lede": "An independent fan project exploring the restoration and preservation of the classic Satria Heroes game experience.", "satria-detail-body": "The private server is operational, but this is not a public release. Asset recovery remains in progress, and some game assets are still missing. The work continues carefully, documenting each discovery and limitation as it appears.", "satria-update-tag": "MAJOR PROGRESS UPDATE", "satria-update-title": "ASSETS RECOVERED.<br>GAME IS NOW RUNNING.", "satria-update-p1": "<strong>Game assets successfully obtained.</strong> The required Satria Heroes game data files have been recovered from a preserved archive, and the game is now running with its assets restored. The private server remains operational for research and testing.", "satria-update-p2": "<strong>Asset recovery completed.</strong> The restoration phase that had previously stalled has now been completed. Special thanks to <strong>tehkotak's (gatau4309)</strong> for making this recovery possible — see the acknowledgement block below.",
         "status-snapshot": "STATUS SNAPSHOT", "status-private": "Private Server", "status-operational": "Operational", "status-assets": "Game Assets", "status-missing": "Some Assets Missing", "status-recovery": "Asset Recovery", "status-progress": "In Progress", "status-public": "Public Release", "status-not-avail": "Not Available", "status-completed": "Completed", "satria-detail-note": "The private server is maintained for research and testing. It is not a public release, and no public availability date is currently announced.",
         "video-evidence": "VIDEO EVIDENCE", "dev-footage": "DEVELOPMENT FOOTAGE.", "video-desc-satria": "Two recorded clips documenting the Satria Heroes project's current state.", "video-soon": "VIDEO COMING SOON", "video-pub": "Footage will be published here when available.", "video-01-private": "01 — PRIVATE SERVER", "video-01-desc": "Recorded session from the Satria Heroes private server.", "video-02-recovery": "02 — ASSET RECOVERY", "video-02-desc": "Preview of recovered assets and in-game visuals.",
-        "download-free": "FREE DOWNLOAD", "download-title": "FREE TO PLAY. HELP KEEP IT ONLINE.", "download-desc1": "These games are free to download. Before downloading, you'll need to pass through a Safelinku shortlink first. Revenue generated through the shortlink helps me cover server hosting and maintenance costs so I can continue working on these projects independently.", "download-desc2": "You don't need to purchase the games or pay a subscription. Completing the shortlink is a way to support the project while accessing the download.", "btn-download": "DOWNLOAD GAME", "download-support": "Free download · Shortlink support helps cover server costs",
+        "download-free": "FREE DOWNLOAD", "download-title": "FREE TO PLAY. HELP KEEP IT ONLINE.", "download-desc1": "These games are free to download. Before downloading, you'll need to pass through a Safelinku shortlink first. Revenue generated through the shortlink helps me cover server hosting and maintenance costs so I can continue working on these projects independently.", "download-desc2": "You don't need to purchase the games or pay a subscription. Completing the shortlink is a way to support the project while accessing the download.", "btn-download": "DOWNLOAD GAME", "btn-download-online": "DOWNLOAD ONLINE", "btn-download-offline-grinding": "OFFLINE GRINDING", "btn-download-offline-unlock": "OFFLINE UNLOCK", "download-variants-note": "Online: live play · Offline Grinding: classic progression · Offline Unlock: all content unlocked", "download-support": "Free download · Shortlink support helps cover server costs", "modal-coming-btn": "DOWNLOAD LINK COMING SOON",
         "bima-detail-eyebrow": "PROJECT 02 / DETAILED RECORD", "bima-detail-lede": "An independent fan project focused on restoring the classic BIMA-X experience and researching potential technical improvements.", "bima-detail-body": "Required game assets have been obtained and date compatibility is fixed. Character model graphics have been repaired to their intended quality, and online 1v1 multiplayer is now functional in initial testing across two separate devices.", "update-tag": "MAJOR PROGRESS UPDATE", "update-title": "CHARACTER GRAPHICS FIXED.<br>ONLINE 1v1 NOW FUNCTIONAL.", "update-p1": "<strong>Character graphics fixed.</strong> The issue that caused character models to appear pixelated, blurry, or unusually low-resolution has been resolved. Character visuals can now return to their intended quality. If the issue persists, clearing the game's cache may help.", "update-p2": "<strong>Online 1v1 multiplayer implemented.</strong> Players can now connect using two separate devices and battle each other without requiring a direct Bluetooth connection. The feature passed initial testing with no crashes observed, though network lag is still present and further optimization is needed to improve stability and responsiveness.", "status-snapshot-beta": "STATUS SNAPSHOT — EXPERIMENTAL BETA", "status-obtained": "Obtained", "status-date": "Date Compatibility", "status-fixed": "Fixed", "status-graphics": "Character Model Graphics", "status-multiplayer": "Online 1v1 Multiplayer", "status-functional": "Functional in Testing", "status-network": "Network Performance", "status-optimizing": "Optimizing", "status-not-confirmed": "Not Yet Confirmed", "bima-detail-note": "This is an experimental beta. Online multiplayer has passed initial testing but remains under active optimization, and public availability has not yet been confirmed.", "proof-progress": "PROOF OF PROGRESS.", "video-desc-bima": "Two evidence cards documenting BIMA-X's current state — a before/after character graphics comparison and online 1v1 gameplay.", "label-before": "BEFORE", "label-after": "AFTER", "video-graphics": "01 — CHARACTER GRAPHICS", "video-graphics-desc": "Before / after comparison of the character model graphics fix.", "video-online": "02 — ONLINE 1v1", "video-online-desc": "Recorded online 1v1 battle between two separate devices.",
         "faq-title": "FREQUENTLY ASKED QUESTIONS", "faq-q1": "Does BIMA-X work on Android 16?", "faq-a1": "Android 16 compatibility has not been fully tested yet. BIMA-X has been confirmed to work on Android 15. An update will be shared once further testing is completed.", "faq-q2": "Does BIMA-X contain any viruses or malware?", "faq-a2": "BIMA-X is not intended to contain any viruses or malware. However, no software can be guaranteed to be completely risk-free without independent security testing. For your safety, download the game only from the official source and scan the APK with a trusted security tool before installing it.", "faq-q3": "Can I play 1v1 using a mobile hotspot or Wi-Fi?", "faq-a3": "It should be possible! BIMA-X has a room list feature, so you can try connecting through Wi-Fi or a mobile hotspot. However, connection stability may vary depending on your network.", "faq-q4": "Can I play BIMA-X offline?", "faq-a4": "Yes! BIMA-X supports offline gameplay. However, online features such as 1v1 multiplayer require a network connection.",
         "tutorial-eyebrow": "VIDEO TUTORIAL", "tutorial-title": "HOW TO COMPLETE SAFELINKU", "tutorial-desc": "Step-by-step guide on how to pass the Safelinku shortlink to access the BIMA-X download.", "tutorial-caption": "SAFELINKU TUTORIAL", "tutorial-caption-desc": "Watch how to complete the shortlink process to reach the download page.",
@@ -3898,7 +4012,7 @@
         "satria-detail-eyebrow": "PROYEK 01 / CATATAN RINCI", "satria-detail-lede": "Proyek fan independen yang mengeksplorasi restorasi dan pelestarian pengalaman game Satria Heroes klasik.", "satria-detail-body": "Server privat beroperasi, tetapi ini bukan rilis publik. Pemulihan aset masih dalam proses, dan beberapa aset game masih hilang. Pekerjaan berlanjut dengan hati-hati, mendokumentasikan setiap penemuan dan batasan saat muncul.", "satria-update-tag": "PEMBARUAN KEMAJUAN BESAR", "satria-update-title": "ASET DIPEROLEH.<br>GAME SEKARANG BERJALAN.", "satria-update-p1": "<strong>Aset game berhasil diperoleh.</strong> File data game Satria Heroes yang dibutuhkan telah dipulihkan dari arsip yang tersimpan, dan game sekarang berjalan dengan asetnya yang telah dipulihkan. Server privat tetap beroperasi untuk riset dan pengujian.", "satria-update-p2": "<strong>Pemulihan aset selesai.</strong> Fase restorasi yang sebelumnya terhenti sekarang telah selesai. Ucapan terima kasih khusus kepada <strong>tehkotak's (gatau4309)</strong> yang telah memungkinkan pemulihan ini — lihat blok penghargaan di bawah.",
         "status-snapshot": "SNAPSHOT STATUS", "status-private": "Server Privat", "status-operational": "Beroperasi", "status-assets": "Aset Game", "status-missing": "Beberapa Aset Hilang", "status-recovery": "Pemulihan Aset", "status-progress": "Dalam Proses", "status-public": "Rilis Publik", "status-not-avail": "Tidak Tersedia", "status-completed": "Selesai", "satria-detail-note": "Server privat dipelihara untuk riset dan pengujian. Ini bukan rilis publik, dan tanggal ketersediaan publik saat ini belum diumumkan.",
         "video-evidence": "BUKTI VIDEO", "dev-footage": "REKAMAN PENGEMBANGAN.", "video-desc-satria": "Dua klip rekaman yang mendokumentasikan keadaan proyek Satria Heroes saat ini.", "video-soon": "VIDEO SEGERA HADIR", "video-pub": "Rekaman akan dipublikasikan di sini saat tersedia.", "video-01-private": "01 — SERVER PRIVAT", "video-01-desc": "Sesi rekaman dari server privat Satria Heroes.", "video-02-recovery": "02 — PEMULIHAN ASET", "video-02-desc": "Pratinjau aset yang dipulihkan dan visual dalam game.",
-        "download-free": "UNDUH GRATIS", "download-title": "GRATIS DIMAINKAN. BANTU TETAP ONLINE.", "download-desc1": "Game ini gratis diunduh. Sebelum mengunduh, Anda harus melewati tautan Safelinku terlebih dahulu. Pendapatan dari tautan membantu menutupi biaya hosting server dan pemeliharaan agar saya dapat terus mengerjakan proyek ini secara independen.", "download-desc2": "Anda tidak perlu membeli game atau membayar langganan. Menyelesaikan tautan adalah cara untuk mendukung proyek sekaligus mengakses unduhan.", "btn-download": "UNDUH GAME", "download-support": "Unduhan gratis · Dukungan tautan membantu menutupi biaya server",
+        "download-free": "UNDUH GRATIS", "download-title": "GRATIS DIMAINKAN. BANTU TETAP ONLINE.", "download-desc1": "Game ini gratis diunduh. Sebelum mengunduh, Anda harus melewati tautan Safelinku terlebih dahulu. Pendapatan dari tautan membantu menutupi biaya hosting server dan pemeliharaan agar saya dapat terus mengerjakan proyek ini secara independen.", "download-desc2": "Anda tidak perlu membeli game atau membayar langganan. Menyelesaikan tautan adalah cara untuk mendukung proyek sekaligus mengakses unduhan.", "btn-download": "UNDUH GAME", "btn-download-online": "UNDUH ONLINE", "btn-download-offline-grinding": "GRINDING OFFLINE", "btn-download-offline-unlock": "UNLOCK OFFLINE", "download-variants-note": "Online: bermain live · Offline Grinding: progresi klasik · Offline Unlock: semua konten terbuka", "download-support": "Unduhan gratis · Dukungan tautan membantu menutupi biaya server", "modal-coming-btn": "TAUTAN UNDUHAN SEGERA HADIR",
         "bima-detail-eyebrow": "PROYEK 02 / CATATAN RINCI", "bima-detail-lede": "Proyek fan independen yang berfokus pada restorasi pengalaman BIMA-X klasik dan meneliti potensi peningkatan teknis.", "bima-detail-body": "Aset game yang dibutuhkan telah diperoleh dan kompatibilitas tanggal telah diperbaiki. Grafik model karakter telah diperbaiki ke kualitas yang dimaksudkan, dan multiplayer online 1v1 sekarang berfungsi dalam pengujian awal di dua perangkat terpisah.", "update-tag": "PEMBARUAN KEMAJUAN BESAR", "update-title": "GRAFIK KARAKTER DIPERBAIKI.<br>ONLINE 1v1 SEKARANG BERFUNGSI.", "update-p1": "<strong>Grafik karakter diperbaiki.</strong> Masalah yang menyebabkan model karakter tampak berpiksel, buram, atau resolusi rendah telah diselesaikan. Visual karakter sekarang dapat kembali ke kualitas yang dimaksudkan. Jika masalah berlanjut, menghapus cache game dapat membantu.", "update-p2": "<strong>Multiplayer online 1v1 diterapkan.</strong> Pemain sekarang dapat terhubung menggunakan dua perangkat terpisah dan bertarung satu sama lain tanpa memerlukan koneksi Bluetooth langsung. Fitur ini lulus pengujian awal tanpa crash yang teramati, meskipun lag jaringan masih ada dan optimalisasi lebih lanjut diperlukan untuk meningkatkan stabilitas dan responsivitas.", "status-snapshot-beta": "SNAPSHOT STATUS — BETA EKSPERIMENTAL", "status-obtained": "Diperoleh", "status-date": "Kompatibilitas Tanggal", "status-fixed": "Diperbaiki", "status-graphics": "Grafik Model Karakter", "status-multiplayer": "Multiplayer Online 1v1", "status-functional": "Berfungsi dalam Pengujian", "status-network": "Performa Jaringan", "status-optimizing": "Mengoptimalkan", "status-not-confirmed": "Belum Dikonfirmasi", "bima-detail-note": "Ini adalah beta eksperimental. Multiplayer online telah lulus pengujian awal tetapi masih dalam optimalisasi aktif, dan ketersediaan publik belum dikonfirmasi.", "proof-progress": "BUKTI KEMAJUAN.", "video-desc-bima": "Dua kartu bukti yang mendokumentasikan keadaan BIMA-X saat ini — perbandingan grafik karakter sebelum/sesudah dan gameplay online 1v1.", "label-before": "SEBELUM", "label-after": "SESUDAH", "video-graphics": "01 — GRAFIK KARAKTER", "video-graphics-desc": "Perbandingan sebelum / sesudah perbaikan grafik model karakter.", "video-online": "02 — ONLINE 1v1", "video-online-desc": "Rekaman pertarungan online 1v1 antara dua perangkat terpisah.",
         "faq-title": "PERTANYAAN YANG SERING DIAJUKAN (FAQ)", "faq-q1": "Apakah BIMA-X berjalan di Android 16?", "faq-a1": "Kompatibilitas Android 16 belum diuji sepenuhnya. BIMA-X telah dikonfirmasi berjalan di Android 15. Informasi terbaru akan dibagikan setelah pengujian lebih lanjut selesai.", "faq-q2": "Apakah BIMA-X mengandung virus atau malware?", "faq-a2": "BIMA-X tidak dimaksudkan untuk mengandung virus atau malware. Namun, keamanan perangkat lunak tidak dapat dijamin sepenuhnya tanpa pengujian keamanan independen. Demi keamanan, unduh game hanya dari sumber resmi dan pindai file APK menggunakan alat keamanan tepercaya sebelum menginstalnya.", "faq-q3": "Bisakah saya bermain 1v1 menggunakan hotspot seluler atau Wi-Fi?", "faq-a3": "Seharusnya bisa! BIMA-X memiliki fitur daftar room, sehingga Anda dapat mencoba bermain melalui Wi-Fi atau hotspot. Namun, kestabilan koneksi dapat berbeda-beda tergantung jaringan yang digunakan.", "faq-q4": "Bisakah saya bermain BIMA-X offline?", "faq-a4": "Ya! BIMA-X mendukung permainan offline. Namun, fitur online seperti multiplayer 1v1 memerlukan koneksi jaringan.",
         "tutorial-eyebrow": "VIDEO TUTORIAL", "tutorial-title": "CARA LEWATI SAFELINKU", "tutorial-desc": "Panduan langkah demi langkah tentang cara melewati tautan Safelinku untuk mengakses unduhan BIMA-X.", "tutorial-caption": "TUTORIAL SAFELINKU", "tutorial-caption-desc": "Tonton cara menyelesaikan proses tautan untuk mencapai halaman unduhan.",
